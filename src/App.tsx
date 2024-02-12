@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LayoutAuth from "./components/layout/auth";
-import Login from "./pages/Login/Index";
-import Register from "./pages/Register/Index";
-import ForgetPassword from "./pages/ForgetPassword/Index";
-import ResetPassword from "./pages/ResetPassword/Index";
+import Login from "./pages/Auth/Login/Index";
+import Register from "./pages/Auth/Register/Index";
+import ForgetPassword from "./pages/Auth/ForgetPassword/Index";
+import ResetPassword from "./pages/Auth/ResetPassword/Index";
 
 function App() {
   return (
