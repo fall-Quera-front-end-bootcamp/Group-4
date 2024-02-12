@@ -1,10 +1,14 @@
 import React from 'react';
-import TestComponent from './components/TestComponent';
-import './App.css';
 
+import './App.css';
+import LayoutAuth from './components/layout/auth';
 function App() {
   return (
-    <TestComponent></TestComponent>
+
+     <LayoutAuth>
+    <h1>your component</h1>
+     </LayoutAuth>
+    
   );
 }
 
