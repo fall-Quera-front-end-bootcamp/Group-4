@@ -1,4 +1,3 @@
-import DynamicButton from '../../../components/common/button';
 
 function Login() {
   return (
