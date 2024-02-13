@@ -8,17 +8,23 @@ import ResetPassword from "./pages/Auth/ResetPassword/Index";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LayoutAuth />}> 
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="forgetpassword" element={<ForgetPassword />} />
-          <Route path="resetpassword" element={<ResetPassword />} />
-          <Route path="*" element={<h1>404 Not Found</h1>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <div>hello</div>
+    
+
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LayoutAuth />}> 
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="forgetpassword" element={<ForgetPassword />} />
+            <Route path="resetpassword" element={<ResetPassword />} />
+            <Route path="*" element={<h1>404 Not Found</h1>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
