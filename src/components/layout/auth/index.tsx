@@ -1,4 +1,6 @@
 import { Outlet } from 'react-router-dom';
+import Navbar from '../../navbar';
+
 import './style.css';
 interface Iprops extends React.PropsWithChildren{}
 
@@ -6,12 +8,17 @@ interface Iprops extends React.PropsWithChildren{}
 const LayoutAuth : React.FC<Iprops> = ({ children }) : JSX.Element => {
 
 return(
-    <>
-        <div className='layout-header'>
+    <>  
         
+     
+        <div className='layout-header'>
+       
+        <Navbar />
+       
         <div className='layout-footer'>
         
         </div>{<Outlet/>}</div>
+     
 
     </>
 )
