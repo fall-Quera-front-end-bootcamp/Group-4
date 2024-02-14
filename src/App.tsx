@@ -5,14 +5,11 @@ import Login from "./pages/Auth/Login/Index";
 import Register from "./pages/Auth/Register/Index";
 import ForgetPassword from "./pages/Auth/ForgetPassword/Index";
 import ResetPassword from "./pages/Auth/ResetPassword/Index";
+import './index.css';
 
 function App() {
   return (
     <>
-      <div>hello</div>
-    
-
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LayoutAuth />}> 
