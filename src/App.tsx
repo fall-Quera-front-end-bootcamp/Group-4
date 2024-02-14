@@ -6,15 +6,11 @@ import Register from "./pages/Auth/Register/Index";
 import ForgetPassword from "./pages/Auth/ForgetPassword/Index";
 import ResetPassword from "./pages/Auth/ResetPassword/Index";
 import navbar from "./components/navbar";
-function App() {
+import './index.css';
+
+  function App() {
   return (
     <>
-      <div>hello</div>
-
-    
-    
-
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LayoutAuth />}> 
