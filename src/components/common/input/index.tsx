@@ -1,6 +1,8 @@
 import React from 'react';
 
 interface InputProps {
+  width:number;
+  height:number;
   value: string | number; 
   onChange: (value: string | number) => void;
   style?: React.CSSProperties; 
@@ -8,6 +10,8 @@ interface InputProps {
 }
 
 const DynamicInput: React.FC<InputProps> = ({
+  width,
+  height,
   value,
   onChange,
   style, 
@@ -25,6 +29,8 @@ const DynamicInput: React.FC<InputProps> = ({
         ...style, 
         borderRadius: '6px',
         border: '1px solid #e2e8f0',
+        width: `${width}px`,
+        height: `${height}px`
       }}
       value={value}
       onChange={handleChange}
