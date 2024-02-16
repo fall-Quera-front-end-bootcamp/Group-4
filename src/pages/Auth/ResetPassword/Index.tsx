@@ -13,6 +13,7 @@ function ResetPassword() {
   const customStyle = {
     width: '640px',
     height: '369px',
+    borderRadius:"20px"
   };
 
   const header = {

@@ -11,11 +11,13 @@ function ForgetPassword() {
   const customStyle = {
     width: '640px',
     height: '304px',
+    borderRadius:"20px"
   };
 
   const secondForm = {
     width: '640px',
     height: '142px',
+    borderRadius:"20px"
   };
 
   const header = {

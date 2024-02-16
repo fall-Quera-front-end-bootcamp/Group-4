@@ -15,6 +15,7 @@ function Register() {
     const customStyle = {
         width: '640px',
         height: '480px',
+        borderRadius:"20px"
     };
 
     const header = {
