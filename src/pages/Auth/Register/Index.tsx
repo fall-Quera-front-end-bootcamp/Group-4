@@ -2,7 +2,12 @@ import Form from "../../../components/common/form/Index";
 import DynamicInput from "../../../components/common/input";
 import { Link } from 'react-router-dom';
 import DynamicButton from "../../../components/common/button";
+import { useState } from "react";
 function Register() {
+
+    const [username, setUsename] = useState("");
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("");
 
 
     const customStyle = {
@@ -51,8 +56,9 @@ function Register() {
                     <DynamicInput
                         width={592}
                         height={40}
-                        value=""
-                        onChange={(value) => console.log(value)}
+                        value={username}
+                        onChange={(value) => setUsename(value)}
+                        type={"text"}
                         style={{marginTop: '8px'}}
                     />
                     <label style={labels} className="w-full flex flex-col
@@ -60,8 +66,9 @@ function Register() {
                     <DynamicInput
                         width={592}
                         height={40}
-                        value=""
-                        onChange={(value) => console.log(value)}
+                        value={email}
+                        onChange={(value) => setEmail(value)}
+                        type={"email"}
                         style={{marginTop: '8px'}}
                     />
 
@@ -71,8 +78,9 @@ function Register() {
                     <DynamicInput
                         width={592}
                         height={40}
-                        value=""
-                        onChange={(value) => console.log(value)}
+                        value={password}
+                        onChange={(value) => setPassword(value)}
+                        type={"password"}
                         style={{marginTop: '8px'}}
                     />
 
