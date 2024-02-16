@@ -2,7 +2,10 @@ import Form from "../../../components/common/form/Index";
 import DynamicInput from "../../../components/common/input";
 import { Link } from 'react-router-dom';
 import DynamicButton from "../../../components/common/button";
+import { useState } from "react";
 function ForgetPassword() {
+
+  const [email, setEmail] = useState("");
 
   const customStyle = {
     width: '640px',
@@ -33,12 +36,12 @@ function ForgetPassword() {
         <h1 style={header}>فراموشی رمز عبور</h1>
         <div className="w-full flex flex-col justify-center items-center pt-8">
           <label style={labels}className="w-full flex flex-col justify-center items-end">ایمیل خود را وارد کنید</label>
-          <DynamicInput
+           <DynamicInput
             width={592}
             height={40}
-            value=""
-            onChange={(value) => console.log(value)} 
-            style={{ marginTop: '8px' }} 
+            value={email}
+            onChange={(value) => setEmail(value)} 
+            style={{ marginTop: '8px' }}
           />
           <div style={{paddingTop: '18px',}}>
             <DynamicButton
