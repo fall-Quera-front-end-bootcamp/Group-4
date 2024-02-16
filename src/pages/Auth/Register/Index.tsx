@@ -119,6 +119,8 @@ function Register() {
                             onClick={() => console.log("Button clicked")}
                             bgColor="blue"
                             textColor="white"
+                            fontWeight={800}
+                            fontSize="14px"
                         />
                     </div>
 

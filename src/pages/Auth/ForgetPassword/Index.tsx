@@ -52,6 +52,8 @@ function ForgetPassword() {
                 onClick={() => console.log("Button clicked")} 
                 bgColor="blue"
                 textColor="white"
+                fontWeight={800}
+                fontSize="14px"
               />
           </div> 
           <Link to="/login" className="text-customBlue hover:text-customBlueLight pr-1" style={register}>بازگشت</Link>

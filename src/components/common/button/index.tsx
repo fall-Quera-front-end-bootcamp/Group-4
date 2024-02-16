@@ -6,7 +6,9 @@ interface ButtonProps {
   height: number;
   onClick?: () => void;
   bgColor?: string; 
-  textColor?: string; 
+  textColor?: string;
+  fontSize?: string;
+  fontWeight?: number; 
 }
 
 const DynamicButton: React.FC<ButtonProps> = ({
@@ -14,7 +16,9 @@ const DynamicButton: React.FC<ButtonProps> = ({
   width,
   height,
   onClick,
-  bgColor, 
+  bgColor,
+  fontSize,
+  fontWeight, 
 }) => {
   
 
@@ -27,6 +31,8 @@ const DynamicButton: React.FC<ButtonProps> = ({
         borderRadius: '6px',
         border: 'none',
         cursor: 'pointer',
+        fontSize: fontSize,
+        fontWeight: `${fontWeight}`,
       }}
       onClick={onClick}
       >

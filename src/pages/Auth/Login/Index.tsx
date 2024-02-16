@@ -75,6 +75,8 @@ function Login() {
               onClick={() => console.log("Button clicked")} 
               bgColor="blue"
               textColor="white"
+              fontWeight={800}
+              fontSize="14px"
             />
             <div className="w-full flex justify-center items-center py-4">
               <Link to="/register" className="text-customBlue hover:text-customBlueLight pr-1" style={register}>ثبت‌نام</Link>
