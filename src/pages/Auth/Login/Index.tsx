@@ -44,7 +44,7 @@ function Login() {
       <Form style={customStyle}>
         <h1 style={header}>(: به کوئرا تسک منیجر خوش برگشتی </h1>
         <div className="w-full flex flex-col justify-center items-center pt-8">
-          <label style={labels}className="w-full flex flex-col justify-center items-end">نام کاربری</label>
+          <label style={labels} className="w-full flex flex-col justify-center items-end">نام کاربری</label>
           <DynamicInput
             width={592}
             height={40}
