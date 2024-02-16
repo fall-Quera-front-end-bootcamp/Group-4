@@ -1,12 +1,13 @@
 import React from 'react';
 
 interface InputProps {
-  width:number;
-  height:number;
-  value: string | number; 
-  onChange: (value: string | number) => void;
-  style?: React.CSSProperties; 
+  width: number;
+  height: number;
+  value: string;
+  onChange: (value: string) => void;
+  style?: React.CSSProperties;
   placeholder?: string;
+  type?: string;
 }
 
 const DynamicInput: React.FC<InputProps> = ({
@@ -14,26 +15,23 @@ const DynamicInput: React.FC<InputProps> = ({
   height,
   value,
   onChange,
-  style, 
+  style,
   placeholder,
+  type = 'text', 
 }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
-  };
-
   return (
     <input
-      type="text"
+      type={type}
       className="border border-gray-300 rounded-md px-2 py-1 w-full"
       style={{
-        ...style, 
+        ...style,
         borderRadius: '6px',
         border: '1px solid #e2e8f0',
         width: `${width}px`,
-        height: `${height}px`
+        height: `${height}px`,
       }}
       value={value}
-      onChange={handleChange}
+      onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
     />
   );

@@ -1,8 +1,12 @@
+import React, { useState } from 'react';
 import Form from "../../../components/common/form/Index";
 import DynamicInput from "../../../components/common/input";
 import { Link } from 'react-router-dom';
 import DynamicButton from "../../../components/common/button";
+
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const customStyle = {
     width: '640px',
@@ -48,17 +52,19 @@ function Login() {
           <DynamicInput
             width={592}
             height={40}
-            value=""
-            onChange={(value) => console.log(value)} 
-            style={{ marginTop: '8px' }} 
+            value={username}
+            onChange={(value) => setUsername(value)}
+            style={{ marginTop: '8px' }}
+            type={"text"}
           />
           <label style={labels} className="w-full flex flex-col justify-center items-end pt-6">رمز عبور</label>  
           <DynamicInput
             width={592}
             height={40}
-            value=""
-            onChange={(value) => console.log(value)} 
-            style={{ marginTop: '8px' }} 
+            value={password}
+            onChange={(value) => setPassword(value)}
+            style={{ marginTop: '8px' }}
+            type={"password"}
           />
           <Link to="/forgetpassword" style={link} className="w-full flex flex-col justify-center items-end pt-6">رمز عبور خود را فراموش کرده‌اید؟</Link>
           <div className="pt-6" >

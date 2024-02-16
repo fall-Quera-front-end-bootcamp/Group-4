@@ -26,7 +26,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
         height: `${height}px`,
         borderRadius: '6px',
         border: 'none',
-        cursor: 'pointer'
+        cursor: 'pointer',
       }}
       onClick={onClick}
       >
