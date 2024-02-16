@@ -11,6 +11,7 @@ function Login() {
   const customStyle = {
     width: '640px',
     height: '429px',
+    borderRadius:"20px"
   };
 
   const header = {
