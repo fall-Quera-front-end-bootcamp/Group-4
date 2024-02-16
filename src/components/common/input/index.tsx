@@ -7,6 +7,7 @@ interface InputProps {
   onChange: (value: string) => void;
   style?: React.CSSProperties;
   placeholder?: string;
+  type?: string;
 }
 
 const DynamicInput: React.FC<InputProps> = ({
@@ -16,10 +17,11 @@ const DynamicInput: React.FC<InputProps> = ({
   onChange,
   style,
   placeholder,
+  type = 'text', 
 }) => {
   return (
     <input
-      type="text"
+      type={type}
       className="border border-gray-300 rounded-md px-2 py-1 w-full"
       style={{
         ...style,

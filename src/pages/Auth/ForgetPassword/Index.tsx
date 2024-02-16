@@ -42,6 +42,7 @@ function ForgetPassword() {
             value={email}
             onChange={(value) => setEmail(value)} 
             style={{ marginTop: '8px' }}
+            type={"email"}
           />
           <div style={{paddingTop: '18px',}}>
             <DynamicButton
