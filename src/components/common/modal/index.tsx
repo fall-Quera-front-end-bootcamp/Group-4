@@ -1,5 +1,5 @@
 import React from 'react';
-import './Modal.css';
+import './index.css';
 import deleteImage from '../../assets/icons/Delete.png';
 
 interface ModalProps {
