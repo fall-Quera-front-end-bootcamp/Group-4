@@ -25,6 +25,8 @@ function Navbar (children : Iprops) : JSX.Element {
         onClick={handleLoginButtonClick}
         bgColor="blue"
         textColor="white"
+        fontWeight={800}
+        fontSize="14px"
     />  
     <Link to="/register" className='font-medium text-[16px] leading-[22.55px] text-right text-black w-[134px] h-[23px] hover:text-gray-700'>ثبت نام نکرده ای؟</Link>
 
