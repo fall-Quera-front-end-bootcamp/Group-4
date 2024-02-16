@@ -55,6 +55,7 @@ function Login() {
             value={username}
             onChange={(value) => setUsername(value)}
             style={{ marginTop: '8px' }}
+            type={"text"}
           />
           <label style={labels} className="w-full flex flex-col justify-center items-end pt-6">رمز عبور</label>  
           <DynamicInput
@@ -63,6 +64,7 @@ function Login() {
             value={password}
             onChange={(value) => setPassword(value)}
             style={{ marginTop: '8px' }}
+            type={"password"}
           />
           <Link to="/forgetpassword" style={link} className="w-full flex flex-col justify-center items-end pt-6">رمز عبور خود را فراموش کرده‌اید؟</Link>
           <div className="pt-6" >
