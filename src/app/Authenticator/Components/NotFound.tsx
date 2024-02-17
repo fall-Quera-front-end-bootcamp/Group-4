@@ -1,6 +1,6 @@
-import DynamicButton from "../../../components/common/button";
+import DynamicButton from '../../Components/common/button';
 import { useNavigate } from 'react-router-dom';
-import Form from "../../../components/common/form/Index";
+import Form from '../../Components/common/form/Index';
 
 
 function NotFound (){
