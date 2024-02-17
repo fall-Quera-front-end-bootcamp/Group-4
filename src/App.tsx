@@ -5,6 +5,7 @@ import Login from "./pages/Auth/Login/Index";
 import Register from "./pages/Auth/Register/Index";
 import ForgetPassword from "./pages/Auth/ForgetPassword/Index";
 import ResetPassword from "./pages/Auth/ResetPassword/Index";
+import NotFound from "./pages/Auth/NotFound/NotFound";
 import navbar from "./components/navbar";
 import './index.css';
 
@@ -18,7 +19,7 @@ import './index.css';
             <Route path="register" element={<Register />} />
             <Route path="forgetpassword" element={<ForgetPassword />} />
             <Route path="resetpassword" element={<ResetPassword />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
+            <Route path="*" element={<NotFound/>} />
           </Route>
         </Routes>
       </BrowserRouter>
