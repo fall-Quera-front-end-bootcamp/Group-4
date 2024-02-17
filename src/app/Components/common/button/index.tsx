@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 interface ButtonProps {
   text: string;
   width: number;
   height: number;
   onClick?: () => void;
-  bgColor?: string; 
+  bgColor?: string;
   textColor?: string;
   fontSize?: string;
-  fontWeight?: number; 
+  fontWeight?: number;
 }
 
 const DynamicButton: React.FC<ButtonProps> = ({
@@ -18,30 +18,25 @@ const DynamicButton: React.FC<ButtonProps> = ({
   onClick,
   bgColor,
   fontSize,
-  fontWeight, 
+  fontWeight,
 }) => {
-  
-
   return (
     <button
       className={`bg-customBlue hover:bg-customBlueLight text-white`}
       style={{
         width: `${width}px`,
         height: `${height}px`,
-        borderRadius: '6px',
-        border: 'none',
-        cursor: 'pointer',
+        borderRadius: "6px",
+        border: "none",
+        cursor: "pointer",
         fontSize: fontSize,
         fontWeight: `${fontWeight}`,
       }}
       onClick={onClick}
-      >
+    >
       {text}
     </button>
   );
 };
 
 export default DynamicButton;
-
-
-

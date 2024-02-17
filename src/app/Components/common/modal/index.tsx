@@ -1,6 +1,6 @@
-import React from 'react';
-import './index.css';
-import deleteImage from '../../assets/icons/Delete.png';
+import React from "react";
+import "./index.css";
+import deleteImage from "../../assets/icons/Delete.png";
 
 interface ModalProps {
   isOpen: boolean;
@@ -17,8 +17,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <button className="modal-close-button" onClick={onClose}>
           <img
             src={deleteImage}
-            alt='X'
-            className='modal-close-button'
+            alt="X"
+            className="modal-close-button"
             onClick={onClose}
           />
         </button>
@@ -29,8 +29,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 };
 
 export default Modal;
-
-
 
 //Usage
 
@@ -68,6 +66,3 @@ export default Modal;
 
 
  */
-
-
-

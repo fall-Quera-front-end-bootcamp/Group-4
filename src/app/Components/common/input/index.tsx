@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface InputProps {
   width: number;
@@ -17,7 +17,7 @@ const DynamicInput: React.FC<InputProps> = ({
   onChange,
   style,
   placeholder,
-  type = 'text', 
+  type = "text",
 }) => {
   return (
     <input
@@ -25,8 +25,8 @@ const DynamicInput: React.FC<InputProps> = ({
       className="border border-gray-300 rounded-md px-2 py-1 w-full"
       style={{
         ...style,
-        borderRadius: '6px',
-        border: '1px solid #e2e8f0',
+        borderRadius: "6px",
+        border: "1px solid #e2e8f0",
         width: `${width}px`,
         height: `${height}px`,
       }}
