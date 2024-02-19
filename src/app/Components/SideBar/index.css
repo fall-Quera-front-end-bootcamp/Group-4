@@ -1,0 +1,14 @@
+.sidebar {
+    width: 340px;
+    height: 1024px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border-left: 2px solid #eaeaea;
+    z-index: 10;
+  }
