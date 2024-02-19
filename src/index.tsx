@@ -4,15 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Loading from "./app/Components/Loading";
+import { store } from "./utils/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Suspense fallback={<Loading />}>
-      <App />
-    </Suspense>
+    <Provider store={store}>
+      <Suspense fallback={<Loading />}>
+        <App />
+      </Suspense>
+    </Provider>
   </React.StrictMode>
 );
 
