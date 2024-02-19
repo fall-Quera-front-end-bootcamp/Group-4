@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../../Navbar/index";
+import Navbar from "../../navbar/index";
 
 import "./style.css";
 interface Iprops extends React.PropsWithChildren {}
