@@ -60,3 +60,25 @@ const Avatars: React.FC<AvatarsProps> = ({
 };
 
 export default Avatars;
+
+
+
+/*
+          const url='';
+
+
+        const profiless = [
+          { name: 'muhammadali ghasemi nezhad', imageSrc: '', color: '#007bff' },
+          { name: 'hojjat iranmanesh', imageSrc: '', color: '#28a745' },
+          { name: 'Ali mombeni',  imageSrc: url ,color: '#007bff'},
+        ];
+
+
+
+        <Avatars profiles={profiless} />
+        
+        <Avatars profiles={profiless} size={20}/>
+
+        <Avatars profiles={profiless} overlap={0.5}/>
+
+*/
