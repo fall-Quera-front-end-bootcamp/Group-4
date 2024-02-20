@@ -21,7 +21,7 @@ const Avatars: React.FC<AvatarsProps> = ({
   profiles,
 }: AvatarsProps) => {
   const containerStyle: React.CSSProperties = {
-    width: '100%',
+    width: '43%',
     height: size,
     position: 'relative',
     alignItems: 'center',
