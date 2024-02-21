@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
 
 const LayoutAuth = React.lazy(() => import("./app/Components/layout/auth"));
-const Board = React.lazy( () => import('./app/Dashboard/HomePage/Board-Component/Board/Board') )
+const Board = React.lazy( () => import('./app/Dashboard/HomePage/Board/Board') )
 const Login = React.lazy(() => import("./app/Authenticator/Components/Login"));
 const Register = React.lazy(
   () => import("./app/Authenticator/Components/Register")
