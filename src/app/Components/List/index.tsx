@@ -36,7 +36,7 @@ function List() {
 
     return (
         <div className="relative flex flex-col justify-between items-end h-[140px] w-[1011px]">
-            <div className="flex items-center cursor-pointer flex" onClick={toggleMenu}>
+            <div className="flex items-center cursor-pointer " onClick={toggleMenu}>
                 <div className="bg-[#E64980] flex justify-center items-center rounded-[4px] pb-[4px] pt-[4px] pl-[12px] pr-[12px] w-[84px] h-[32px] text-pink-200 leading-[16.91px] text-right text-xs" style={pandding}>
                     Pendding
                 </div>
