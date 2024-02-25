@@ -21,6 +21,7 @@ interface Task {
 
 function Board() {
     return (
+
         <div className="flex justify-center">
             <Header />
             <div className="mt-[150px] mr-[280px]">
