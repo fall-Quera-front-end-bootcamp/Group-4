@@ -22,7 +22,9 @@ const NotFound = React.lazy(
 const ListView = React.lazy(
   () => import("./app/Dashboard/HomePage/Board/ListView")
 )
-
+const CalendarView = React.lazy(
+  () => import("./app/Dashboard/HomePage/Board/CalendarView")
+)
 
 
 function App() {
@@ -38,6 +40,7 @@ function App() {
           </Route>  
           <Route path="board" element={<Board/>}>
               <Route path="listview" element={<ListView/>}/>
+              <Route path="calendarview" element={<CalendarView/>}/>
           </Route>  
             <Route path="*" element={<NotFound/>} />
         </Routes>

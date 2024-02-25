@@ -10,7 +10,7 @@ import {faTableColumns , faListCheck , faShareNodes , faSearch , faSliders , faR
 
     return(
 
-        <div className='w-[95%] pr-[320px] pt-[30px] fixed'>
+        <div className='w-[95%] pr-[320px] pt-[30px] bg-white fixed' >
 
             {/* container of header  */}
             <div className=" container pt-[16px] pb-[16px] flex  justify-between items-center W-[1034px] H-[64px] ">
