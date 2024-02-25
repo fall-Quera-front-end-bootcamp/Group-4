@@ -19,20 +19,27 @@ const NotFound = React.lazy(
   () => import("./app/Authenticator/Components/NotFound")
 );
 
+const ListView = React.lazy(
+  () => import("./app/Dashboard/HomePage/Board/ListView")
+)
+
+
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route>
-          <Route path="/" element={<LayoutAuth />} />
+          <Route path="/" element={<LayoutAuth />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="forgetpassword" element={<ForgetPassword />} />
             <Route path="resetpassword" element={<ResetPassword />} />
+          </Route>  
+          <Route path="board" element={<Board/>}>
+              <Route path="listview" element={<ListView/>}/>
+          </Route>  
             <Route path="*" element={<NotFound/>} />
-            <Route path="board" element={<Board/>} />
-          </Route>
         </Routes>
       </BrowserRouter>
     </>
