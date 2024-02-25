@@ -3,7 +3,7 @@ import Calendar from '../../../Components/calendar/calendarview'
 
 function CalendarView() {
   return (
-    <div>
+    <div className='mr-[40px]'>
         <Calendar/>
     </div>
   )

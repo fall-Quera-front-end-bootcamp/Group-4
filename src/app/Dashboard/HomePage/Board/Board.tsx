@@ -23,7 +23,7 @@ function Board() {
     return (
         <div className="flex justify-center">
             <Header />
-            <div className="flex flex-col mt-[150px] mr-[280px]">
+            <div className="mt-[150px] mr-[280px]">
                 <Outlet />
             </div>
             <SideBar />
