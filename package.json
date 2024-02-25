@@ -17,12 +17,8 @@
     "@types/react-dom": "^18.2.19",
     "@types/tinycolor2": "^1.4.6",
     "axios": "^1.6.7",
-<<<<<<< HEAD
     "formik": "^2.4.5",
     "primereact": "^10.5.1",
-=======
-    "jalali-moment": "^3.3.11",
->>>>>>> 7ca48fed25f8722c74329f6d4a82be9c5a985f7d
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-colorful": "^5.6.1",
