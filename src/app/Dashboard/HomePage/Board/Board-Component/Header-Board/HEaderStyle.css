@@ -1,5 +1,12 @@
 
-
+.header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #ffffff;
+    z-index: 10;
+    left: 0;
+}
 .line_effect_l:hover {
     color: rgba(32, 141, 142, 1);
 

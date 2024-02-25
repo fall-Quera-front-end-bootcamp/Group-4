@@ -38,7 +38,7 @@ const Calendar: React.FC = () => {
   const cellSize = '150px';
 
   return (
-    <div style={{ direction: 'rtl' }}>
+    <div style={{ direction: 'rtl'}}>
       
       <div>
         <div style={{marginRight:'20px'}}>

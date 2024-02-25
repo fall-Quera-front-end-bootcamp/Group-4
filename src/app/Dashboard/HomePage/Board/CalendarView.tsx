@@ -3,7 +3,7 @@ import Calendar from '../../../Components/calendar/calendarview'
 
 function CalendarView() {
   return (
-    <div style={{marginRight:'-50px'}}>
+    <div className='mr-[40px]'>
         <Calendar/>
     </div>
   )
