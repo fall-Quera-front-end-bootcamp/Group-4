@@ -7,7 +7,6 @@ import DynamicButton from "../../../../../Components/common/button";
 import {faDotCircle, faArrowLeft, faBan} from "@fortawesome/free-solid-svg-icons";
 import { ColorPicker } from 'primereact/colorpicker';
 import { Formik } from 'formik';
-import colorPicker from "./ColorPicker/Color-Picker";
 
 const customStyle = {
     width: "500px",
