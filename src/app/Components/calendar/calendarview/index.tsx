@@ -76,7 +76,7 @@ const Calendar: React.FC = () => {
               height: cellSize,
               position: 'relative',
               outline:'0.5px solid #aaaaaa',
-              ...(day.isSame(moment(), 'day') && { borderTop: '1px solid #208d8e', borderRight: '1px solid #208d8e', borderBottom: '1px solid #208d8e', borderLeft: '1px solid #208d8e' })}}
+              ...(day.isSame(moment(), 'day') && { borderTop: '2px solid #208d8e', borderRight: '2px solid #208d8e', borderBottom: '2px solid #208d8e', borderLeft: '2px solid #208d8e' })}}
           >
              {/* Render day names only for the first row */}
             {index < 7 && ( 

@@ -18,7 +18,7 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ imgSrc, projectName, 
 
     return (
         <div>
-            <div className="rounded-[16px] p-[16px] gap-[16px] bg-white drop-shadow-md">
+            <div className="rounded-[16px] p-[16px] gap-[16px] bg-white drop-shadow-md flex flex-col justify-center items-center">
                 {imgSrc && ( 
                     <div className="flex justify-center w-[218px] h-[134px]">
                         <img className="rounded-[4px]" src={imgSrc} alt="" />
@@ -34,15 +34,15 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ imgSrc, projectName, 
                     </div>
                 </div>
                 <div dir="rtl">
-                    <div className="w-[78px] h-[17px] gap-[8px] mt-3">
+                    <div className="w-[235px] h-[17px] gap-[8px] mt-3">
                         <span className="text-[#FA5252] text-sm"><FontAwesomeIcon icon={faFlag} /></span>
                         <span className="mr-1 font-medium text-[12px] leading-[16.91px] text-right">{pDeadline}</span>
                     </div>
                 </div>
                 <div dir="rtl">
-                <div className="w-[91px] h-[24px] gap-[8px] flex-row flex mt-6">
+                <div className="w-[240px] h-[24px] gap-[8px] flex-row flex mt-6">
                     {tags.map((tag, index) => (
-                        <div key={index} className={`text-[#228BE6] bg-[#D0EBFF] inline-block rounded-[14px] pr-[8px] pl-[8px] `}>
+                        <div key={index} className={`text-[#228BE6] bg-[#D0EBFF] inline-block rounded-[14px] pr-[8px] pl-[8px]`}>
                             <span className="w-[25px] h-[17px] font-extrabold text-[12px] leading-[16.91px] text-right">{tag}</span>
                         </div>
                     ))}
