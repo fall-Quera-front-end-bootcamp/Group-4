@@ -33,7 +33,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
         cursor: "pointer",
         fontSize: fontSize,
         fontWeight: `${fontWeight}`,
-          padding:`${padding}px`,
+          padding:`${ padding}px`,
       }}
       onClick={onClick}
     >

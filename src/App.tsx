@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
-
+const NewTask= React.lazy(()=> import("./app/Task/NewTask/NewTask")  )
 const LayoutAuth = React.lazy(() => import("./app/Components/layout/auth"));
 const Board = React.lazy( () => import('./app/Dashboard/HomePage/Board/Board') )
 const Login = React.lazy(() => import("./app/Authenticator/Components/Login"));
@@ -45,7 +45,11 @@ function App() {
               <Route path="listview" element={<ListView/>}/>
               <Route path="calendarview" element={<CalendarView/>}/>
               <Route path="boardview" element={<BView/>}/>
-          </Route>  
+          </Route>
+            <Route>
+                <Route path="newtask" element={<NewTask/>}/>
+            </Route>
+
             <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
