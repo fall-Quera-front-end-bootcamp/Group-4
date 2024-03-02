@@ -6,6 +6,10 @@ import ColumnOpen from "./Board-Component/Board-Column/Column-Open/Board-Column"
 import List from "../../../Components/List";
 import BoardView from "./Board-Component/board-view/BoardView";
 import Calendar from '../../../Components/calendar/calendarview';
+import ProjectCreate from "./Board-Component/Board-Column/Column-More/New-Project/ProjectCreate";
+import TaskCreate from "./Board-Component/Board-Column/Column-More/New-Task/TaskCreate";
+import ShareWorkspace from "./Board-Component/Board-Column/Column-More/New-Project/Share-Workspace/ShareWorkspace";
+import WorkspaceModal from "./Board-Component/WorkspaceModal";
 
 
 
@@ -24,8 +28,11 @@ function Board() {
 
         <div className="flex justify-center">
             <Header />
+
             <div className="mt-[150px] mr-[280px]">
+
                 <Outlet />
+
             </div>
             <SideBar />
         </div>

@@ -10,6 +10,7 @@ interface ButtonProps {
   fontSize?: string;
   fontWeight?: number;
   padding?:number;
+  borderRadius?:number;
 }
 
 const DynamicButton: React.FC<ButtonProps> = ({
@@ -21,6 +22,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
   fontSize,
   fontWeight,
     padding,
+   borderRadius
 }) => {
   return (
     <button
@@ -28,7 +30,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
       style={{
         width: `${width}px`,
         height: `${height}px`,
-        borderRadius: "6px",
+        borderRadius: `${borderRadius}px`,
         border: "none",
         cursor: "pointer",
         fontSize: fontSize,

@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
+import WorkspaceModal from "./app/Dashboard/HomePage/Board/Board-Component/WorkspaceModal";
 const NewTask= React.lazy(()=> import("./app/Task/NewTask/NewTask")  )
 const LayoutAuth = React.lazy(() => import("./app/Components/layout/auth"));
 const Board = React.lazy( () => import('./app/Dashboard/HomePage/Board/Board') )
 const Login = React.lazy(() => import("./app/Authenticator/Components/Login"));
+const WorkSpaceModal= React.lazy(() => import("./app/Dashboard/HomePage/Board/Board-Component/WorkspaceModal"));
 const Register = React.lazy(
   () => import("./app/Authenticator/Components/Register")
 );
@@ -45,9 +47,11 @@ function App() {
               <Route path="listview" element={<ListView/>}/>
               <Route path="calendarview" element={<CalendarView/>}/>
               <Route path="boardview" element={<BView/>}/>
+
           </Route>
             <Route>
                 <Route path="newtask" element={<NewTask/>}/>
+                <Route path="WorkSpaceModal" element={<WorkspaceModal/>}/>
             </Route>
 
             <Route path="*" element={<NotFound/>} />
