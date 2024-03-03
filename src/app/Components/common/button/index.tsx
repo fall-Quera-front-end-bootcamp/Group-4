@@ -9,8 +9,9 @@ interface ButtonProps {
   textColor?: string;
   fontSize?: string;
   fontWeight?: number;
-  padding?:number;
-  borderRadius?:number;
+  padding?: number;
+  borderRadius?: number;
+  icon?: string;
 }
 
 const DynamicButton: React.FC<ButtonProps> = ({
@@ -21,8 +22,9 @@ const DynamicButton: React.FC<ButtonProps> = ({
   bgColor,
   fontSize,
   fontWeight,
-    padding,
-   borderRadius
+  padding,
+  borderRadius,
+  icon,
 }) => {
   return (
     <button
@@ -35,10 +37,14 @@ const DynamicButton: React.FC<ButtonProps> = ({
         cursor: "pointer",
         fontSize: fontSize,
         fontWeight: `${fontWeight}`,
-          padding:`${ padding}px`,
+        padding: `${padding}px`,
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center", 
       }}
       onClick={onClick}
     >
+      {icon && <img src={icon} alt="button-icon" style={{ marginRight: "20px" }} />}
       {text}
     </button>
   );
