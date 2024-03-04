@@ -40,10 +40,18 @@ export const registerr = async (username, email, password) => {
       return userData;
     } catch (error) {
       // Log and handle any errors
-      console.error('Registration failed:', error);
-      throw error; 
+      if (error.response && error.response.status === 400) {
+        // If status is 400, it means the request is malformed or contains invalid data
+        // You can provide feedback to the user indicating the issue with their input
+        // For example:
+        alert('کاربر از قبل وجود دارد.');
+      } else {
+        // For other errors, log and handle them accordingly
+        console.error('Registration failed:', error);
+        throw error;
     }
   };
+}
 
 
   export const fetchAccounts = async () => {
