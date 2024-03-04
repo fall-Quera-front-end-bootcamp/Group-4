@@ -11,8 +11,8 @@ interface InputProps {
   icon?: React.ReactNode;
   backgroundColor?: string;
   rtlPlaceholder?: boolean;
-  buttonText?: string; // New prop for button text
-  onButtonClick?: () => void; // New prop for button click handler
+  buttonText?: string; 
+  onButtonClick?: () => void; 
 }
 
 const DynamicInput: React.FC<InputProps> = ({
@@ -26,8 +26,8 @@ const DynamicInput: React.FC<InputProps> = ({
   icon,
   backgroundColor = "#fff",
   rtlPlaceholder = false,
-  buttonText, // Added prop for button text
-  onButtonClick, // Added prop for button click handler
+  buttonText, 
+  onButtonClick,
 }) => {
   return (
     <div style={{ position: "relative", width: `${width}px` }}>
@@ -43,13 +43,13 @@ const DynamicInput: React.FC<InputProps> = ({
           background: backgroundColor,
           direction: rtlPlaceholder ? "rtl" : "ltr",
           textAlign: rtlPlaceholder ? "right" : "left",
-          paddingRight: buttonText ? "10px" : "10px", // Adjust padding for button
+          paddingRight: buttonText ? "10px" : "10px", 
         }}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
       />
-      {buttonText && ( // Render button only if buttonText is provided
+      {buttonText && ( 
         <button
           style={{
             position: "absolute",
