@@ -4,11 +4,31 @@ import { Link } from "react-router-dom";
 import DynamicButton from "../../Components/common/button";
 import { useState } from "react";
 import Modal from "../../Components/common/modal";
+import { registerr , fetchAccounts } from "../../../services/account";
+
 function Register() {
   const [username, setUsename] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const handleRegister = async () => {
+    try {
+      // Call the register function with username, email, and password
+      const userData = await registerr(username, email, password);
+      console.log("Registration successful:", userData);
+      // Handle successful registration
+    } catch (error) {
+      // Handle registration error
+      console.error("Registration failed:", error);
+    }
+  };
+
+  fetchAccounts();
+
+
+
 
   const customStyle = {
     width: "640px",
@@ -136,7 +156,7 @@ function Register() {
               text="ثبت نام"
               width={592}
               height={40}
-              onClick={() => console.log("Button clicked")}
+              onClick={handleRegister}
               bgColor="blue"
               textColor="white"
               fontWeight={800}
