@@ -10,21 +10,15 @@ function Login() {
   const [password, setPassword] = useState("");
 
     // Function to handle form submission
-  // Function to handle form submission
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
   
     try {
-      // Call the login function with the username and password
       const response = await login(username, password);
-      console.log("Login response:", response); // Log the response
-      // Handle successful login, e.g., redirect to dashboard
+      console.log("Login response:", response); 
       console.log("Login successful:", response);
-      // Redirect or update state to indicate successful login
     } catch (error) {
-      // Handle login error, e.g., display error message to user
       console.error("Login failed:", error);
-      // Display error message to user or handle the error appropriately
     }
   };
 
