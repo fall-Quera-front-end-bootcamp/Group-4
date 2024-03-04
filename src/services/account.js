@@ -57,7 +57,7 @@ export const register = async (username, email, password) => {
   
 
 
-  export default { login };
+  
 // export const fetchAccounts = async () => {
 //     try {
 //       const accessToken = localStorage.getItem('accessToken');

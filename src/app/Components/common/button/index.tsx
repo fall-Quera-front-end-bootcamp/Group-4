@@ -12,6 +12,7 @@ interface ButtonProps {
   padding?: number;
   borderRadius?: number;
   icon?: string;
+  type?: "button" | "submit" | "reset"; // Define the type prop
 }
 
 const DynamicButton: React.FC<ButtonProps> = ({
@@ -25,6 +26,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
   padding,
   borderRadius,
   icon,
+  type = "button", // Set default value for type prop
 }) => {
   return (
     <button
@@ -43,6 +45,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
         justifyContent: "center", 
       }}
       onClick={onClick}
+      type={type} // Use the type prop
     >
       {icon && <img src={icon} alt="button-icon" style={{ marginRight: "20px" }} />}
       {text}

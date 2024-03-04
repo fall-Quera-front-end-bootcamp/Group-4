@@ -10,23 +10,25 @@ function Login() {
   const [password, setPassword] = useState("");
 
     // Function to handle form submission
-    const handleLogin = async () => {
-      try {
-        // Call the login function with the username and password
-        const response = await login(username, password);
-        // Handle successful login, e.g., redirect to dashboard
-        console.log("Login successful:", response);
-        // Redirect or update state to indicate successful login
-      } catch (error) {
-        // Handle login error, e.g., display error message to user
-        console.error("Login failed:", error);
-        // Display error message to user or handle the error appropriately
-      }
-    };
+  // Function to handle form submission
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission behavior
+  
+    try {
+      // Call the login function with the username and password
+      const response = await login(username, password);
+      console.log("Login response:", response); // Log the response
+      // Handle successful login, e.g., redirect to dashboard
+      console.log("Login successful:", response);
+      // Redirect or update state to indicate successful login
+    } catch (error) {
+      // Handle login error, e.g., display error message to user
+      console.error("Login failed:", error);
+      // Display error message to user or handle the error appropriately
+    }
+  };
+
     
-
-
-
 
 
   const customStyle = {
@@ -67,7 +69,7 @@ function Login() {
 
   return (
     <div>
-      <Form style={customStyle}  >
+      <Form style={customStyle} onSubmit={handleLogin} >
         <h1 style={header}>(: به کوئرا تسک منیجر خوش برگشتی </h1>
         <div className="w-full flex flex-col justify-center items-center pt-8">
           <label
@@ -110,12 +112,11 @@ function Login() {
               text="ورود"
               width={592}
               height={40}
-              onClick={handleLogin}
               bgColor="blue"
               textColor="white"
               fontWeight={800}
               fontSize="14px"
-              
+              type="submit"
             />
             <div className="w-full flex justify-center items-center py-4">
               <Link
