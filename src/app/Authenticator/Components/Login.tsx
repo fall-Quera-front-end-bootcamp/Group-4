@@ -3,10 +3,32 @@ import Form from "../../Components/common/form/Index";
 import DynamicInput from "../../Components/common/input";
 import { Link } from "react-router-dom";
 import DynamicButton from "../../Components/common/button";
+import { login } from "../../../services/account";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+    // Function to handle form submission
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault(); // Prevent default form submission behavior
+  
+      try {
+        // Call the login function with username and password
+        const response = await login(username, password);
+        
+        // Handle successful login, such as redirecting to another page
+        console.log("Login successful:", response);
+  
+      } catch (error) {
+        // Handle login error, such as displaying error message to user
+        console.error("Login failed:", error);
+      }
+    };
+
+
+
+
 
   const customStyle = {
     width: "640px",
@@ -46,7 +68,7 @@ function Login() {
 
   return (
     <div>
-      <Form style={customStyle}>
+      <Form style={customStyle} onSubmit={handleSubmit} >
         <h1 style={header}>(: به کوئرا تسک منیجر خوش برگشتی </h1>
         <div className="w-full flex flex-col justify-center items-center pt-8">
           <label
