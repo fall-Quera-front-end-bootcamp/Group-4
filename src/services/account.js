@@ -16,7 +16,7 @@ export const login = async (username, password) => {
     return response.data;
   } catch (error) {
     if (error.response && error.response.status === 401) {
-      
+      alert('نام کاربری یا رمز عبور اشتباه است');
       console.error('Invalid username or password:', error);
       throw new Error('Invalid username or password');
     } else {
