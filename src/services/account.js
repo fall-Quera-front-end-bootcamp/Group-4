@@ -28,25 +28,26 @@ export const login = async (username, password) => {
 };
 
 export const registerr = async (username, email, password) => {
-    try {
-      const response = await axiosInstance.post('/accounts/', {
-        username,
-        email,
-        password
-      });
-  
-      const userData = response.data;
-  
-      return userData;
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert('کاربر از قبل وجود دارد.');
-      } else {
-        console.error('Registration failed:', error);
-        throw error;
+  try {
+    const response = await axiosInstance.post('/accounts/', {
+      username,
+      email,
+      password
+    });
+
+    const userData = response.data;
+
+    return userData;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      alert('کاربر از قبل وجود دارد.');
+    } else {
+      console.error('Registration failed:', error);
+      throw error;
     }
-  };
-}
+  }
+};
+
 
 
   export const fetchAccounts = async () => {
