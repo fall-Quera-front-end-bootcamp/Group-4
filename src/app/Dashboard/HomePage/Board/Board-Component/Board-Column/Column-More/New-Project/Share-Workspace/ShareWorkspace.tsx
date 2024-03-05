@@ -95,8 +95,8 @@ const ShareWorkspace: React.FC<ShareWorkspaceProp> = (): JSX.Element => {
                             {/*----------Workspace Owner---------*/}
                             <div className="w-[507px] h-[33px] flex justify-between items-center ">
                                 <div className="w-[181px] h-[33px] gap-[7px] flex items-center">
-                                    <img
-                                        className="w-[34px] h-[33px] rounded-[100%] object-cover   pt-[9px] pr-[8px] pb-[7px] pl-[8px]"
+                                    <img alt="profile image"
+                                        className="w-[34px] h-[34px] rounded-[100%] object-cover "
                                         src="https://media.istockphoto.com/id/1317804578/photo/one-businesswoman-headshot-smiling-at-the-camera.jpg?b=1&s=612x612&w=0&k=20&c=XdZqQ92Yk82otKZio_pE0KURn0U08sIr5Vz9bFSm7bM="/>
                                     <span className="w-[18px] h-[20px] font-medium
                    text-[14px] leading-[19.73px] text-right">من</span>

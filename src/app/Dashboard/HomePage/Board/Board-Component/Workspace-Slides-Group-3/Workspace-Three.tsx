@@ -67,11 +67,10 @@ const WorkspaceThree = () => {
                 <div className="w-[429px] h-[34px] justify-between flex">
                             <span
                                 className="font-extrabold text-[14px] leading-[19.73px] text-right">اعضا</span>
-                    <div className=" w-[36px] h-[33px]">
-                        <img
-                            className="w-[36px] h-[33px] rounded-[100%] object-cover   pt-[9px] pr-[8px] pb-[7px] pl-[8px]"
-                            src="https://media.istockphoto.com/id/1317804578/photo/one-businesswoman-headshot-smiling-at-the-camera.jpg?b=1&s=612x612&w=0&k=20&c=XdZqQ92Yk82otKZio_pE0KURn0U08sIr5Vz9bFSm7bM="/>
-                    </div>
+                    <img alt="profile photo"
+                         className="w-[34px] h-[34px] object-cover  rounded-[100%] "
+                         src="https://media.istockphoto.com/id/1317804578/photo/one-businesswoman-headshot-smiling-at-the-camera.jpg?b=1&s=612x612&w=0&k=20&c=XdZqQ92Yk82otKZio_pE0KURn0U08sIr5Vz9bFSm7bM="/>
+
                 </div>
 
 

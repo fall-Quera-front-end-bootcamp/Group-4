@@ -5,6 +5,7 @@ import WorkspaceThree from "./Workspace-Slides-Group-3/Workspace-Three";
 import {Link, Route, Routes} from "react-router-dom";
 import DynamicButton from "../../../../Components/common/button";
 import ShareWorkspace from "./Board-Column/Column-More/New-Project/Share-Workspace/ShareWorkspace";
+import ShareProject from "./Header-Board/Shahre-Project/ShareProject";
 
 function WorkspaceModal ()  {
 
@@ -14,9 +15,9 @@ function WorkspaceModal ()  {
 
         //color picker workspace
 // <WorkspaceTwo/>
-
-  // <WorkspaceThree/>
-          <ShareWorkspace/>
+<ShareProject/>
+    // <WorkspaceThree/>
+   //         <ShareWorkspace/>
 
 )
 

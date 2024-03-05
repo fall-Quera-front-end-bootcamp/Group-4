@@ -30,7 +30,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
       style={{
         width: `${width}px`,
         height: `${height}px`,
-        borderRadius: `${borderRadius}px`,
+        borderRadius: "6px",
         border: "none",
         cursor: "pointer",
         fontSize: fontSize,

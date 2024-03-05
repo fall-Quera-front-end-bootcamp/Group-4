@@ -1,35 +1,22 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
-import WorkspaceModal from "./app/Dashboard/HomePage/Board/Board-Component/WorkspaceModal";
-const NewTask= React.lazy(()=> import("./app/Task/NewTask/NewTask")  )
+
+import TaskInformationModalView from "./app/Task/Task-Information-Modal/TaskInformationModalView";
+// import {from} from "jalali-moment";
+
+const NewTask= React.lazy(()=> import("./app/Task/NewTask/NewTask") )
 const LayoutAuth = React.lazy(() => import("./app/Components/layout/auth"));
 const Board = React.lazy( () => import('./app/Dashboard/HomePage/Board/Board') )
 const Login = React.lazy(() => import("./app/Authenticator/Components/Login"));
 const WorkSpaceModal= React.lazy(() => import("./app/Dashboard/HomePage/Board/Board-Component/WorkspaceModal"));
-const Register = React.lazy(
-  () => import("./app/Authenticator/Components/Register")
-);
-
-const ForgetPassword = React.lazy(
-  () => import("./app/Authenticator/Components/ForgetPassword")
-);
-const ResetPassword = React.lazy(
-  () => import("./app/Authenticator/Components/ResetPassword")
-);
-const NotFound = React.lazy(
-  () => import("./app/Authenticator/Components/NotFound")
-);
-
-const ListView = React.lazy(
-  () => import("./app/Dashboard/HomePage/Board/ListView")
-)
-const CalendarView = React.lazy(
-  () => import("./app/Dashboard/HomePage/Board/CalendarView")
-)
-const BView = React.lazy(
-  () => import("./app/Dashboard/HomePage/Board/BView")
-)
+const Register = React.lazy(() => import("./app/Authenticator/Components/Register"));
+const ForgetPassword = React.lazy(() => import("./app/Authenticator/Components/ForgetPassword"));
+const ResetPassword = React.lazy(() => import("./app/Authenticator/Components/ResetPassword"));
+const NotFound = React.lazy(() => import("./app/Authenticator/Components/NotFound"));
+const ListView = React.lazy(() => import("./app/Dashboard/HomePage/Board/ListView"))
+const CalendarView = React.lazy(() => import("./app/Dashboard/HomePage/Board/CalendarView"))
+const BView = React.lazy(() => import("./app/Dashboard/HomePage/Board/BView"))
 
 
 function App() {
@@ -51,7 +38,8 @@ function App() {
           </Route>
             <Route>
                 <Route path="newtask" element={<NewTask/>}/>
-                <Route path="WorkSpaceModal" element={<WorkspaceModal/>}/>
+                <Route path="taskinfo" element={<TaskInformationModalView/>} />
+                <Route path="taskinfo" element={<TaskInformationModalView/>}/>
             </Route>
 
             <Route path="*" element={<NotFound/>} />

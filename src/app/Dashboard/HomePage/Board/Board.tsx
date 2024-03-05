@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "./Board-Component/Header-Board/Header";
 import SideBar from "../../../Components/SideBar";
-import { Outlet } from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 import ColumnOpen from "./Board-Component/Board-Column/Column-Open/Board-Column";
 import List from "../../../Components/List";
 import BoardView from "./Board-Component/board-view/BoardView";
@@ -10,6 +10,7 @@ import ProjectCreate from "./Board-Component/Board-Column/Column-More/New-Projec
 import TaskCreate from "./Board-Component/Board-Column/Column-More/New-Task/TaskCreate";
 import ShareWorkspace from "./Board-Component/Board-Column/Column-More/New-Project/Share-Workspace/ShareWorkspace";
 import WorkspaceModal from "./Board-Component/WorkspaceModal";
+import DynamicButton from "../../../Components/common/button";
 
 
 
@@ -26,7 +27,7 @@ interface Task {
 function Board() {
     return (
 
-        <div className="flex justify-center">
+        <div className="flex justify-center relative">
             <Header />
 
             <div className="mt-[150px] mr-[280px]">
@@ -35,7 +36,13 @@ function Board() {
 
             </div>
             <SideBar />
-        </div>
+            <div className="absolute  top-[954px] left-[50px] gap-[4px] ">
+                <Link to="/NewTask">
+            <DynamicButton text="تسک جدید" width={118} height={40} />
+                </Link>
+            </div>
+
+            </div>
     );
 }
 
