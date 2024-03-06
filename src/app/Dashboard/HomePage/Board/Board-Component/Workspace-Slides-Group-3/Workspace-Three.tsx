@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {HexColorPicker} from "react-colorful";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowLeft, faBan, faDotCircle} from '@fortawesome/free-solid-svg-icons';
+import {faArrowLeft, faBan, faDotCircle,faTimes} from '@fortawesome/free-solid-svg-icons';
 import Form from "../../../../../Components/common/form/Index";
 import {faTimesCircle} from "@fortawesome/free-regular-svg-icons";
 import DynamicButton from "../../../../../Components/common/button";
@@ -30,12 +30,13 @@ interface workspaceProps {
 
 const WorkspaceThree = () => {
     const [color, setColor] = useState();
+    const [WorkspaceClose,setWorkspaceClose]=useState(true)
     const colorHandler = () => {
         setColor(color)
 
     }
     return (
-
+<div className={`${!WorkspaceClose? 'hidden':''}`}>
         <Form style={customStyle}>
             {/* ---card body ------START*/}
             {/*--------ورک اسپیس------------*/}
@@ -44,8 +45,8 @@ const WorkspaceThree = () => {
                     <div className="w-[24px] h-[24px]"><FontAwesomeIcon icon={faArrowLeft}/></div>
                     <div className="font-extrabold text-[24px] leading-[32px] text-center text-[#1E1E1E]">مرور اطلاعات
                     </div>
-                    <div className="cursor-pointer text-[#323232] w-[24px] h-[24px] ml-4"><FontAwesomeIcon
-                        icon={faTimesCircle}/></div>
+                    <div onClick={()=>setWorkspaceClose(!WorkspaceClose)} className="cursor-pointer text-[#323232] w-[24px] h-[24px] ml-4"><FontAwesomeIcon
+                        icon={faTimes}/></div>
                 </div>
             </div>
             {/*------نام ورک اسپیس-----*/}
@@ -93,6 +94,7 @@ const WorkspaceThree = () => {
                 <div className="text-gray-700"><FontAwesomeIcon icon={faDotCircle}/></div>
             </div>
         </Form>
+</div>
     )
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "./Board-Component/Header-Board/Header";
 import SideBar from "../../../Components/SideBar";
 import {Link, Outlet} from "react-router-dom";
@@ -11,6 +11,7 @@ import TaskCreate from "./Board-Component/Board-Column/Column-More/New-Task/Task
 import ShareWorkspace from "./Board-Component/Board-Column/Column-More/New-Project/Share-Workspace/ShareWorkspace";
 import WorkspaceModal from "./Board-Component/WorkspaceModal";
 import DynamicButton from "../../../Components/common/button";
+import NewTask from "../../../Task/NewTask/NewTask";
 
 
 
@@ -25,6 +26,7 @@ interface Task {
 }
 
 function Board() {
+    const [ShowNewTask, setShowNewTask]=useState(false)
     return (
 
         <div className="flex justify-center relative">
@@ -37,10 +39,13 @@ function Board() {
             </div>
             <SideBar />
             <div className="absolute  top-[954px] left-[50px] gap-[4px] ">
-                <Link to="/NewTask">
-            <DynamicButton text="تسک جدید" width={118} height={40} />
-                </Link>
+
+            <DynamicButton text="تسک جدید" width={118} height={40} onClick={()=>setShowNewTask(!ShowNewTask)} />
+
             </div>
+            {ShowNewTask &&(
+                <NewTask/>
+            )}
 
             </div>
     );

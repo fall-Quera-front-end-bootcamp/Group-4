@@ -9,12 +9,16 @@ import Tags from "./Tags/Tags";
 import {useEffect, useRef, useState} from "react";
 import NewTag from "./Tags/NewTag/NewTag";
 import Calendar from "../../Components/calendar/calendarview";
+import Calendarmodal from "../../Components/calendar/calendarmodal";
+import Calendarview from "../../Components/calendar/calendarview";
+
 
 
 function NewTask () {
 const [closeTask,setCloseTask]=useState(true)
 const [open,setOpen]=useState(false)
 const [priorityOpen, setPriorityOpen] =useState(false)
+    const[calandarOpen,setcalandarOpen]=useState(true)
 const handlerOpenTag=(e:any)=>{
 e.preventDefault()
 
@@ -32,9 +36,12 @@ return (
 
     <div className={`${closeTask? 'visible' : 'hidden'}`}>
 
-    <div dir="rtl"
-                 className=" w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md">
-                <div className="w-[1089px] h-[34px] flex justify-between ">
+    <div dir="rtl" className=" w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md">
+
+
+
+        <div className="w-[1089px] h-[34px] flex justify-between ">
+
                     <div className="w-[148px] h-[34px] gap-[13px] flex items-center">
                         <div className="w-[16px] h-[16px] rounded-[2px] bg-[#d9d9d9]"></div>
                         <span
@@ -44,6 +51,7 @@ return (
                 </div>
                 {/*------------------پروژه اول-----------*/}
                 <div className="w-[1089px]  h-[34px] gap-[8px] mt-4 flex items-center ">
+
                     <div className="w-[14px] h-[23px]">
                         <span
                             className=" font-medium text-[16px] leading-[22.55px] text-right text-[#1e1e1e]">در</span>
@@ -87,13 +95,17 @@ return (
                 <div className="w-[1089px] h-[50px] flex flex-row justify-between items-center mt-8 ">
                     <div className="w-[198px] h-[50px] gap-[24px] flex ">
 
-                        <div onClick={()=>setPriorityOpen(!priorityOpen)} className="cursor-pointer hover:text-customBlue w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon icon={faFlag}/></span></div>
+                        <div onClick={()=>setPriorityOpen(!priorityOpen)} className=" cursor-pointer hover:text-customBlue w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon icon={faFlag}/></span></div>
                       <div className={`${priorityOpen ? 'visible': 'hidden'}`}>
                         <Priority/>
                       </div>
-                        <Link to="/board/calendarview">
-                        <div className=" cursor-pointer hover:text-customBlue w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon icon={faCalendar}/></span></div>
-                        </Link>
+
+                        <div onClick={()=>setcalandarOpen(!calandarOpen)} className=" cursor-pointer hover:text-customBlue w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon icon={faCalendar}/></span></div>
+                        {!calandarOpen && (
+                            <div>
+                                <Calendarview/>
+                            </div>
+                        )}
                         <div onClick={()=>setOpen(!open)} className=" hover:text-customBlue cursor-pointer w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon icon={faTags}/></span></div>
                        {/*------------Tag --showing--------------------------------------------------------------*/}
                        <div className={`${open ?'visible':'hidden'}`}>

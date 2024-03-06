@@ -1,9 +1,9 @@
 import DynamicButton from "../../../../../Components/common/button";
-import React, {useState} from "react";
+import React, {JSX, useState} from "react";
 import DynamicInput from "../../../../../Components/common/input";
 import Form from "../../../../../Components/common/form/Index";
 import { faTimesCircle  } from '@fortawesome/free-regular-svg-icons';
-import { faDotCircle ,faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import { faDotCircle,faTimes ,faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import WorkspaceTwo from "./Workspace-Two";
@@ -24,14 +24,24 @@ const customStylebtn = {
     padding:"10px",
 }
 
-function WorkspaceOne () {
+interface openProps{
+    open?:any;
+
+    setopen?: any;
+
+}
+
+
+const WorkspaceOne :React.FC<openProps> = ({open ,setopen}):JSX.Element=> {
 
     const [workspace, setWorkspace] = useState("");
-
+    const [WorkspaceClose,setWorkspaceClose]=useState(true)
 
     return (
 
+        <div className={`${!WorkspaceClose? 'hidden':''}`}>
 <Form style={customStyle}>
+
     {/* ---card body ------START*/}
     {/*--------ورک اسپیس------------*/}
     <div className="flex justify-center items-center w-[452px] h-[140px] gap-[40px] ">
@@ -41,7 +51,7 @@ function WorkspaceOne () {
             </div>
                 <div className="font-extrabold
                  text-[24px] leading-[32px] text-center text-[#1E1E1E]">ساختن ورک اسپیس جدید</div>
-        <div className="cursor-pointer text-[#323232] w-[24px] h-[24px] ml-4"><FontAwesomeIcon icon={faTimesCircle}/></div>
+        <div onClick={()=> setWorkspaceClose(!WorkspaceClose)} className="cursor-pointer text-[#323232] w-[24px] h-[24px] ml-4"><FontAwesomeIcon icon={faTimes}/></div>
         </div>
 
     </div>
@@ -56,7 +66,7 @@ function WorkspaceOne () {
                 width={415}
                 height={40}
                 value={workspace}
-                onChange={(value) => setWorkspace(value)}
+                onChange={()=>console.log('input change')}
                 type={"text"}
             />
         </div>
@@ -64,18 +74,18 @@ function WorkspaceOne () {
 
     {/*------card Button--- START */}
 
-
-
     <DynamicButton
         text="ادامه"
         width={415}
         height={40}
-        onClick={() => console.log("Button Clicked")}
+        onClick={()=>setopen(!open)}
         bgColor="#208D8E"
         fontSize="14px"
         fontWeight={800}
         padding={10}
     />
+
+
 
 
     <div className=" flex-row flex  w-[40px] h-[8px] gap-[8px]">
@@ -84,7 +94,7 @@ function WorkspaceOne () {
         <div className="text-gray-400"><FontAwesomeIcon icon={faDotCircle}/></div>
     </div>
 </Form>
-
+        </div>
     )
 
 

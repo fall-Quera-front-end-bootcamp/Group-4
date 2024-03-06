@@ -35,11 +35,11 @@ function App() {
               <Route path="calendarview" element={<CalendarView/>}/>
               <Route path="boardview" element={<BView/>}/>
 
+
           </Route>
             <Route>
                 <Route path="newtask" element={<NewTask/>}/>
                 <Route path="taskinfo" element={<TaskInformationModalView/>} />
-                <Route path="taskinfo" element={<TaskInformationModalView/>}/>
             </Route>
 
             <Route path="*" element={<NotFound/>} />

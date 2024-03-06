@@ -7,13 +7,15 @@ import DynamicInput from '../common/input';
 import DynamicButton from '../common/button';
 import SearchIcon from "../assets/icons/SearchIcon.png"
 import firstProject from '../assets/icons/firstProject.png'
-
+import {Link} from "react-router-dom";
+import WorkspaceModal from "../../Dashboard/HomePage/Board/Board-Component/WorkspaceModal";
 function SideBar() {
     
     const [isOpen, setIsOpen] = useState(false);
     const [openProject, setOpenProject] = useState(false);
     const [openProjects, setOpenProjects] = useState(false);
     const [search, setSearch] = useState("");
+    const [showWorkspaceModal,setShowWorkspaceModal]=useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -49,7 +51,7 @@ function SideBar() {
           </div>
             <div>
             <div className="relative" style={main}>
-                    <div className="flex items-center cursor-pointer flex justify-between" onClick={toggleMenu}>
+                    <div className="flex items-center cursor-pointer  justify-between" onClick={toggleMenu}>
                         {isOpen ? (
                         <img src={ArrowUp} alt="Up Icon" className=" inline-block ml-2" style={arrow}/>
                         ) : (
@@ -71,15 +73,23 @@ function SideBar() {
                                 placeholder='جستجو کنید'
                              />
                              <div className='pt-4'>
+
                              <DynamicButton
                                 text="ساختن اسپیس جدید"
                                 width={274}
                                 height={32}
-                                onClick={() => console.log("Button Clicked")}
+                                onClick={() => setShowWorkspaceModal(!showWorkspaceModal )}
                                 bgColor="#007bff"
                                 fontSize="12px"
                                 fontWeight={400}
                                 />
+                                 {showWorkspaceModal && (
+                                     <WorkspaceModal/>
+
+                                 )}
+
+
+
                                 <div className='relative'>
                                 <div className="flex items-center cursor-pointer justify-end pt-4" onClick={toggleProject}>
                                     <div>درس مدیریت پروژه</div>
