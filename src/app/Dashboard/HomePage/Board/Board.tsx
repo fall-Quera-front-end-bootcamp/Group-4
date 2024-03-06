@@ -10,7 +10,7 @@ import ProjectCreate from "./Board-Component/Board-Column/Column-More/New-Projec
 import TaskCreate from "./Board-Component/Board-Column/Column-More/New-Task/TaskCreate";
 import ShareWorkspace from "./Board-Component/Board-Column/Column-More/New-Project/Share-Workspace/ShareWorkspace";
 import WorkspaceModal from "./Board-Component/WorkspaceModal";
-
+import { getWorkspaces } from '../../../../services/workspace';
 
 
 interface Task {
@@ -24,6 +24,22 @@ interface Task {
 }
 
 function Board() {
+
+    async function fetchWorkspaces() {
+        try {
+          const workspaces = await getWorkspaces();
+          console.log('Workspaces:', workspaces);
+          
+        } catch (error) {
+          console.error('Error fetching workspaces:', error);
+          
+        }
+      }
+      fetchWorkspaces();
+
+
+
+
     return (
 
         <div className="flex justify-center">
