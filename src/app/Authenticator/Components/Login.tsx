@@ -4,10 +4,13 @@ import DynamicInput from "../../Components/common/input";
 import { Link } from "react-router-dom";
 import DynamicButton from "../../Components/common/button";
 import {login}  from "../../../services/account";
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
     // Function to handle form submission
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,6 +20,7 @@ function Login() {
       const response = await login(username, password);
       console.log("Login response:", response); 
       console.log("Login successful:", response);
+      navigate('/board');
     } catch (error) {
       console.error("Login failed:", error);
     }
