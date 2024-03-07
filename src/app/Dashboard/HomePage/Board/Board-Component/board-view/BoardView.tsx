@@ -1,9 +1,10 @@
 import React from 'react';
 import ColumnOpen from '../Board-Column/Column-Open/Board-Column';
 import ColumnCardImage from '../Board-Column/Column-Card-Image/ColumnCardImage';
-import pict from '../../../../../Components/assets/icons/pic-t.webp'
-import test2 from '../../../../../Components/assets/icons/test2.jpeg'
-
+import pict from '../../../../../Components/assets/icons/pic-t.webp';
+import test2 from '../../../../../Components/assets/icons/test2.jpeg';
+import DynamicButton from '../../../../../Components/common/button';
+import NewTaksButton from '../../../../../Components/assets/icons/newTask.png'
 
 
 
@@ -152,26 +153,47 @@ const BoardView: React.FC = () => {
     });
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' ,gap:'10px', justifyContent:'flex-start', marginRight:'290px' , position:"absolute",right:"65px",top:"150px"}}>
-            {Object.entries(tasksByState).map(([state, tasks]) => (
-                <div key={state} style={{ flex: 1 ,
-                                            display:'flex',
-                                            flexDirection:'column',
-                                            gap:'10px'}}>
-                    <ColumnOpen state={state} number={tasks.length} borderColor="#FD7E14" />
-                    {tasks.map(task => (
-                        <ColumnCardImage
-                            key={task.id}
-                            imgSrc={task.imgSrc||''}
-                            projectName={task.projectName}
-                            title={task.title}
-                            deadline={task.deadline}
-                            state={task.state}
-                            tags={task.tags}
-                        />
-                    ))}
-                </div>
-            ))}
+        <div>
+            <div style={{ display: 'flex', flexDirection: 'row' ,gap:'10px', justifyContent:'flex-start', marginRight:'290px' , position:"absolute",right:"65px",top:"150px"}}>
+                {Object.entries(tasksByState).map(([state, tasks]) => (
+                    <div key={state} style={{ flex: 1 ,
+                                                display:'flex',
+                                                flexDirection:'column',
+                                                gap:'10px'}}>
+                        <ColumnOpen state={state} number={tasks.length} borderColor="#FD7E14" />
+                        {tasks.map(task => (
+                            <ColumnCardImage
+                                key={task.id}
+                                imgSrc={task.imgSrc||''}
+                                projectName={task.projectName}
+                                title={task.title}
+                                deadline={task.deadline}
+                                state={task.state}
+                                tags={task.tags}
+                            />
+                        ))}
+                    </div>
+                ))}
+                <DynamicButton
+                text="تسک جدید"
+                width={118}
+                height={40}
+                onClick={() => console.log('Button clicked')} 
+                bgColor="#007bff"
+                textColor="#ffffff"
+                fontSize="14px" 
+                fontWeight={800}
+                borderRadius={6}
+                icon={NewTaksButton}
+                style={{
+                    position: 'fixed',
+                    bottom: '20px',
+                    right: '1302px',
+                    padding:"0px"
+                }}
+            />
+            </div>
+            
         </div>
     );
 }
