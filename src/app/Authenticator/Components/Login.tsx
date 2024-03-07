@@ -3,31 +3,32 @@ import Form from "../../Components/common/form/Index";
 import DynamicInput from "../../Components/common/input";
 import { Link } from "react-router-dom";
 import DynamicButton from "../../Components/common/button";
-import {login}  from "../../../services/account";
-import { useNavigate } from 'react-router-dom';
-
+import { login } from "../../../services/account";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../utils/store";
+import { setMode } from "../slice";
+import { FORGET_PASSWORD } from "../constant";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-    // Function to handle form submission
+  const dispatch = useAppDispatch();
+
+  // Function to handle form submission
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
-  
+    e.preventDefault();
+
     try {
       const response = await login(username, password);
-      console.log("Login response:", response); 
+      console.log("Login response:", response);
       console.log("Login successful:", response);
-      navigate('/board');
+      navigate("/board");
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
-
-    
-
 
   const customStyle = {
     width: "640px",
@@ -65,9 +66,13 @@ function Login() {
     fontSize: "16px",
   };
 
+  const handleForgotPasswordClick = () => {
+    dispatch(setMode(FORGET_PASSWORD));
+  };
+
   return (
     <div>
-      <Form style={customStyle} onSubmit={handleLogin} >
+      <Form style={customStyle} onSubmit={handleLogin}>
         <h1 style={header}>(: به کوئرا تسک منیجر خوش برگشتی </h1>
         <div className="w-full flex flex-col justify-center items-center pt-8">
           <label
@@ -98,13 +103,14 @@ function Login() {
             style={{ marginTop: "8px" }}
             type={"password"}
           />
-          <Link
-            to="/forgetpassword"
+          <p
+            // to="/forgetpassword"
             style={link}
             className="w-full flex flex-col justify-center items-end pt-6"
+            onClick={handleForgotPasswordClick}
           >
             رمز عبور خود را فراموش کرده‌اید؟
-          </Link>
+          </p>
           <div className="pt-6">
             <DynamicButton
               text="ورود"

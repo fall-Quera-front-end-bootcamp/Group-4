@@ -9,7 +9,6 @@ const LayoutAuth: React.FC<Iprops> = ({ children }): JSX.Element => {
     <>
       <div className="layout-header">
         <Navbar />
-
         <div className="layout-footer"></div>
         {<Outlet />}
       </div>

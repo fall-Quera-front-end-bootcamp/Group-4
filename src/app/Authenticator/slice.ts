@@ -1,21 +1,45 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { FORGET_PASSWORD } from "./constant";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { FORGET_PASSWORD, LOGIN } from "./constant";
 
-export const initialState = {
-  mode: FORGET_PASSWORD,
-  dataList: {
-    taskItems: [],
-    tasks: [],
-    totalTasks: null,
-    init: {},
-  },
+export interface Login {
+  email: string;
+  password: string;
+}
+
+export interface Register {
+  name: string;
+  mobile: string;
+  email: string;
+  password: string;
+}
+
+interface AuthState {
+  mode: string;
+  loginInfos: Login;
+  registerInfos: Register;
+}
+
+export const initialState: AuthState = {
+  loginInfos: { email: "", password: "" },
+  mode: LOGIN,
+  registerInfos: { name: "", password: "", mobile: "", email: "" },
 };
 
+// export const initialState = {
+//   mode: FORGET_PASSWORD,
+//   dataList: {
+//     taskItems: [],
+//     tasks: [],
+//     totalTasks: null,
+//     init: {},
+//   },
+// };
+
 const slice = createSlice({
-  name: "App/Authenticator",
+  name: "Authenticator",
   initialState,
   reducers: {
-    setMode: (state, action) => {
+    setMode: (state, action: PayloadAction<string>) => {
       state.mode = action.payload;
     },
   },

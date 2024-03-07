@@ -1,1 +1,2 @@
-export const  FORGET_PASSWORD = "app/Authenticator/FORGET_PASSWORD"
+export const LOGIN = "LOGIN";
+export const FORGET_PASSWORD = "FORGET_PASSWORD";
