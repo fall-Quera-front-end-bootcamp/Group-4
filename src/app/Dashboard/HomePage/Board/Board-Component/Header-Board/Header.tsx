@@ -6,7 +6,13 @@ import {    faCalendarDays} from "@fortawesome/free-regular-svg-icons" ;
 import {faTableColumns , faListCheck , faShareNodes , faSearch , faSliders , faRotateRight} from "@fortawesome/free-solid-svg-icons";
 
 
- function Header () {
+interface HeaderProps {
+    onDivClick: () => void;
+}
+
+ function Header ({ onDivClick }: HeaderProps) {
+
+    
 
     return(
 
@@ -15,7 +21,7 @@ import {faTableColumns , faListCheck , faShareNodes , faSearch , faSliders , faR
             {/* container of header  */}
             <div className=" container pt-[16px] pb-[16px] flex  justify-between items-center W-[1034px] H-[64px] ">
                 {/* left side of header */}
-                <div className="w-[118px] h-[24px] gap-[5px] flex flex-row items-center justify-center ">
+                <div className="w-[118px] h-[24px] gap-[5px] flex flex-row items-center justify-center " onClick={onDivClick}>
                     <div className=" w-[98px] h-[23px] line_effect_l">
                         <span className="cursor-pointer text-base font-medium leading-[22.55px] text-right ">  اشتراک گذاری</span>
 

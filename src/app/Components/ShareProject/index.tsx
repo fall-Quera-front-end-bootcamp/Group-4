@@ -6,9 +6,13 @@ import PersonLink from '../../Components/assets/icons/personLink.png';
 import DynamicButton from '../common/button';
 import Avatar from '../common/avatar/avatar';
 import Tag from '../common/tag';
-import DownArrow from '../../Components/assets/icons/DownArrow.png'
+import DownArrow from '../../Components/assets/icons/DownArrow.png';
 
-function ShareProject() {
+interface ShareProjectProps {
+    onCloseModal: () => void;
+}
+
+function ShareProject({ onCloseModal }: ShareProjectProps) {
 
     const FormStyle = {
         width: "470px",
@@ -31,13 +35,14 @@ function ShareProject() {
 
 
     return (
-        <Form style={FormStyle}>
+       <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+             <Form style={FormStyle}>
             <div className='flex p1 mb-[40px]'>
                 <div className='w-[430px] h-[32px] flex justify-center items-center'>
                     <h1 style={header} className='ml-[15px]'>به اشتراک‌گذاری پروژه‌</h1>
                 </div>
                 <div>
-                    <img src={DeleteIcon} alt="preDeleteIconv" className='cursor-pointer' />
+                    <img src={DeleteIcon} alt="preDeleteIconv" className='cursor-pointer' onClick={onCloseModal}/>
                 </div>
             </div>
             <div className='w-[430px] h-[220px] flex flex-col justify-center items-center'>
@@ -133,6 +138,7 @@ function ShareProject() {
                 </div>
             </div>
         </Form>
+       </div>
     )
 }
 
