@@ -4,6 +4,7 @@ import './HEaderStyle.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {    faCalendarDays} from "@fortawesome/free-regular-svg-icons" ;
 import {faTableColumns , faListCheck , faShareNodes , faSearch , faSliders , faRotateRight} from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 
 
 interface HeaderProps {
@@ -33,31 +34,31 @@ interface HeaderProps {
                 <div className="w-[511px] h-[32px] justify-center
                  flex gap-[5px] ">
                     {/*---------calender------------*/}
-                    <div className="cursor-pointer w-[98px] h-[23px] text-base font-medium
+                    <Link to="/board/calendarview" className="cursor-pointer w-[98px] h-[23px] text-base font-medium
                      leading-[22.55px] text-right line_effect_r">تقویم
 
                         <span className=" ml-2 ">
                     <FontAwesomeIcon icon={faCalendarDays}/>
                         </span>
-                    </div>
+                    </Link>
 
                     {/*----------column-sorting----------*/}
                     <span className="border-[#999999] border-l-[1px] w-[22px]"></span>
-                    <div className="mr-6  cursor-pointer w-[98px] h-[23px] text-base font-medium
+                    <Link to="/board/boardview" className="mr-6  cursor-pointer w-[98px] h-[23px] text-base font-medium
                      leading-[22.55px] text-right line_effect_r">نمایش ستونی
                         <span className="absolute ml-2 ">
                     <FontAwesomeIcon icon={faTableColumns}/>
                     </span>
-                    </div>
+                    </Link>
                     {/*--------------list-sorting-------------*/}
                     <span className="border-[#999999] border-l-[1px] w-[22px]"></span>
-                    <div className="mr-6 cursor-pointer w-[98px] h-[23px] text-base font-medium
+                    <Link to="/board/listview" className="mr-6 cursor-pointer w-[98px] h-[23px] text-base font-medium
                      leading-[22.55px] text-right line_effect_r
                        ">نمایش لیستی
                         <span className="absolute ml-2">
                     <FontAwesomeIcon icon={faListCheck}/>
                     </span>
-                    </div>
+                    </Link>
                     {/*-------------------first-projects---------*/}
                     <span className="border-[#999999] border-l-[1px] w-[22px]"></span>
                     <span className="  w-[77px] h-[32px] font-extrabold text-[20px]
