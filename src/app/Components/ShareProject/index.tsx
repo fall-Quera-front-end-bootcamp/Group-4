@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from '../common/form/Index';
 import DeleteIcon from '../../Components/assets/icons/Delete.png';
 import DynamicInput from '../common/input';
@@ -7,12 +7,18 @@ import DynamicButton from '../common/button';
 import Avatar from '../common/avatar/avatar';
 import Tag from '../common/tag';
 import DownArrow from '../../Components/assets/icons/DownArrow.png';
+import Permission from '../permission';
 
 interface ShareProjectProps {
     onCloseModal: () => void;
 }
 
 function ShareProject({ onCloseModal }: ShareProjectProps) {
+    const [showPermission, setShowPermission] = useState(false);
+
+    const togglePermission = () => {
+        setShowPermission(!showPermission);
+    };
 
     const FormStyle = {
         width: "470px",
@@ -112,13 +118,13 @@ function ShareProject({ onCloseModal }: ShareProjectProps) {
                                 text="دسترسی کامل"
                                 width={117}
                                 height={27}
-                                onClick={() => { console.log("test") }}
+                                onClick={togglePermission}
                                 bgColor="white"
                                 textColor="black"
                                 fontSize="12px"
                                 fontWeight={400}
                                 borderRadius={6}
-                                icon={DownArrow} 
+                                icon={DownArrow}
                             />
                         <div className='w-[176px] h-[33px] flex justify-end'>
                             {profile.map((profileData, index) => (
@@ -138,6 +144,7 @@ function ShareProject({ onCloseModal }: ShareProjectProps) {
                 </div>
             </div>
         </Form>
+        {showPermission && <Permission/>}
        </div>
     )
 }

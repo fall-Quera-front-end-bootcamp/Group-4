@@ -12,7 +12,10 @@ function Permission() {
         width: "252px",
         height: "398px",
         borderRadius: "8px",
-        padding:"0px"
+        padding:"0px",
+        position:"absolute" as const,
+        right:"700px",
+        top:"260px"
       };
 
 
