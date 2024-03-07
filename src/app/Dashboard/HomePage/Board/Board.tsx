@@ -11,6 +11,8 @@ import TaskCreate from "./Board-Component/Board-Column/Column-More/New-Task/Task
 import ShareWorkspace from "./Board-Component/Board-Column/Column-More/New-Project/Share-Workspace/ShareWorkspace";
 import WorkspaceModal from "./Board-Component/WorkspaceModal";
 import { getWorkspaces } from '../../../../services/workspace';
+import ShareProject from '../../../Components/ShareProject';
+import { useState } from 'react';
 
 
 interface Task {
@@ -24,6 +26,16 @@ interface Task {
 }
 
 function Board() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+      setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+      setIsModalOpen(false);
+  };
 
     async function fetchWorkspaces() {
         try {
@@ -43,13 +55,15 @@ function Board() {
     return (
 
         <div className="flex justify-center">
-            <Header />
+            
 
             <div className="mt-[150px] mr-[280px]">
 
                 <Outlet />
 
             </div>
+            <Header onDivClick={handleOpenModal} />
+            {isModalOpen && <ShareProject onCloseModal={handleCloseModal} />}
             <SideBar />
         </div>
     );
