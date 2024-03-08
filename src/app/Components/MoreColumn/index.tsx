@@ -12,8 +12,8 @@ function MoreColumn() {
         padding: "0px",
         paddingBottom: "15px",
         margin:"0px",
-        position:"absolute",
-        left:"725px",
+        position:"relative",
+        left:"10px",
         top:"25px",
         zIndex:100
     };

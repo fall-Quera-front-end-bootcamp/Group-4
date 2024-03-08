@@ -26,7 +26,7 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor }) =
                 <span className="font-medium text-[12px] leading-[16.91px] text-right text-[#1E1E1E]">{state}</span>
             </div>
             <div className="flex flex-row justify-center h-[24px] gap-[4px]">
-                <span className="w-[24px] h-[24px] cursor-pointer">+</span>
+                <span className="w-[24px] h-[24px] cursor-pointer absolute">+</span>
                 <span className="w-[20px] h-[20px] mb-4 cursor-pointer" onClick={toggleModal}>...</span>
             </div>
             {isModalOpen && <MoreColumn />}
