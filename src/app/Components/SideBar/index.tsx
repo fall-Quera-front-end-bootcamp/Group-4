@@ -1,19 +1,24 @@
-import React from 'react'
+// SideBar component
+import React, { useState } from 'react';
 import './index.css';
-import { useState } from 'react';
-import ArrowUp from '../assets/icons/arrowUp.png'
-import ArrowDown from '../assets/icons/arrowDown.png'
 import DynamicInput from '../common/input';
 import DynamicButton from '../common/button';
 import SearchIcon from "../assets/icons/SearchIcon.png"
 import firstProject from '../assets/icons/firstProject.png'
+import ArrowUp from '../assets/icons/arrowUp.png'
+import ArrowDown from '../assets/icons/arrowDown.png'
+import CreateWorkspace from '../../Dashboard/HomePage/WorkspaceContainer/CreateWorkspace';
 
-function SideBar() {
-    
+interface SidebarProps {
+    openModal: () => void;
+}
+
+function SideBar({ openModal }: SidebarProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [openProject, setOpenProject] = useState(false);
     const [openProjects, setOpenProjects] = useState(false);
     const [search, setSearch] = useState("");
+    const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false); 
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -27,9 +32,8 @@ function SideBar() {
         setOpenProjects(!openProjects);
     };
 
-  
     const main = {
-        width:"304px"
+        width: "304px"
     };
 
     const WorkspacesTitle = {
@@ -38,22 +42,22 @@ function SideBar() {
     };
 
     const arrow = {
-        width:"10px",
-        height:"5px"
-    }
+        width: "10px",
+        height: "5px"
+    };
 
     return (
         <div className="sidebar">
-          <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
-                 کوئرا تسک منیجر
-          </div>
+            <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
+                کوئرا تسک منیجر
+            </div>
             <div>
-            <div className="relative" style={main}>
+                <div className="relative" style={main}>
                     <div className="flex items-center cursor-pointer flex justify-between" onClick={toggleMenu}>
                         {isOpen ? (
-                        <img src={ArrowUp} alt="Up Icon" className=" inline-block ml-2" style={arrow}/>
+                            <img src={ArrowUp} alt="Up Icon" className=" inline-block ml-2" style={arrow} />
                         ) : (
-                            <img src={ArrowDown} alt="Down Icon" className="w-6 h-6 inline-block ml-2" style={arrow}/>
+                            <img src={ArrowDown} alt="Down Icon" className="w-6 h-6 inline-block ml-2" style={arrow} />
                         )}
                         <div style={WorkspacesTitle}>ورک‌اسپیس‌ها</div>
                     </div>
@@ -67,24 +71,24 @@ function SideBar() {
                                 style={{ marginTop: "8px" }}
                                 type={"text"}
                                 icon={<img src={SearchIcon} alt="search icon" />}
-                                backgroundColor="background: #F6F7F9" 
+                                backgroundColor="background: #F6F7F9"
                                 placeholder='جستجو کنید'
-                             />
-                             <div className='pt-4'>
-                             <DynamicButton
-                                text="ساختن اسپیس جدید"
-                                width={274}
-                                height={32}
-                                onClick={() => console.log("Button Clicked")}
-                                bgColor="#007bff"
-                                fontSize="12px"
-                                fontWeight={400}
+                            />
+                            <div className='pt-4'>
+                                <DynamicButton
+                                    text="ساختن اسپیس جدید"
+                                    width={274}
+                                    height={32}
+                                    onClick={() => setIsWorkspaceModalOpen(true)}
+                                    bgColor="#007bff"
+                                    fontSize="12px"
+                                    fontWeight={400}
                                 />
                                 <div className='relative'>
-                                <div className="flex items-center cursor-pointer justify-end pt-4" onClick={toggleProject}>
-                                    <div>درس مدیریت پروژه</div>
-                                    <img src={firstProject} alt="Up Icon" className="inline-block ml-2" style={{ width: "20px", height: "20px" }} />   
-                                    
+                                    <div className="flex items-center cursor-pointer justify-end pt-4" onClick={toggleProject}>
+                                        <div>درس مدیریت پروژه</div>
+                                        <img src={firstProject} alt="Up Icon" className="inline-block ml-2" style={{ width: "20px", height: "20px" }} />
+
                                     </div>
                                     {openProject && (
                                         <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
@@ -93,17 +97,18 @@ function SideBar() {
                                             <h1>پروژه سوم</h1>
                                         </div>
                                     )}
-                                 </div>
-                             </div>
+                                </div>
+                            </div>
                         </div>
 
                     )}
+                </div>
+                <div>
+                </div>
             </div>
-            <div>
-            </div>
-          </div>
+            {isWorkspaceModalOpen && <CreateWorkspace onCloseModal={() => setIsWorkspaceModalOpen(false)} />}
         </div>
-      );
+    );
 };
 
-export default SideBar
+export default SideBar;

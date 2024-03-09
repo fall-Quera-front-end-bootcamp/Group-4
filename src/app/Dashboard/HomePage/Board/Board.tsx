@@ -64,7 +64,7 @@ function Board() {
             </div>
             <Header onDivClick={handleOpenModal} />
             {isModalOpen && <ShareProject onCloseModal={handleCloseModal} />}
-            <SideBar />
+            <SideBar openModal={handleOpenModal}/>
         </div>
     );
 }
