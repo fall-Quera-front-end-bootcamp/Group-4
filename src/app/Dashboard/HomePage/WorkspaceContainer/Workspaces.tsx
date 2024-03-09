@@ -15,21 +15,25 @@ interface Workspace {
     projects:Project[];
 }
 
+
 const Workspaces: React.FC = () => {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+  const [workspacesCreated, setWorkspacesCreated] = useState(0);
+  
 
   useEffect(() => {
     const fetchWorkspaces = async () => {
       try {
         const fetchedWorkspaces = await getWorkspaces();
         setWorkspaces(fetchedWorkspaces);
+        setWorkspacesCreated(prevCount => prevCount + 1);
       } catch (error) {
         console.error('Error fetching workspaces:', error);
       }
     };
 
     fetchWorkspaces();
-  }, []);
+  }, [workspacesCreated]);
   console.log(workspaces);
 
 
