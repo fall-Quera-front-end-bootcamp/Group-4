@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 import { getProjects } from '../../../../services/project';
+import addNewProjectIcon from '../../../Components/assets/icons/addNewProject.png'
 
 interface Project {
   id: number;
@@ -12,6 +13,11 @@ interface WorkspaceProps {
   id: number;
   name: string;
   color: string;
+};
+
+const CreateNewProjectButtonStyle = {
+  fontWeight:800,
+  fontSize:"16px"
 }
 
 const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
@@ -35,6 +41,10 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
   return (
     <div dir='rtl' className="flex flex-column gap-2 mb-6 mr-6 ">
         <h1>{name}</h1>
+        <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center">
+          <h1 style={CreateNewProjectButtonStyle}>ساختن پروژه جدید</h1>
+          <img src={addNewProjectIcon} alt="addNewProjectIcon" />
+        </button>
         <div className="flex flex-row gap-4">
             {projects.map(project => (
                 <ProjectCard
