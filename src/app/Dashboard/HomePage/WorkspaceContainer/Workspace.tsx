@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 import { getProjects } from '../../../../services/project';
 import addNewProjectIcon from '../../../Components/assets/icons/addNewProject.png'
+import NewProjectModal from '../../../Components/NewProjectModal';
 
 interface Project {
   id: number;
@@ -22,6 +23,15 @@ const CreateNewProjectButtonStyle = {
 
 const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
  
   useEffect(() => {
     const fetchProjects = async () => {
@@ -43,11 +53,12 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
         <h1>{name}</h1>
           <div className='flex flex-row gap-4'>
           {projects.length === 0 && (
-              <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center">
+              <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center" onClick={openModal}>
                 <img src={addNewProjectIcon} alt="addNewProjectIcon" />
                 <h1 style={CreateNewProjectButtonStyle}>ساختن پروژه جدید</h1>
-              </button>
+              </button> 
           )}
+          {isModalOpen && <NewProjectModal onCloseModal={closeModal} workspaceId={id} />}
             <div className="flex flex-row gap-4">
                 {projects.map(project => (
                     <ProjectCard

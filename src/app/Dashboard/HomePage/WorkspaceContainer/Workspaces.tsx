@@ -33,7 +33,7 @@ const Workspaces: React.FC = () => {
     };
 
     fetchWorkspaces();
-  }, [workspacesCreated]);
+  }, []);
   console.log(workspaces);
 
 
