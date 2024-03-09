@@ -42,10 +42,12 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
     <div dir='rtl' className="flex flex-col gap-2 mb-6 mr-6 ">
         <h1>{name}</h1>
           <div className='flex flex-row gap-4'>
-            <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center">
-              <img src={addNewProjectIcon} alt="addNewProjectIcon" />
-              <h1 style={CreateNewProjectButtonStyle}>ساختن پروژه جدید</h1>
-            </button>
+          {projects.length === 0 && (
+              <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center">
+                <img src={addNewProjectIcon} alt="addNewProjectIcon" />
+                <h1 style={CreateNewProjectButtonStyle}>ساختن پروژه جدید</h1>
+              </button>
+          )}
             <div className="flex flex-row gap-4">
                 {projects.map(project => (
                     <ProjectCard
