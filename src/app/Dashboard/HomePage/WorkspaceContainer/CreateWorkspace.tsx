@@ -6,10 +6,12 @@ import DynamicButton from '../../../Components/common/button';
 import BackIcon from '../../../Components/assets/icons/BackIcon.png'
 import Avatar from '../../../Components/common/avatar/avatar';
 
-
-function CreateWorkspace() {
+interface CreateWorkspaceProps {
+  onCloseModal: () => void;
+}
+function CreateWorkspace({ onCloseModal }: CreateWorkspaceProps) {
   const [step, setStep] = useState(1);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [workspaceName, setWorkspaceName] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState('');
 
@@ -45,14 +47,14 @@ function CreateWorkspace() {
     fontSize:"14px"
   }
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
+  // const openModal = () => {
+  //   setModalIsOpen(true);
+  // };
 
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setStep(1); 
-  };
+  // const closeModal = () => {
+  //   setModalIsOpen(false);
+  //   setStep(1); 
+  // };
 
   const handleNext = () => {
     setStep(step + 1);
@@ -71,10 +73,14 @@ function CreateWorkspace() {
     setSelectedColor(color);
   };
 
+  const closeModal = () => {
+    setIsOpen(false);
+    onCloseModal();
+  };
+
   return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}
+      <div>
+      <Modal isOpen={isOpen} onRequestClose={closeModal}
         
         style={{
             content: {
@@ -92,7 +98,7 @@ function CreateWorkspace() {
            <>
              <div className='flex w-[452px] h-[32px] justify-end items-center'>
               <h3 className='pr-[85px]' style={HeaderStyles}>ساختن ورکسپیس جدید</h3>
-              <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={closeModal}/>
+              <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
             </div>
            <div className='flex flex-col h-[190px] justify-between'>
                   <div className='w-[415px] h-[68px] flex flex-col justify-center items-end pt-[70px] ml-[20px]'>
@@ -123,7 +129,7 @@ function CreateWorkspace() {
              <div className='flex w-[452px] h-[32px] justify-end items-center'>
                 <img src={BackIcon} alt="BackIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={handlePrev}/>
                 <h3 className='pr-[85px] pl-[85px]' style={HeaderStyles}>انتخاب رنگ ورک‌اسپیس</h3>
-                <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={closeModal}/>
+                <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
             </div>
             <div dir='rtl' className='flex flex-row justify-start w-[453px] h-[150px] pt-[40px]'>
                 <div className={`bg-${selectedColor} w-[70px] h-[70px] rounded-lg flex justify-center items-center`}><p className='text-white text-xl font-bold'>{workspaceName.split(' ').map((part: string) => part.charAt(0).toUpperCase()).join(' ').slice(0, 3)}</p></div>
@@ -186,7 +192,7 @@ function CreateWorkspace() {
              <div className='flex w-[452px] h-[32px] justify-end items-center'>
                 <img src={BackIcon} alt="BackIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={handlePrev}/>
                 <h3 className='pr-[140px] pl-[133px]' style={HeaderStyles}>مرور اطلاعات</h3>
-                <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={closeModal}/>
+                <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
             </div>
             <div className='border border-gray-200 rounded-lg ml-[5px] mt-[20px] mb-[20px] w-[445px] h-[110px] flex flex-col justify-between p-[10px]'>
               <div className='flex justify-between items-center cursor-pointer' onClick={() => setStep(1)}>
