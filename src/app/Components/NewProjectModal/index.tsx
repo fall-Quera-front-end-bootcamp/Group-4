@@ -13,7 +13,7 @@ interface NewProjectModalProps {
 const NewProjectModal: React.FC<NewProjectModalProps> = ({ onCloseModal, workspaceId }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [projectName, setProjectName] = useState<string>('');
-
+  
   const HeaderStyles = {
     fontWeight:800,
     fontSize:"24px"
@@ -41,6 +41,8 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ onCloseModal, workspa
     fontWeight:400,
     fontSize:"14px"
   };
+
+  console.log(workspaceId);
 
   return (
     <div>
