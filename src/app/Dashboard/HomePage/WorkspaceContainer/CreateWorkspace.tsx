@@ -200,7 +200,9 @@ function CreateWorkspace({ onCloseModal }: CreateWorkspaceProps) {
                 <h1 style={InformationStyle}>نام ورک‌اسپیس</h1>
               </div>
               <div className='flex justify-between items-center cursor-pointer' onClick={() => setStep(2)}>
-                <h1>{selectedColor}</h1>
+                <div  
+                  key={selectedColor}
+                  className={`w-[20px] h-[20px] rounded-lg bg-${selectedColor} cursor-pointer ml-1`}></div>
                 <h1 style={InformationStyle}>رنگ ورک‌اسپیس</h1>
               </div>
               <div className='flex justify-between items-center cursor-pointer'>
