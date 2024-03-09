@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import DeleteIcon from '../../../Components/assets/icons/Delete.png';
+import DynamicInput from '../../../Components/common/input';
+import DynamicButton from '../../../Components/common/button';
+import BackIcon from '../../../Components/assets/icons/BackIcon.png'
+import Avatar from '../../../Components/common/avatar/avatar';
+
 
 function CreateWorkspace() {
   const [step, setStep] = useState(1);
@@ -24,6 +30,20 @@ function CreateWorkspace() {
     
   ];
 
+  const HeaderStyles = {
+    fontWeight:800,
+    fontSize:"24px"
+  };
+
+  const NameOfWorkSpaceStyle = {
+    fontWeight:400,
+    fontSize:"14px"
+  };
+
+  const InformationStyle = {
+    fontWeight:800,
+    fontSize:"14px"
+  }
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -67,78 +87,49 @@ function CreateWorkspace() {
             }
           }}
         >
-        <div>
-          <button
-            style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-              padding: '5px',
-              cursor: 'pointer',
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#666',
-              fontSize: '20px'
-            }}
-            onClick={closeModal}
-          >
-            X
-          </button>
+        <div className='w-[452px] h-[140px]'>
           {step === 1 && (
-            <div style={{
-                display:'flex',
-                flexDirection:'column',
-                justifyContent:'center',
-                alignItems:'center'
-            }}>
-              <h3>ساختن ورکسپیس جدید</h3>
-              <div >
-                <label htmlFor="workspaceName" style={{marginLeft:'350px'}}>نام ورک اسپیسس</label>
-                <input
-                    type="text"
-                    id="workspaceName"
-                    name="workspaceName"
-                    style={{width:'400px',marginLeft:'30px', border:'1px solid black'}}
-                    value={workspaceName} 
-                    onChange={handleWorkspaceNameChange} 
-                />
-              </div>
-              <button onClick={handleNext}>Next</button>
+           <>
+             <div className='flex w-[452px] h-[32px] justify-end items-center'>
+              <h3 className='pr-[85px]' style={HeaderStyles}>ساختن ورکسپیس جدید</h3>
+              <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={closeModal}/>
             </div>
+           <div className='flex flex-col h-[190px] justify-between'>
+                  <div className='w-[415px] h-[68px] flex flex-col justify-center items-end pt-[70px] ml-[20px]'>
+                      <label htmlFor="workspaceName" className='pb-[10px]' style={NameOfWorkSpaceStyle}>نام ورک اسپیس</label>
+                      <DynamicInput
+                      type='text'
+                      width={415}
+                      height={40}
+                      value={workspaceName}
+                      onChange={handleWorkspaceNameChange}
+                      />
+                  </div>
+                  <DynamicButton
+                      text='ادامه'
+                      width={415}
+                      height={40}
+                      borderRadius={6}
+                      fontWeight={800}
+                      fontSize='14px'
+                      onClick={handleNext}
+                      style={{marginLeft:"20px"}}
+                   />
+           </div>
+           </>
           )}
         {step === 2 && (
             <>
-            <button 
-            style={{
-                position: 'absolute',
-                top: '10px',
-                left: '10px',
-                padding: '5px',
-                cursor: 'pointer',
-                backgroundColor: 'transparent',
-                border: 'none',
-                color: '#666',
-                fontSize: '20px'
-            }}
-            onClick={handlePrev}>&lt;</button>
-          <div style={{display:'flex',flexDirection:'column', justifyContent:'center',alignItems:'center'}}>
-            <h3>انتخاب رنگ ورک‌اسپیس</h3>
-            <button 
-                style={{
-                    position: 'absolute',
-                    top: '10px',
-                    left: '10px',
-                    padding: '5px',
-                    cursor: 'pointer',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    color: '#666',
-                    fontSize: '20px'
-                }}
-                onClick={handlePrev}>&lt;</button>
-            <div dir='rtl' className='flex flex-row justify-center   '>
+             <div className='flex w-[452px] h-[32px] justify-end items-center'>
+                <img src={BackIcon} alt="BackIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={handlePrev}/>
+                <h3 className='pr-[85px] pl-[85px]' style={HeaderStyles}>انتخاب رنگ ورک‌اسپیس</h3>
+                <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={closeModal}/>
+            </div>
+            <div dir='rtl' className='flex flex-row justify-start w-[453px] h-[150px] pt-[40px]'>
                 <div className={`bg-${selectedColor} w-[70px] h-[70px] rounded-lg flex justify-center items-center`}><p className='text-white text-xl font-bold'>{workspaceName.split(' ').map((part: string) => part.charAt(0).toUpperCase()).join(' ').slice(0, 3)}</p></div>
-                <div className="flex flex-wrap gap-2 m-3 w-[200px]">
+                <div className="flex flex-col gap-2 mr-[15px] w-[293px] h-[94px]">
+                  <h1 style={NameOfWorkSpaceStyle}>رنگ ورک‌اسپیس</h1>
+                  <div className="flex flex-wrap gap-2">
                   {colors.map((color) => (
                     <div
                       key={color}
@@ -175,31 +166,59 @@ function CreateWorkspace() {
                     {/* <div className='bg-ceruleanBlue w-[20px] h-[20px]'/> */}
                     </div>
                   ))}
+                  </div>
                 </div>
             </div>
-            <button onClick={handleNext}>Next</button>
-          </div>
+            <DynamicButton
+                      text='ادامه'
+                      width={415}
+                      height={40}
+                      borderRadius={6}
+                      fontWeight={800}
+                      fontSize='14px'
+                      onClick={handleNext}
+                      style={{marginLeft:"20px"}}
+                   />
           </>
         )}
           {step === 3 && (
-          <div style={{display:'flex',flexDirection:'column', justifyContent:'center',alignItems:'center'}}>
-          <h3>مرور اطلاعات</h3>
-          <button 
-              style={{
-                  position: 'absolute',
-                  top: '10px',
-                  left: '10px',
-                  padding: '5px',
-                  cursor: 'pointer',
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  color: '#666',
-                  fontSize: '20px'
-              }}
-              onClick={handlePrev}>&lt;</button>
-              
-              <button onClick={() =>{}}>ساختن ورک اسپیس</button>
+          <>
+             <div className='flex w-[452px] h-[32px] justify-end items-center'>
+                <img src={BackIcon} alt="BackIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={handlePrev}/>
+                <h3 className='pr-[140px] pl-[133px]' style={HeaderStyles}>مرور اطلاعات</h3>
+                <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={closeModal}/>
             </div>
+            <div className='border border-gray-200 rounded-lg ml-[5px] mt-[20px] mb-[20px] w-[445px] h-[110px] flex flex-col justify-between p-[10px]'>
+              <div className='flex justify-between items-center cursor-pointer' onClick={() => setStep(1)}>
+                <h1 style={InformationStyle}>{workspaceName}</h1>
+                <h1 style={InformationStyle}>نام ورک‌اسپیس</h1>
+              </div>
+              <div className='flex justify-between items-center cursor-pointer' onClick={() => setStep(2)}>
+                <h1>{selectedColor}</h1>
+                <h1 style={InformationStyle}>رنگ ورک‌اسپیس</h1>
+              </div>
+              <div className='flex justify-between items-center cursor-pointer'>
+              <Avatar
+                size={30}
+                borderRadius="50%" 
+                profile={{ name: "hojiii", color: "red" }} 
+                index={0} 
+                overlap={0} 
+              />
+                <h1 style={InformationStyle}>اعضا</h1>
+              </div>
+            </div>
+            <DynamicButton
+                      text='ساختن ورک‌اسپیس'
+                      width={415}
+                      height={40}
+                      borderRadius={6}
+                      fontWeight={800}
+                      fontSize='14px'
+                      onClick={() =>{}}
+                      style={{marginLeft:"20px"}}
+                   />
+          </>
           )}
         </div>
       </Modal>
