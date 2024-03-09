@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import WorkspaceModal from "./app/Dashboard/HomePage/Board/Board-Component/WorkspaceModal";
-const NewTask = React.lazy(() => import("./app/Task/NewTask/NewTask"));
 const LayoutAuth = React.lazy(() => import("./app/Components/layout/auth"));
 const Board = React.lazy(() => import("./app/Dashboard/HomePage/Board/Board"));
 const AuthPage = React.lazy(
@@ -52,7 +51,6 @@ function App() {
             <Route path="boardview" element={<BView />} />
           </Route>
           <Route>
-            <Route path="newtask" element={<NewTask />} />
             <Route path="WorkSpaceModal" element={<WorkspaceModal />} />
           </Route>
 
