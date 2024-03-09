@@ -38,6 +38,8 @@ const BView = React.lazy(() => import("./app/Dashboard/HomePage/Board/BView"));
 
 const WorkSpace = React.lazy(() => import("./app/Dashboard/HomePage/WorkspaceContainer/Workspaces"));
 
+const ProfilePages = React.lazy(() => import("./app/Profile/index"))
+
 function App() {
   return (
     <>
@@ -53,6 +55,7 @@ function App() {
             <Route path="boardview" element={<BView />} />
             <Route path="workspace" element={<WorkSpace />} />
           </Route>
+          <Route path="Profile" element={<ProfilePages />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
