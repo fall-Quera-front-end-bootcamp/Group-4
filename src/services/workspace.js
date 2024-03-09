@@ -13,3 +13,17 @@ export const getWorkspaces = async () => {
   };
   
 //   export default getWorkspaces;
+
+
+export const createWorkspace = async (workspaceName , workspaceColor) => {
+  try {
+    const response = await axiosInstance.post(`/workspaces/`, {
+      name:workspaceName,
+      color:workspaceColor
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating workspace:', error);
+    throw error;
+  }
+}

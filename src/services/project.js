@@ -10,3 +10,16 @@ export const getProjects = async (workspaceId) => {
       throw error;
     }
   }
+
+
+export const createProject = async (workspaceId, projectName) => {
+    try {
+      const response = await axiosInstance.post(`/workspaces/${workspaceId}/projects/`, {
+        name: projectName
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating project:', error);
+      throw error;
+    }
+  }

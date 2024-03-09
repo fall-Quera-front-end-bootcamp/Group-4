@@ -5,6 +5,7 @@ import DynamicInput from '../../../Components/common/input';
 import DynamicButton from '../../../Components/common/button';
 import BackIcon from '../../../Components/assets/icons/BackIcon.png'
 import Avatar from '../../../Components/common/avatar/avatar';
+import { createWorkspace } from '../../../../services/workspace';
 
 interface CreateWorkspaceProps {
   onCloseModal: () => void;
@@ -77,6 +78,17 @@ function CreateWorkspace({ onCloseModal }: CreateWorkspaceProps) {
     setIsOpen(false);
     onCloseModal();
   };
+
+
+  const handleCreateWorkspace = async () => {
+    try {
+      await createWorkspace(workspaceName, selectedColor);
+      closeModal();
+    } catch (error) {
+      console.error('Error creating workspace:', error);
+    }
+  };
+
 
   return (
       <div>
@@ -223,7 +235,7 @@ function CreateWorkspace({ onCloseModal }: CreateWorkspaceProps) {
                       borderRadius={6}
                       fontWeight={800}
                       fontSize='14px'
-                      onClick={() =>{}}
+                      onClick={handleCreateWorkspace}
                       style={{marginLeft:"20px"}}
                    />
           </>
