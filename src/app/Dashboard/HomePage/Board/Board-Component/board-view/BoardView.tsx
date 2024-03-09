@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ColumnOpen from '../Board-Column/Column-Open/Board-Column';
 import ColumnCardImage from '../Board-Column/Column-Card-Image/ColumnCardImage';
 import pict from '../../../../../Components/assets/icons/pic-t.webp';
 import test2 from '../../../../../Components/assets/icons/test2.jpeg';
 import DynamicButton from '../../../../../Components/common/button';
-import NewTaksButton from '../../../../../Components/assets/icons/newTask.png'
+import NewTaksButton from '../../../../../Components/assets/icons/newTask.png';
+import NewTask from '../../../../../Task/NewTask/NewTask';
 
 
 
@@ -152,6 +153,12 @@ const BoardView: React.FC = () => {
         tasksByState[task.state].push(task);
     });
 
+    const [showModal, setShowModal] = useState(false);
+    
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
+
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'row' ,gap:'10px', justifyContent:'flex-start', marginRight:'290px' , position:"absolute",right:"65px",top:"150px"}}>
@@ -178,7 +185,7 @@ const BoardView: React.FC = () => {
                 text="تسک جدید"
                 width={118}
                 height={40}
-                onClick={() => console.log('Button clicked')} 
+                onClick={toggleModal} 
                 bgColor="#007bff"
                 textColor="#ffffff"
                 fontSize="14px" 
@@ -192,6 +199,7 @@ const BoardView: React.FC = () => {
                     padding:"0px"
                 }}
             />
+            {showModal && <NewTask onClose={toggleModal} />}
             </div>
             
         </div>

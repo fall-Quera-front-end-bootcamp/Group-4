@@ -4,26 +4,34 @@ import { faTimes , faUserPlus ,faChain, faTags} from '@fortawesome/free-solid-sv
 import { faFlag, faCalendar} from '@fortawesome/free-regular-svg-icons'
 import DynamicButton from "../../Components/common/button";
 
+interface NewTaskProps {
+    onClose: () => void; 
+}
+
+const containerStyle = {
+    position: "absolute" as "absolute",
+    left: "135px",
+    top: "100px"
+};
 
 
 
-function NewTask () {
+function NewTask ({ onClose }: NewTaskProps) {
 
     return (
-
-
-        <form>
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 ">
+              <form>
             {/*--------------عنوان تسک----------*/}
-            <div dir="rtl"
-                 className="w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md">
+            <div dir="rtl" style={containerStyle}
+                 className="w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md bg-white z-100">
                 <div className="w-[1089px] h-[34px] flex justify-between ">
                     <div className="w-[148px] h-[34px] gap-[13px] flex items-center">
 
                         <div className="w-[16px] h-[16px] rounded-[2px] bg-[#d9d9d9]"></div>
                         <span
                             className="w-[119px] h-[34px] font-medium text-[24px] leading-[33.82px] text-right text-[#1e1e1e] ">عنوان تسک</span>
-                    </div>
-                    <span className="w-[32px] h-[32px] text-[#bdbdbd]"><FontAwesomeIcon icon={faTimes}/></span>
+                    </div >
+                    <span className="w-[32px] h-[32px] text-[#bdbdbd] cursor-pointer" onClick={onClose}><FontAwesomeIcon icon={faTimes}/></span>
                 </div>
 
                 {/*------------------پروژه اول-----------*/}
@@ -87,6 +95,7 @@ function NewTask () {
 
             </div>
         </form>
+        </div>
     )
 
 
