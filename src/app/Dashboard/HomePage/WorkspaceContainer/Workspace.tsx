@@ -29,10 +29,12 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
 
     fetchProjects(); 
   }, []);
+  console.log(name);
+
 
   return (
     <div dir='rtl' className="flex flex-column gap-2 mb-6 mr-6 ">
-        <h1>{Workspace.name}</h1>
+        <h1>{name}</h1>
         <div className="flex flex-row gap-4">
             {projects.map(project => (
                 <ProjectCard
