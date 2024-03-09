@@ -28,7 +28,6 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ onCloseModal, workspa
     try {
       await createProject(workspaceId, projectName);
       closeModal(); 
-      window.location.reload();
     } catch (error) {
       console.error('Error creating project:', error);
     }
