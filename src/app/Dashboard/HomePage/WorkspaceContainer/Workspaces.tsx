@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Workspace from './Workspace';
+import { getWorkspaces } from '../../../../services/workspace';
+
 
 interface Project {
     id: number;
@@ -14,12 +16,22 @@ interface Workspace {
 }
 
 const Workspaces: React.FC = () => {
+  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+
+  useEffect(() => {
+    const fetchWorkspaces = async () => {
+      try {
+        const fetchedWorkspaces = await getWorkspaces();
+        setWorkspaces(fetchedWorkspaces);
+      } catch (error) {
+        console.error('Error fetching workspaces:', error);
+      }
+    };
+
+    fetchWorkspaces();
+  }, []);
 
 
-const workspaces=[
-    {id:1 , name:"workspace one",color:"customBlue" },
-    {id:2 , name:"workspace one",color:"customBlue" },
-];
 
   return (
     <div>
