@@ -1,5 +1,6 @@
-
+import React, { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
+import { getProjects } from '../../../../services/project';
 
 interface Project {
   id: number;
@@ -14,17 +15,20 @@ interface WorkspaceProps {
 }
 
 const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
+  const [projects, setProjects] = useState<Project[]>([]);
  
- 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const projectsData = await getProjects(id); 
+        setProjects(projectsData);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
 
-const projects=[
-    {id:1 , name:"project1" },
-    {id:2 , name:"project2" },
-    {id:3 , name:"project3" },
-    {id:4 , name:"project4" },
-
-];
-
+    fetchProjects(); 
+  }, []);
 
   return (
     <div dir='rtl' className="flex flex-column gap-2 mb-6 mr-6 ">
