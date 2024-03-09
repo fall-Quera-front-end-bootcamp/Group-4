@@ -64,9 +64,9 @@ function CreateWorkspace({ onCloseModal }: CreateWorkspaceProps) {
     setStep(step - 1);
   };
 
-  const handleWorkspaceNameChange = (event: any) => {
-    setWorkspaceName(event.target.value);
-    console.log(event.target.value);
+  const handleWorkspaceNameChange = (newValue: string) => {
+    setWorkspaceName(newValue);
+    console.log(newValue);
   };
 
   const handleColorSelect = (color:string) => {
@@ -108,7 +108,7 @@ function CreateWorkspace({ onCloseModal }: CreateWorkspaceProps) {
                       width={415}
                       height={40}
                       value={workspaceName}
-                      onChange={handleWorkspaceNameChange}
+                      onChange={(newValue) => handleWorkspaceNameChange(newValue)}
                       />
                   </div>
                   <DynamicButton
