@@ -1,6 +1,6 @@
 import Form from '../../common/form/Index';
-import DeleteIcon from '../../Components/assets/icons/Delete.png';
-import motevaset from '../../Components/assets/icons/PriorityIcons/motevaset.png';
+import DeleteIcon from '../../assets/icons/Delete.png';
+import motevaset from '../../assets/icons/PriorityIcons/motevaset.png';
 import DynamicButton from '../../common/button';
 function ModalOfCalendar() {
 

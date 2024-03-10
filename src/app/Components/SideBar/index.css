@@ -12,3 +12,7 @@
     border-left: 2px solid #eaeaea;
     z-index: 10;
   }
+  .workspaces{
+    height: 800px;
+    overflow-y: scroll;
+  }
