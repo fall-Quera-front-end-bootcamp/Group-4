@@ -37,7 +37,8 @@ const CalendarView = React.lazy(
 );
 const BView = React.lazy(() => import("./app/Dashboard/HomePage/Board/BView"));
 
-const WorkSpace = React.lazy(() => import("./app/Dashboard/HomePage/WorkspaceContainer/Workspaces"));
+
+const WorkSpacePage = React.lazy(() => import("./app/WorkSpacePage/index"))
 
 const ProfilePages = React.lazy(() => import("./app/Profile/index"));
 const Profile1 = React.lazy(() => import("./app/Profile/ProfilePages/Profile1"));
@@ -57,9 +58,10 @@ function App() {
             <Route path="listview" element={<ListView />} />
             <Route path="calendarview" element={<CalendarView />} />
             <Route path="boardview" element={<BView />} />
-            <Route path="workspace" element={<WorkSpace />} />
 
           </Route>
+
+          <Route path="workspace" element={<WorkSpacePage />} />
 
           <Route path="profile" element={<ProfilePages />}>
             <Route path="profile1" element={<Profile1 />} />

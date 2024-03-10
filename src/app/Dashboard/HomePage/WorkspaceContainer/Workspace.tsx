@@ -49,9 +49,9 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
 
 
   return (
-    <div dir='rtl' className="flex flex-col gap-2 mb-6 mr-6 ">
+    <div dir='rtl' className="flex flex-col gap-2 mb-6 mr-6 w-[1100px] mt-[30px] pr-[30px]">
         <h1>{name}</h1>
-          <div className='flex flex-row gap-4'>
+          <div className='flex flex-row  mb-[20px]'>
           {projects.length === 0 && (
               <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center" onClick={openModal}>
                 <img src={addNewProjectIcon} alt="addNewProjectIcon" />
@@ -70,7 +70,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
                 ))}
             </div>
           </div>
-        <div className='w-full h-[2px] bg-gray-200 mt-3' ></div>
+        <div className='w-[1100px] h-[2px] bg-gray-200 mt-3 mr-[-50px]'></div>
     </div>
   );
 };

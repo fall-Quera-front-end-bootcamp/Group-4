@@ -24,7 +24,7 @@ function Login() {
       const response = await login(username, password);
       console.log("Login response:", response);
       console.log("Login successful:", response);
-      navigate("/board/workspace");
+      navigate("/workspace");
     } catch (error) {
       console.error("Login failed:", error);
     }
