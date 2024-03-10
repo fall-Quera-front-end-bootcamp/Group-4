@@ -84,6 +84,7 @@ function CreateWorkspace({ onCloseModal }: CreateWorkspaceProps) {
     try {
       await createWorkspace(workspaceName, selectedColor);
       closeModal();
+      window.location.reload();
     } catch (error) {
       console.error('Error creating workspace:', error);
     }

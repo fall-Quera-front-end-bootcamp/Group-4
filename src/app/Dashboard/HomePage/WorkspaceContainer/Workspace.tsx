@@ -58,7 +58,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
                 <h1 style={CreateNewProjectButtonStyle}>ساختن پروژه جدید</h1>
               </button> 
           )}
-          {isModalOpen && <NewProjectModal onCloseModal={closeModal} />}
+          {isModalOpen && <NewProjectModal onCloseModal={closeModal} workspaceId={id} />}
             <div className="flex flex-row gap-4">
                 {projects.map(project => (
                     <ProjectCard
