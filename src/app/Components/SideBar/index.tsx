@@ -114,13 +114,13 @@ function SideBar({ openModal }: SidebarProps) {
                                 fontSize="12px"
                                 fontWeight={400}
                             />
-                            <div className='relative overflow-y-scroll'  >
+                            <div className='relative'  >
                                 {workspaces.map(workspace => (
                                     <div key={workspace.id}>
                                         <div className="flex items-center cursor-pointer justify-end pt-4" onClick={() => toggleWorkspace(workspace.id)}>
                                         
                                             <div className='mt-1'>{workspace.name}</div>
-                                            <div className="w-[20px] h-[20px] rounded-md ml-2" style={{ backgroundColor: workspace.color }}></div>
+                                            <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
                                         </div>
                                         {selectedWorkspace === workspace.id && openProjects[workspace.id] && (
                                             <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
