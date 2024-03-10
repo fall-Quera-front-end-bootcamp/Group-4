@@ -37,26 +37,27 @@ interface Board {
 
 
 
-const BoardCol: React.FC<{ boardId: number }> = ({ boardId }) => {
+const BoardCol: React.FC<{ board: Board }> = ({ board }) => {
 
 
     const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
     const projectId = useSelector((state: RootState) => selectProjectId(state));
-
-    const [board, setBoard] = useState<any>(null);
+    console.log('from boardCol',workspaceId,projectId);
+    // const [board, setBoard] = useState<any>(null);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [projectName, setProjectName] = useState<string>('');
+    console.log(board.id);
 
     useEffect(() => {
         const fetchBoardAndTasks = async () => {
             try {
-                const boardDetails = await getBoard(boardId);
-                setBoard(boardDetails);
+                // const boardDetails = await getBoard(workspaceId,projectId,Board.Id);
+                // setBoard(boardDetails);
 
-                const boardTasks = await getTasks(boardId);
+                const boardTasks = await getTasks(workspaceId,projectId,board.id);
                 setTasks(boardTasks);
 
-                const project = await getProject(boardDetails.workspaceId, boardDetails.projectId);
+                const project = await getProject(workspaceId,projectId);
                 setProjectName(project.name);
 
             } catch (error) {
@@ -64,11 +65,11 @@ const BoardCol: React.FC<{ boardId: number }> = ({ boardId }) => {
             }
         };
         fetchBoardAndTasks();
-    }, [boardId]);
+    }, [board]);
 
-    if (!board || tasks.length === 0) {
-        return <div>Loading...</div>; 
-    }
+    // if (!board || tasks.length === 0) {
+    //     return <div>Loading...</div>; 
+    // }
 
     return (
         <div>

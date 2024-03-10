@@ -15,13 +15,23 @@ import { useSelector } from "react-redux";
 
 
 
-
+interface Board {
+    id: number;
+    name: string;
+    order: number;
+    tasks: string;
+    tasks_count: string;
+    is_archive: boolean;
+    color: string;
+}
 
 const BoardView: React.FC = () => {
 
     const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
     const projectId = useSelector((state: RootState) => selectProjectId(state));
+    // console.log(workspaceId,projectId);
     const [boards, setBoards] = useState<any[]>([]); 
+    // console.log(workspaceId,projectId);
 
     useEffect(() => {
         if (workspaceId && projectId) { 
@@ -31,9 +41,10 @@ const BoardView: React.FC = () => {
                 })
                 .catch((error) => {
                     console.error('Error fetching boards:', error);
+                    console.log('errrrr',workspaceId,projectId);
                 });
         }
-    }, [workspaceId, projectId]);
+    }, [workspaceId,projectId]);
 
 
     interface Task {
@@ -51,12 +62,13 @@ const BoardView: React.FC = () => {
     const toggleModal = () => {
         setShowModal(!showModal);
     };
-
+    console.log(workspaceId,projectId);
+    
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'flex-start', marginRight: '290px', position: 'absolute', right: '65px', top: '150px' }}>
                 {boards.map((board) => (
-                    <BoardCol key={board.id} boardId={board.id} />
+                    <BoardCol key={board.id} board={board} />
                 ))}
                 <DynamicButton
                     text="تسک جدید"

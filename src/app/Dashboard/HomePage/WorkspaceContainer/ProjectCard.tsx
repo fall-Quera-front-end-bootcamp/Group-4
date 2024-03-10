@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from "react-redux";
 import { setWorkspaceId } from "../../../../Features/workspaceSlice"
 import { setProjectId } from "../../../../Features/projectSlice"
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface ProjectCardProps {
   workspaceId: number;
@@ -11,6 +12,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ workspaceId,id, name, color}) => {
+  const navigate=useNavigate();
   const dispatch = useDispatch();
 
   const handleProjectClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
@@ -18,6 +20,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ workspaceId,id, name, color})
     dispatch(setProjectId(id)); 
     console.log("project ID:", id);
     console.log("workspace ID:", workspaceId);
+    navigate('/board/boardview');
+    
   };
 
 
