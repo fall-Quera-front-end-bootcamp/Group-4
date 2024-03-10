@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import WorkspaceModal from "./app/Dashboard/HomePage/Board/Board-Component/WorkspaceModal";
+import TaskInformation from "./app/Task/TaskInformation/TaskInformation";
 const LayoutAuth = React.lazy(() => import("./app/Components/layout/auth"));
 const Board = React.lazy(() => import("./app/Dashboard/HomePage/Board/Board"));
 const AuthPage = React.lazy(
@@ -54,8 +55,10 @@ function App() {
             <Route path="calendarview" element={<CalendarView />} />
             <Route path="boardview" element={<BView />} />
             <Route path="workspace" element={<WorkSpace />} />
+
           </Route>
           <Route path="Profile" element={<ProfilePages />}/>
+          <Route path="Taskinfo" element={<TaskInformation />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

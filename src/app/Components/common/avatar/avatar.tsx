@@ -15,7 +15,6 @@ interface AvatarProps {
   index: number; 
   overlap: number; 
 }
-
 const Avatar: React.FC<AvatarProps> = ({ size, borderRadius, profile, index, overlap }: AvatarProps) => {
   const baseImageStyle: React.CSSProperties = {
     width: size,
@@ -24,11 +23,8 @@ const Avatar: React.FC<AvatarProps> = ({ size, borderRadius, profile, index, ove
     cursor: 'pointer',
     zIndex: 2,
   };
-
-
   const textColor = profile.color;
   const bgColor = profile.color ? tinycolor(profile.color).lighten(35).toString() : 'lightgray';
-
   return profile.imageSrc ? (
     <img
       src={profile.imageSrc}
@@ -66,6 +62,5 @@ const Avatar: React.FC<AvatarProps> = ({ size, borderRadius, profile, index, ove
     </div>
   );
 };
-
 export default Avatar;
 export{}
