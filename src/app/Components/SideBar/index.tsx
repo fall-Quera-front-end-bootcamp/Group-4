@@ -15,6 +15,9 @@ import ExitIcon from '../../Components/assets/icons/ExitIcon.png';
 import DarkModeSwitch from '../../Components/assets/icons/Dark Mode switch.png';
 import { Link } from "react-router-dom";
 import NewProjectModal from '../NewProjectModal/index';
+import { useDispatch } from "react-redux";
+import { setWorkspaceId } from "../../../Features/workspaceSlice"
+import { setProjectId } from "../../../Features/projectSlice"
 
 interface SidebarProps {
     openModal: () => void;
@@ -41,6 +44,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
     const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate(); 
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchWorkspaces = async () => {
@@ -54,6 +58,17 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
 
         fetchWorkspaces();
     }, []);
+
+
+
+    const handleProjectClick = (workspaceId: string, projectId: string) => {
+        dispatch(setWorkspaceId(parseInt(workspaceId)));
+        dispatch(setProjectId(parseInt(projectId)));
+        console.log("Project ID:", projectId);
+        console.log("Workspace ID:", workspaceId);
+        navigate('/board/boardview');
+    };
+
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -111,6 +126,11 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
         navigate('/authentication'); 
     };
 
+
+    
+
+    
+
     return (
         <div className="sidebar">
             <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
@@ -159,7 +179,9 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                     <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
                                     {openProjects[workspace.id].length > 0 ? (
                                      openProjects[workspace.id].map(project => (
-                                     <h1 key={project.id} className='mb-[10px]'>{project.name}</h1>
+                                    <div onClick={(event)=>handleProjectClick(workspace.id,project.id)}>
+                                        <h1 key={project.id} className='mb-[10px]'>{project.name}</h1>
+                                     </div>
                                     ))
                                     ) : (
                                     <button className="w-[240px] h-[32px] border border-solid border-[#208D8E] bg-white text-[#208D8E] py-2 px-4 rounded-[8px] hover:bg-[#208D8E] hover:text-white flex justify-center items-center" onClick={openModalFunction}>ساختن پروژه جدید</button>
