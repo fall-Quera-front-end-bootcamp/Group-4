@@ -12,3 +12,16 @@ export const getBoards = async (workspaceId , projectId) => {
           throw error;
         }
 }
+
+
+
+export const getBoard = async (workspaceId , projectId , boardId) => {
+
+  try {
+      const response = await axiosInstance.get(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}`);
+      return response.data
+      } catch (error) {
+        console.error('Error fetching board :', error);
+        throw error;
+      }
+}
