@@ -39,7 +39,10 @@ const BView = React.lazy(() => import("./app/Dashboard/HomePage/Board/BView"));
 
 const WorkSpace = React.lazy(() => import("./app/Dashboard/HomePage/WorkspaceContainer/Workspaces"));
 
-const ProfilePages = React.lazy(() => import("./app/Profile/index"))
+const ProfilePages = React.lazy(() => import("./app/Profile/index"));
+const Profile1 = React.lazy(() => import("./app/Profile/ProfilePages/Profile1"));
+const Profile2 = React.lazy(() => import("./app/Profile/ProfilePages/Profile2"));
+const Profile3 = React.lazy(() => import("./app/Profile/ProfilePages/Profile3"));
 
 function App() {
   return (
@@ -57,8 +60,12 @@ function App() {
             <Route path="workspace" element={<WorkSpace />} />
 
           </Route>
-          <Route path="Profile" element={<ProfilePages />}/>
-          <Route path="Taskinfo" element={<TaskInformation />} />
+
+          <Route path="profile" element={<ProfilePages />}>
+            <Route path="profile1" element={<Profile1 />} />
+            <Route path="profile2" element={<Profile2 />} />
+            <Route path="profile3" element={<Profile3 />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

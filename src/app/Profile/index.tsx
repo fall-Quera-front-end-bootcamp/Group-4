@@ -1,6 +1,7 @@
 import React from 'react'
 import SideBar from '../Components/SideBar'
 import { useState } from 'react';
+import { Outlet } from "react-router-dom";
 import DynamicButton from '../Components/common/button';
 import BackIcon from '../../app/Components/assets/icons/backRight.png'
 import PersonalityInfoIcon from '../Components/assets/icons/Profile/personalityInformation.png'
@@ -22,7 +23,8 @@ function ProfilePage() {
   };
 
   return (
-    <div className="fixed top-0 right-0 h-screen w-80 bg-white flex flex-col justify-start items-center border-l-2 border-gray-200 z-10">
+    <div>
+      <div className="fixed top-0 right-0 h-screen w-80 bg-white flex flex-col justify-start items-center border-l-2 border-gray-200 z-10">
       <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
           کوئرا تسک منیجر
       </div>
@@ -59,6 +61,11 @@ function ProfilePage() {
       </div>
 
     </div>
+    <div className='w-[1120px] h-screen flex justify-end items-center pr-[50px]'>
+    <Outlet />
+    </div>
+    </div>
+    
   )
 }
 
