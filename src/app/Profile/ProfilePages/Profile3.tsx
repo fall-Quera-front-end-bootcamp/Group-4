@@ -2,6 +2,7 @@ import React, { ChangeEvent,useState } from 'react';
 import Avatar from '../../Components/common/avatar/avatar';
 import DynamicInput from '../../Components/common/input';
 import DynamicButton from '../../Components/common/button';
+import SwitchDarkMode from '../../Components/assets/icons/Dark Mode switch.png'
 
 function Profile3() {
 
@@ -47,7 +48,7 @@ function Profile3() {
       <div className='w-[354px] h-[176px] flex flex-col justify-start items-end'>
         <div className='w-[354] h-[56px] flex flex-col justify-between items-end'>
           <h1 style={detailStyle}>انتخاب تم</h1>
-          <div className="flex flex-wrap gap-2 w-[428px] h-[28px] justify-end">
+          <div className="flex flex-wrap gap-2 w-[428px] h-[28px] justify-end mt-[10px] mb-[25px]">
                   {colors.map((color) => (
                     <div
                       key={color}
@@ -85,7 +86,8 @@ function Profile3() {
                     </div>
                   ))}
             </div>
-            {/* <button></button>  switchMode*/}
+            <img src={SwitchDarkMode} alt="SwitchDarkMode" />
+
         </div>
         <DynamicButton
                       text='ثبت تغییرات'
