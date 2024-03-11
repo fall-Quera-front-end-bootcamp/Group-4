@@ -1,5 +1,4 @@
-// SideBar component
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import DynamicInput from '../common/input';
 import DynamicButton from '../common/button';
@@ -10,8 +9,11 @@ import ArrowDown from '../assets/icons/arrowDown.png'
 import CreateWorkspace from '../../Dashboard/HomePage/WorkspaceContainer/CreateWorkspace';
 import { getWorkspaces } from '../../../services/workspace';
 import { getProjects } from '../../../services/project';
-
-
+import Avatar from '../common/avatar/avatar';
+import ExitIcon from '../../Components/assets/icons/ExitIcon.png';
+import DarkModeSwitch from '../../Components/assets/icons/Dark Mode switch.png';
+import { Link } from "react-router-dom";
+import NewProjectModal from '../NewProjectModal/index';
 
 interface SidebarProps {
     openModal: () => void;
@@ -25,16 +27,17 @@ interface Project {
 interface Workspace {
     id: string;
     name: string;
-    color:string;
+    color: string;
 }
 
 function SideBar({ openModal }: SidebarProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState("");
-    const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false); 
+    const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
     const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
     const [openProjects, setOpenProjects] = useState<{ [key: string]: Project[] }>({});
-    const [selectedWorkspace, setSelectedWorkspace] = useState<string | null>(null);
+    const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>([]);
+    const [isModalOpen, setIsModalOpen] = useState(false); 
 
     useEffect(() => {
         const fetchWorkspaces = async () => {
@@ -54,13 +57,24 @@ function SideBar({ openModal }: SidebarProps) {
     };
 
     const toggleWorkspace = async (workspaceId: string) => {
-        setSelectedWorkspace(workspaceId);
-        try {
-            const projectsData = await getProjects(workspaceId);
-            setOpenProjects({ ...openProjects, [workspaceId]: projectsData });
-        } catch (error) {
-            console.error(`Error fetching projects of workspace ${workspaceId}:`, error);
+        const isSelected = selectedWorkspaces.includes(workspaceId);
+        setSelectedWorkspaces(prevSelected => isSelected ? prevSelected.filter(id => id !== workspaceId) : [...prevSelected, workspaceId]);
+        if (!isSelected) {
+            try {
+                const projectsData = await getProjects(workspaceId);
+                setOpenProjects({ ...openProjects, [workspaceId]: projectsData });
+            } catch (error) {
+                console.error(`Error fetching projects of workspace ${workspaceId}:`, error);
+            }
         }
+    };
+
+    const openModalFunction = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModalFunction = () => {
+        setIsModalOpen(false);
     };
 
     const main = {
@@ -76,6 +90,15 @@ function SideBar({ openModal }: SidebarProps) {
         width: "10px",
         height: "5px"
     };
+
+    const profile = [
+        { name: 'حجت', imageSrc: '', color: '#007bff' },
+    ];
+
+    const accountStyle = {
+        fontWeight: 500,
+        fontSize: "16px"
+    }
 
     return (
         <div className="sidebar">
@@ -114,30 +137,59 @@ function SideBar({ openModal }: SidebarProps) {
                                 fontSize="12px"
                                 fontWeight={400}
                             />
-                            <div className='relative'  >
-                                {workspaces.map(workspace => (
-                                    <div key={workspace.id}>
-                                        <div className="flex items-center cursor-pointer justify-end pt-4" onClick={() => toggleWorkspace(workspace.id)}>
-                                        
-                                            <div className='mt-1'>{workspace.name}</div>
-                                            <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
-                                        </div>
-                                        {selectedWorkspace === workspace.id && openProjects[workspace.id] && (
-                                            <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
-                                                {openProjects[workspace.id].map(project => (
-                                                    <h1 key={project.id}>{project.name}</h1>
-                                                ))}
-                                            </div>
-                                        )}
+                            <div className='relative workspaces'  >
+                            {workspaces.map(workspace => (
+                                <div key={workspace.id}>
+                                    <div className="flex items-center cursor-pointer justify-end pt-4 mr-[20px]" onClick={() => toggleWorkspace(workspace.id)}>
+                                        <div className='mt-1'>{workspace.name}</div>
+                                        <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                )}
+                                    {selectedWorkspaces.includes(workspace.id) && openProjects[workspace.id] && (
+                                    <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
+                                    {openProjects[workspace.id].length > 0 ? (
+                                     openProjects[workspace.id].map(project => (
+                                     <h1 key={project.id} className='mb-[10px]'>{project.name}</h1>
+                                    ))
+                                    ) : (
+                                    <button className="w-[240px] h-[32px] border border-solid border-[#208D8E] bg-white text-[#208D8E] py-2 px-4 rounded-[8px] hover:bg-[#208D8E] hover:text-white flex justify-center items-center" onClick={openModalFunction}>ساختن پروژه جدید</button>
+                                    )}
+                                     </div>
+                                    )}
+                                </div>
+                            ))}
+                            </div>                                        
+                        </div>                       
+                    </div>                   
+                )}               
             </div>
+            <div className='w-[276px] h-[85px] mt-[570px]'>
+                            <Link to="/profile/profile1">
+                                <div className=' h-[33px] flex justify-end items-center cursor-pointer'>
+                                    <h1 className='mr-[10px]' style={accountStyle}>{profile[0].name}</h1>
+                                    <Avatar
+                                        size={30}
+                                        borderRadius="50%" 
+                                        profile={profile[0]} 
+                                        index={0} 
+                                        overlap={0} 
+                                    />
+                                </div>
+                                </Link>
+                                <div className='flex justify-between items-center h-[36px] mt-[10px]'>
+                                    <div className='w-[64px] h-[36px]'>
+                                        <img src={DarkModeSwitch} alt="DarkModeSwitch" />
+                                    </div>
+                                    <button className='w-[65px] h-[24px] flex'>
+                                        <h1 style={accountStyle} className='text-gray-500'>خروج</h1>    
+                                        <img src={ExitIcon} alt="ExitIcon" />
+                                    </button>
+                                </div>                       
+                                </div>
             {isWorkspaceModalOpen && <CreateWorkspace onCloseModal={() => setIsWorkspaceModalOpen(false)} />}
+            {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={1}/>}
+            
         </div>
+        
     );
 };
 
