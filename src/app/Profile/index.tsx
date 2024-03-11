@@ -49,19 +49,19 @@ function ProfilePage() {
       </div>
       <div className='w-[226px] flex flex-col justify-end mr-[70px] mt-[80px]'>
           <Link to="/profile/profile1">
-            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer pb-[50px]'>
+            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer mb-[50px] hover:bg-blue-200 hover:rounded-lg'>
               <h1 style={SidBarItemsStyle}>اطلاعات فردی</h1>
               <img src={PersonalityInfoIcon} alt="PersonalityInfoIcon" />
             </div>
           </Link>
           <Link to="/profile/profile2">
-            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer '>
+            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer hover:bg-blue-200 hover:rounded-lg'>
               <h1  style={SidBarItemsStyle}>اطلاعات حساب</h1>
               <img src={AccountInfo} alt="AccountInfo" />
             </div>
           </Link>
           <Link to="/profile/profile3">
-            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer pt-[50px]'>
+            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer mt-[50px] hover:bg-blue-200 hover:rounded-lg'>
               <h1  style={SidBarItemsStyle}>تنظیمات</h1>
               <img src={settingIcon} alt="settingIcon" />
             </div>
