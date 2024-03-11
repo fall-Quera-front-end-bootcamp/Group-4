@@ -4,12 +4,16 @@ import Workspaces from '../Dashboard/HomePage/WorkspaceContainer/Workspaces';
 
 function WorkSpacePage() {
 
+  const handleLogout = () => {
+//testtt
+};
+
     const openModal = () => {
       };
 
   return (
     <div>
-        <SideBar openModal={openModal}/>
+        <SideBar openModal={openModal} onLogout={handleLogout}/>
         <Workspaces/>
     </div>
   )
