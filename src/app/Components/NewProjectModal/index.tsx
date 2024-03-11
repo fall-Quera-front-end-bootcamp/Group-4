@@ -13,10 +13,10 @@ interface NewProjectModalProps {
 const NewProjectModal: React.FC<NewProjectModalProps> = ({ onCloseModal, workspaceId }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [projectName, setProjectName] = useState<string>('');
-  
+
   const HeaderStyles = {
-    fontWeight:800,
-    fontSize:"24px"
+    fontWeight: 800,
+    fontSize: "24px"
   };
 
   const closeModal = () => {
@@ -39,15 +39,15 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ onCloseModal, workspa
   };
 
   const NameOfWorkSpaceStyle = {
-    fontWeight:400,
-    fontSize:"14px"
+    fontWeight: 400,
+    fontSize: "14px"
   };
 
   console.log(workspaceId);
 
   return (
     <div>
-      <Modal isOpen={isOpen} onRequestClose={closeModal} style={{ content: { width:'500px', height:'268px', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '8px' } }}>
+      <Modal isOpen={isOpen} onRequestClose={closeModal} style={{ content: { width: '500px', height: '268px', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', borderRadius: '8px' } }}>
         <div className='flex w-[452px] h-[32px] justify-end items-center'>
           <h3 className='pr-[105px]' style={HeaderStyles}>ساختن پروژه جدید‌</h3>
           <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={closeModal}/>
@@ -70,7 +70,7 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ onCloseModal, workspa
           fontWeight={800}
           fontSize='14px'
           onClick={handleNext}
-          style={{marginLeft:"20px" , marginTop:"80px"}}
+          style={{ marginLeft: "20px", marginTop: "80px" }}
         />
       </Modal>
     </div>
