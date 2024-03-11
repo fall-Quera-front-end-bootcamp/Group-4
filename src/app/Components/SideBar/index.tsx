@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './index.css';
 import DynamicInput from '../common/input';
 import DynamicButton from '../common/button';
@@ -17,6 +18,7 @@ import NewProjectModal from '../NewProjectModal/index';
 
 interface SidebarProps {
     openModal: () => void;
+    onLogout?: () => void; 
 }
 
 interface Project {
@@ -28,16 +30,17 @@ interface Workspace {
     id: string;
     name: string;
     color: string;
-}
+};
 
-function SideBar({ openModal }: SidebarProps) {
+function SideBar({ openModal, onLogout }: SidebarProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
     const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
     const [openProjects, setOpenProjects] = useState<{ [key: string]: Project[] }>({});
     const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>([]);
-    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchWorkspaces = async () => {
@@ -98,7 +101,15 @@ function SideBar({ openModal }: SidebarProps) {
     const accountStyle = {
         fontWeight: 500,
         fontSize: "16px"
-    }
+    };
+
+    const handleLogout = () => {
+        localStorage.clear();
+        if (onLogout) {
+            onLogout();
+        }
+        navigate('/authentication'); 
+    };
 
     return (
         <div className="sidebar">
@@ -179,7 +190,7 @@ function SideBar({ openModal }: SidebarProps) {
                                     <div className='w-[64px] h-[36px]'>
                                         <img src={DarkModeSwitch} alt="DarkModeSwitch" />
                                     </div>
-                                    <button className='w-[65px] h-[24px] flex'>
+                                    <button className='w-[65px] h-[24px] flex' onClick={handleLogout}>
                                         <h1 style={accountStyle} className='text-gray-500'>خروج</h1>    
                                         <img src={ExitIcon} alt="ExitIcon" />
                                     </button>

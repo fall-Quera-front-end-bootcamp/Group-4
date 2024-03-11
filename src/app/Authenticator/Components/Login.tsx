@@ -16,7 +16,6 @@ function Login() {
 
   const dispatch = useAppDispatch();
 
-  // Function to handle form submission
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

@@ -37,6 +37,11 @@ function Board() {
       setIsModalOpen(false);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    console.log('exit shod');
+};
+
     async function fetchWorkspaces() {
         try {
           const workspaces = await getWorkspaces();
@@ -64,7 +69,7 @@ function Board() {
             </div>
             <Header onDivClick={handleOpenModal} />
             {isModalOpen && <ShareProject onCloseModal={handleCloseModal} />}
-            <SideBar openModal={handleOpenModal}/>
+            <SideBar openModal={handleOpenModal} onLogout={handleLogout}/>
         </div>
     );
 }
