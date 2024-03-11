@@ -4,6 +4,8 @@ import { getProjects } from '../../../../services/project';
 import addNewProjectIcon from '../../../Components/assets/icons/addNewProject.png'
 import NewProjectModal from '../../../Components/NewProjectModal';
 
+
+
 interface Project {
   id: number;
   name: string;
@@ -22,6 +24,9 @@ const CreateNewProjectButtonStyle = {
 }
 
 const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
+  
+
+
   const [projects, setProjects] = useState<Project[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,6 +53,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
   console.log(name);
 
 
+
+
   return (
     <div dir='rtl' className="flex flex-col gap-2 mb-6 mr-6 w-[1100px] mt-[30px] pr-[30px]">
         <h1>{name}</h1>
@@ -63,6 +70,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ id, name, color }) => {
                 {projects.map(project => (
                     <ProjectCard
                         key={project.id}
+                        workspaceId={id}
                         id={project.id}
                         name={project.name}
                         color={color}
