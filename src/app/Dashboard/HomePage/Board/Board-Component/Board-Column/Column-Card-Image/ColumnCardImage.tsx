@@ -37,7 +37,7 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName}) 
             <div className="rounded-[16px] p-[16px] gap-[16px] bg-white drop-shadow-md flex flex-col justify-center items-center mb-[10px] cursor-pointer">
             {task.thumbnail && ( 
                     <div className="flex justify-center w-[218px] h-[134px] items-center mt-[10px] rounded-[20px]">
-                        <img className="w-[218px] h-[134px] object-contain rounded-[4px]" src={`http://185.8.174.74:8000${task.thumbnail}`} alt="task'sImage" />
+                        <img className="w-[218px] h-[134px] rounded-[4px]" src={`http://185.8.174.74:8000${task.thumbnail}`} alt="task'sImage" />
                     </div>
                 )}
                 <div dir="rtl" className="w-[238px] h-[43px] gap-[9px] flex flex-col mt-4">
