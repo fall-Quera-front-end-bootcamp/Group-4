@@ -7,6 +7,8 @@ import BackIcon from '../../app/Components/assets/icons/backRight.png'
 import PersonalityInfoIcon from '../Components/assets/icons/Profile/personalityInformation.png'
 import AccountInfo from '../Components/assets/icons/Profile/accountInformation.png'
 import settingIcon from '../Components/assets/icons/Profile/setting.png'
+import { Link } from "react-router-dom";
+
 
 
 function ProfilePage() {
@@ -46,18 +48,24 @@ function ProfilePage() {
         />
       </div>
       <div className='w-[226px] flex flex-col justify-end mr-[70px] mt-[80px]'>
-          <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer pb-[50px]'>
-            <h1 style={SidBarItemsStyle}>اطلاعات فردی</h1>
-            <img src={PersonalityInfoIcon} alt="PersonalityInfoIcon" />
-          </div>
-          <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer '>
-            <h1  style={SidBarItemsStyle}>اطلاعات حساب</h1>
-            <img src={AccountInfo} alt="AccountInfo" />
-          </div>
-          <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer pt-[50px]'>
-            <h1  style={SidBarItemsStyle}>تنظیمات</h1>
-            <img src={settingIcon} alt="settingIcon" />
-          </div>
+          <Link to="/profile/profile1">
+            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer pb-[50px]'>
+              <h1 style={SidBarItemsStyle}>اطلاعات فردی</h1>
+              <img src={PersonalityInfoIcon} alt="PersonalityInfoIcon" />
+            </div>
+          </Link>
+          <Link to="/profile/profile2">
+            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer '>
+              <h1  style={SidBarItemsStyle}>اطلاعات حساب</h1>
+              <img src={AccountInfo} alt="AccountInfo" />
+            </div>
+          </Link>
+          <Link to="/profile/profile3">
+            <div className='w-[266px] h-[36px] flex justify-end items-center cursor-pointer pt-[50px]'>
+              <h1  style={SidBarItemsStyle}>تنظیمات</h1>
+              <img src={settingIcon} alt="settingIcon" />
+            </div>
+          </Link>
       </div>
 
     </div>
