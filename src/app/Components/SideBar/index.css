@@ -13,6 +13,7 @@
     z-index: 10;
   }
   .workspaces{
-    height: 800px;
-    overflow-y: scroll;
+    max-height: 400px;
+    overflow-y: auto; 
+    margin-top: 20px;
   }
