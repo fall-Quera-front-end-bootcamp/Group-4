@@ -1,5 +1,5 @@
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../utils/store";
 
 interface WorkspaceState {
   workspaceId: number | null;
@@ -21,7 +21,6 @@ const workspaceSlice = createSlice({
 
 export const { setWorkspaceId } = workspaceSlice.actions;
 
-export const selectWorkspaceId = (state: { workspace: WorkspaceState }) =>
-  state.workspace.workspaceId;
+export const selectWorkspaceId = (state: RootState) => state.workspace.workspaceId;
 
 export default workspaceSlice.reducer;
