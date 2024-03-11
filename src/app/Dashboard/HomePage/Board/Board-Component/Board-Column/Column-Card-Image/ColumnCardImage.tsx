@@ -2,26 +2,42 @@ import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faListAlt } from "@fortawesome/free-regular-svg-icons";
 import jalaliMoment from 'jalali-moment';
+import { selectWorkspaceId } from '../../../../../../../Features/workspaceSlice';
+import { selectProjectId } from '../../../../../../../Features/projectSlice';
+import { RootState } from "../../../../../../../utils/store";
+import { useSelector } from "react-redux";
 
-interface ColumnCardImageProps {
-    id?: number; 
-    imgSrc: string;
-    projectName: string;
-    title: string;
+interface Task {
+    id: number;
+    name: string;
+    description: string;
     deadline: string;
-    state: string;
-    tags: string[];
+    priority: number;
+    attachment: string;
+    thumbnail: string;
+    order: number;
+    members: string;
+    created_at: string;
 }
 
-const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ imgSrc, projectName, title, deadline, state ,tags}) => {
-    const pDeadline = jalaliMoment(deadline, 'YYYY/MM/DD').locale('fa').format('D MMMM');
+interface ColumnCardImageProps {
+    task: Task;
+    projectName: string;
+}
+
+const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName}) => {
+
+    const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
+    const projectId = useSelector((state: RootState) => selectProjectId(state));
+
+    const pDeadline = jalaliMoment(task.deadline, 'YYYY-MM-DD').locale('fa').format('D MMMM');
 
     return (
         <div>
             <div className="rounded-[16px] p-[16px] gap-[16px] bg-white drop-shadow-md flex flex-col justify-center items-center">
-                {imgSrc && ( 
+            {task.thumbnail && ( 
                     <div className="flex justify-center w-[218px] h-[134px]">
-                        <img className="rounded-[4px]" src={imgSrc} alt="" />
+                        <img className="rounded-[4px]" src={task.thumbnail} alt="" />
                     </div>
                 )}
                 <div dir="rtl" className="w-[238px] h-[43px] gap-[9px] flex flex-col mt-4">
@@ -29,7 +45,7 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ imgSrc, projectName, 
                         <span className="font-medium text-[12px] leading-[16.91px] text-right text-[#534D60]">{projectName}</span>
                     </div>
                     <div dir="rtl" className="w-[218px] h-[17px] font-medium text-[12px] leading-[16.91px] text-right gap-[4px]">
-                        <span className="font-normal text-sm leading-[16.91px text-right text-[#0E0E0E] h-[17px] w-[170px]">{title}</span>
+                        <span className="font-normal text-sm leading-[16.91px text-right text-[#0E0E0E] h-[17px] w-[170px]">{task.name}</span>
                         <span className="mr-1"> <FontAwesomeIcon icon={faListAlt} /></span>
                     </div>
                 </div>
@@ -41,11 +57,11 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ imgSrc, projectName, 
                 </div>
                 <div dir="rtl">
                 <div className="w-[240px] h-[24px] gap-[8px] flex-row flex mt-6">
-                    {tags.map((tag, index) => (
+                    {/* {tags.map((tag, index) => (
                         <div key={index} className={`text-[#228BE6] bg-[#D0EBFF] inline-block rounded-[14px] pr-[8px] pl-[8px]`}>
                             <span className="w-[25px] h-[17px] font-extrabold text-[12px] leading-[16.91px] text-right">{tag}</span>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
                 </div>
             </div>

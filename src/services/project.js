@@ -11,6 +11,17 @@ export const getProjects = async (workspaceId) => {
     }
   }
 
+  export const getProject = async (workspaceId , projectId ) => {
+
+    try {
+        const response = await axiosInstance.get(`/workspaces/${workspaceId}/projects/${projectId}/`);
+        return response.data
+        } catch (error) {
+          console.error('Error fetching project :', error);
+          throw error;
+        }
+  }
+
 
 export const createProject = async (workspaceId, projectName) => {
     try {
