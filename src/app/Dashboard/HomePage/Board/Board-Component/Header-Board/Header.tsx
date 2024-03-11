@@ -1,10 +1,15 @@
-import React from 'react'
+import React , {useState , useEffect} from 'react'
 import './HEaderStyle.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {    faCalendarDays} from "@fortawesome/free-regular-svg-icons" ;
 import {faTableColumns , faListCheck , faShareNodes , faSearch , faSliders , faRotateRight} from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
+import { selectWorkspaceId } from '../../../../../../Features/workspaceSlice';
+import { selectProjectId } from '../../../../../../Features/projectSlice';
+import { RootState } from "../../../../../../utils/store";
+import { useSelector } from "react-redux";
+import { getProject } from '../../../../../../services/project';
 
 
 interface HeaderProps {
@@ -12,7 +17,23 @@ interface HeaderProps {
 }
 
  function Header ({ onDivClick }: HeaderProps) {
+    const [projectName, setProjectName] = useState<string>('');
+    const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
+    const projectId = useSelector((state: RootState) => selectProjectId(state));
 
+    useEffect(() => {
+        const fetchBoardAndTasks = async () => {
+            try {
+
+                const project = await getProject(workspaceId,projectId);
+                setProjectName(project.name);
+
+            } catch (error) {
+                console.error('Error fetching project:', error);
+            }
+        };
+        fetchBoardAndTasks();
+    }, [projectId]);
     
 
     return(
@@ -62,7 +83,7 @@ interface HeaderProps {
                     {/*-------------------first-projects---------*/}
                     <span className="border-[#999999] border-l-[1px] w-[22px]"></span>
                     <span className="  w-[77px] h-[32px] font-extrabold text-[20px]
-                    leading-[32px] text-right ">پروژه اول</span>
+                    leading-[32px] text-right ">{projectName}</span>
                 </div>
             </div>
             {/*-----------------solid-border-under--menu-------------------------*/}
