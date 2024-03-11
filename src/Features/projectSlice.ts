@@ -1,5 +1,5 @@
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../utils/store";
 
 interface ProjectState {
   projectId: number | null;
@@ -21,7 +21,6 @@ const projectSlice = createSlice({
 
 export const { setProjectId } = projectSlice.actions;
 
-export const selectProjectId = (state: { project: ProjectState }) =>
-  state.project.projectId;
+export const selectProjectId = (state: RootState) => state.project.projectId;
 
 export default projectSlice.reducer;

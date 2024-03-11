@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import ColumnOpen from '../Board-Column/Column-Open/Board-Column';
 import ColumnCardImage from '../Board-Column/Column-Card-Image/ColumnCardImage';
 import pict from '../../../../../Components/assets/icons/pic-t.webp';
@@ -6,10 +6,35 @@ import test2 from '../../../../../Components/assets/icons/test2.jpeg';
 import DynamicButton from '../../../../../Components/common/button';
 import NewTaksButton from '../../../../../Components/assets/icons/newTask.png';
 import NewTask from '../../../../../Task/NewTask/NewTask';
+import { getBoards } from '../../../../../../services/board';
+import { selectWorkspaceId } from '../../../../../../Features/workspaceSlice';
+import { selectProjectId } from '../../../../../../Features/projectSlice';
+import { RootState } from "../../../../../../utils/store";
+import { useSelector } from "react-redux";
+
+
 
 
 
 const BoardView: React.FC = () => {
+
+    const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
+    const projectId = useSelector((state: RootState) => selectProjectId(state));
+    const [boards, setBoards] = useState<any[]>([]); 
+
+    useEffect(() => {
+        if (workspaceId && projectId) { 
+            getBoards(workspaceId, projectId)
+                .then((data) => {
+                    setBoards(data); 
+                })
+                .catch((error) => {
+                    console.error('Error fetching boards:', error);
+                });
+        }
+    }, [workspaceId, projectId]);
+
+
     interface Task {
         id: number;
         imgSrc?: string;
