@@ -5,7 +5,6 @@ function ListView() {
   return (
     <div>
         <List/>
-        <ModalOfCalendar/>
 
     </div>
   )
