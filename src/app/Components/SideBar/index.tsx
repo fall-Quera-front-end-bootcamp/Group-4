@@ -17,7 +17,8 @@ import { Link } from "react-router-dom";
 import NewProjectModal from '../NewProjectModal/index';
 import { useDispatch } from "react-redux";
 import { setWorkspaceId } from "../../../Features/workspaceSlice"
-import { setProjectId } from "../../../Features/projectSlice"
+import { setProjectId } from "../../../Features/projectSlice";
+import MoreIcon from '../assets/icons/MoreIcon.png'
 
 interface SidebarProps {
     openModal: () => void;
@@ -171,9 +172,12 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                             <div className='relative workspaces'  >
                             {workspaces.map(workspace => (
                                 <div key={workspace.id}>
-                                    <div className="flex items-center cursor-pointer justify-end pt-4 mr-[20px]" onClick={() => toggleWorkspace(workspace.id)}>
-                                        <div className='mt-1'>{workspace.name}</div>
-                                        <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
+                                    <div className="flex justify-between items-center cursor-pointer pt-4 mr-[15px]" onClick={() => toggleWorkspace(workspace.id)}>
+                                        <img src={MoreIcon} alt="MoreIcon" />
+                                        <div className='flex w-[160px] h-[23px] justify-end items-center'>
+                                            <div className='mt-1'>{workspace.name}</div>
+                                            <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
+                                        </div>
                                     </div>
                                     {selectedWorkspaces.includes(workspace.id) && openProjects[workspace.id] && (
                                     <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
