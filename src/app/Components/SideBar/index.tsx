@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import './index.css';
 import DynamicInput from '../common/input';
 import DynamicButton from '../common/button';
@@ -18,11 +18,12 @@ import NewProjectModal from '../NewProjectModal/index';
 import { useDispatch } from "react-redux";
 import { setWorkspaceId } from "../../../Features/workspaceSlice"
 import { setProjectId } from "../../../Features/projectSlice";
-import MoreIcon from '../assets/icons/MoreIcon.png'
+import MoreIcon from '../assets/icons/MoreIcon.png';
+import MoreWorkSpaceModal from '../MoreModal/WorkSpace/Index';
 
 interface SidebarProps {
     openModal: () => void;
-    onLogout?: () => void; 
+    onLogout?: () => void;
 }
 
 interface Project {
@@ -44,7 +45,8 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
     const [openProjects, setOpenProjects] = useState<{ [key: string]: Project[] }>({});
     const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const navigate = useNavigate(); 
+    const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -60,8 +62,6 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
         fetchWorkspaces();
     }, []);
 
-
-
     const handleProjectClick = (workspaceId: string, projectId: string) => {
         dispatch(setWorkspaceId(parseInt(workspaceId)));
         dispatch(setProjectId(parseInt(projectId)));
@@ -69,7 +69,6 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
         console.log("Workspace ID:", workspaceId);
         navigate('/board/boardview');
     };
-
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -96,55 +95,27 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
         setIsModalOpen(false);
     };
 
-    const main = {
-        width: "304px"
-    };
-
-    const WorkspacesTitle = {
-        fontWeight: 800,
-        fontSize: "16px"
-    };
-
-    const arrow = {
-        width: "10px",
-        height: "5px"
-    };
-
-    const profile = [
-        { name: 'حجت', imageSrc: '', color: '#007bff' },
-    ];
-
-    const accountStyle = {
-        fontWeight: 500,
-        fontSize: "16px"
-    };
-
     const handleLogout = () => {
         localStorage.clear();
         if (onLogout) {
             onLogout();
         }
-        navigate('/authentication'); 
+        navigate('/authentication');
     };
-
-
-    
-
-    
 
     return (
         <div className="sidebar">
             <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
                 کوئرا تسک منیجر
             </div>
-            <div className="relative" style={main}>
+            <div className="relative" style={{ width: "304px" }}>
                 <div className="flex items-center cursor-pointer flex justify-between" onClick={toggleMenu}>
                     {isOpen ? (
-                        <img src={ArrowUp} alt="Up Icon" className=" inline-block ml-2" style={arrow} />
+                        <img src={ArrowUp} alt="Up Icon" className=" inline-block ml-2" style={{ width: "10px", height: "5px" }} />
                     ) : (
-                        <img src={ArrowDown} alt="Down Icon" className="w-6 h-6 inline-block ml-2" style={arrow} />
+                        <img src={ArrowDown} alt="Down Icon" className="w-6 h-6 inline-block ml-2" style={{ width: "10px", height: "5px" }} />
                     )}
-                    <div style={WorkspacesTitle}>ورک‌اسپیس‌ها</div>
+                    <div style={{ fontWeight: 800, fontSize: "16px" }}>ورک‌اسپیس‌ها</div>
                 </div>
                 {isOpen && (
                     <div className="absolute top-full left-0 mt-2 p-4 bg-white">
@@ -170,63 +141,65 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                 fontWeight={400}
                             />
                             <div className='relative workspaces'  >
-                            {workspaces.map(workspace => (
-                                <div key={workspace.id}>
-                                    <div className="flex justify-between items-center cursor-pointer pt-4 mr-[15px]" onClick={() => toggleWorkspace(workspace.id)}>
-                                        <img src={MoreIcon} alt="MoreIcon" />
-                                        <div className='flex w-[160px] h-[23px] justify-end items-center'>
-                                            <div className='mt-1'>{workspace.name}</div>
-                                            <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
+                                {workspaces.map(workspace => (
+                                    <div key={workspace.id}>
+                                        <div className="flex justify-between items-center cursor-pointer pt-4 mr-[15px]" >
+                                            <button onClick={() => setIsMoreModalOpen(true)}> 
+                                                <img src={MoreIcon} alt="MoreIcon" />
+                                            </button>
+                                            <div className='flex w-[160px] h-[23px] justify-end items-center' onClick={() => toggleWorkspace(workspace.id)}>
+                                                <div className='mt-1'>{workspace.name}</div>
+                                                <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
+                                            </div>
                                         </div>
+                                        {selectedWorkspaces.includes(workspace.id) && openProjects[workspace.id] && (
+                                            <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
+                                                {openProjects[workspace.id].length > 0 ? (
+                                                    openProjects[workspace.id].map(project => (
+                                                        <div onClick={(event) => handleProjectClick(workspace.id, project.id)}>
+                                                            <h1 key={project.id} className='mb-[10px]'>{project.name}</h1>
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <button className="w-[240px] h-[32px] border border-solid border-[#208D8E] bg-white text-[#208D8E] py-2 px-4 rounded-[8px] hover:bg-[#208D8E] hover:text-white flex justify-center items-center" onClick={openModalFunction}>ساختن پروژه جدید</button>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
-                                    {selectedWorkspaces.includes(workspace.id) && openProjects[workspace.id] && (
-                                    <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
-                                    {openProjects[workspace.id].length > 0 ? (
-                                     openProjects[workspace.id].map(project => (
-                                    <div onClick={(event)=>handleProjectClick(workspace.id,project.id)}>
-                                        <h1 key={project.id} className='mb-[10px]'>{project.name}</h1>
-                                     </div>
-                                    ))
-                                    ) : (
-                                    <button className="w-[240px] h-[32px] border border-solid border-[#208D8E] bg-white text-[#208D8E] py-2 px-4 rounded-[8px] hover:bg-[#208D8E] hover:text-white flex justify-center items-center" onClick={openModalFunction}>ساختن پروژه جدید</button>
-                                    )}
-                                     </div>
-                                    )}
-                                </div>
-                            ))}
-                            </div>                                        
-                        </div>                       
-                    </div>                   
-                )}               
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
             <div className='w-[276px] h-[85px] mt-[570px]'>
-                            <Link to="/profile/profile1">
-                                <div className=' h-[33px] flex justify-end items-center cursor-pointer'>
-                                    <h1 className='mr-[10px]' style={accountStyle}>{profile[0].name}</h1>
-                                    <Avatar
-                                        size={30}
-                                        borderRadius="50%" 
-                                        profile={profile[0]} 
-                                        index={0} 
-                                        overlap={0} 
-                                    />
-                                </div>
-                                </Link>
-                                <div className='flex justify-between items-center h-[36px] mt-[10px]'>
-                                    <div className='w-[64px] h-[36px]'>
-                                        <img src={DarkModeSwitch} alt="DarkModeSwitch" />
-                                    </div>
-                                    <button className='w-[65px] h-[24px] flex' onClick={handleLogout}>
-                                        <h1 style={accountStyle} className='text-gray-500'>خروج</h1>    
-                                        <img src={ExitIcon} alt="ExitIcon" />
-                                    </button>
-                                </div>                       
-                                </div>
+                <Link to="/profile/profile1">
+                    <div className=' h-[33px] flex justify-end items-center cursor-pointer'>
+                        <h1 className='mr-[10px]' style={{ fontWeight: 500, fontSize: "16px" }}>حجت</h1>
+                        <Avatar
+                            size={30}
+                            borderRadius="50%"
+                            profile={{ name: 'حجت', imageSrc: '', color: '#007bff' }}
+                            index={0}
+                            overlap={0}
+                        />
+                    </div>
+                </Link>
+                <div className='flex justify-between items-center h-[36px] mt-[10px]'>
+                    <div className='w-[64px] h-[36px]'>
+                        <img src={DarkModeSwitch} alt="DarkModeSwitch" />
+                    </div>
+                    <button className='w-[65px] h-[24px] flex' onClick={handleLogout}>
+                        <h1 style={{ fontWeight: 500, fontSize: "16px" }} className='text-gray-500'>خروج</h1>
+                        <img src={ExitIcon} alt="ExitIcon" />
+                    </button>
+                </div>
+            </div>
             {isWorkspaceModalOpen && <CreateWorkspace onCloseModal={() => setIsWorkspaceModalOpen(false)} />}
-            {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={1}/>}
-            
+            {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={1} />}
+            {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />}
         </div>
-        
+
     );
 };
 
