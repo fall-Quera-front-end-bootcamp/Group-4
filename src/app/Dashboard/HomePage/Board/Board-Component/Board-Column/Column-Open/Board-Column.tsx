@@ -1,5 +1,5 @@
 import React from 'react';
-import MoreColumn from '../../../../../../Components/MoreColumn';
+// import MoreColumn from '../../../../../../Components/MoreModal';
 import { useState } from 'react';
 
 interface ColumnOpenProps {
@@ -30,7 +30,7 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor }) =
                 <button className='w-[26px] h-[26px] mb-[7px] cursor-pointer' onClick={toggleModal}>...</button>
 
             </div>
-            {isModalOpen && <MoreColumn />}
+            {/* {isModalOpen && <MoreColumn />} */}
         </div>
     );
 }

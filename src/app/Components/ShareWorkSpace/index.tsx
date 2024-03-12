@@ -8,7 +8,11 @@ import Avatar from '../common/avatar/avatar';
 import Tag from '../common/tag';
 import DownArrow from '../../Components/assets/icons/DownArrow.png'
 
-function ShareWorkspace() {
+interface Props {
+    closeModal: () => void;
+}
+
+const ShareWorkspace: React.FC<Props> = ({ closeModal }) => {
 
     const FormStyle = {
         width: "547px",
@@ -37,7 +41,7 @@ function ShareWorkspace() {
                     <h1 style={header} className='ml-[15px]'>اشتراک‌گذاری ورک‌اسپیس‌</h1>
                 </div>
                 <div>
-                    <img src={DeleteIcon} alt="preDeleteIconv" className='cursor-pointer' />
+                    <img src={DeleteIcon} alt="preDeleteIconv" className='cursor-pointer' onClick={closeModal} />
                 </div>
             </div>
             <div className='w-[507px] h-[261px] flex flex-col justify-center items-center'>
