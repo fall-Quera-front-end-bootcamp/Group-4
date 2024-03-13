@@ -62,6 +62,16 @@ export const registerr = async (username, email, password) => {
   };
   
 
+  export const fetchAccount = async (userId) => {
+    try {
+      const response = await axiosInstance.get(`/accounts/${userId}`);
+      console.log('Account:', response.data);
+      return response.data; 
+    } catch (error) {
+      console.error('Error fetching accounts:', error);
+    }
+  };
+
 
   
 // export const fetchAccounts = async () => {
