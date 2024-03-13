@@ -12,6 +12,7 @@ export const login = async (username, password) => {
     // Store the token in local storage
     localStorage.setItem('accessToken', response.data.access);
     localStorage.setItem('refreshToken', response.data.refresh);
+    localStorage.setItem('userId' , response.data.id);
     
     return response.data;
   } catch (error) {
