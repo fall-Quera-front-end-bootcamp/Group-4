@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import React, { useState } from 'react';
 import { faTimes , faUserPlus ,faChain, faTags} from '@fortawesome/free-solid-svg-icons'
 import { faFlag, faCalendar} from '@fortawesome/free-regular-svg-icons'
 import DynamicButton from "../../Components/common/button";
@@ -17,6 +17,12 @@ const containerStyle = {
 
 
 function NewTask ({ onClose }: NewTaskProps) {
+    const [taskDescription, setTaskDescription] = useState<string>('');
+
+    const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setTaskDescription(event.target.value);
+        console.log(taskDescription);
+    };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 ">
@@ -56,9 +62,12 @@ function NewTask ({ onClose }: NewTaskProps) {
                 </div>
                 {/*    ----------------توضیحات برای تسک--------------*/}
                 <div className="mt-4">
-                    <textarea
-                        className=" w-[1089px] h-[191px] rounded-[12px] border-2 border-[#e2e2e2] outline-0 inline-block"
-                        placeholder="توضیحاتی برای این تسک بنویسید"/>
+                        <textarea
+                            className="w-[1089px] h-[191px] rounded-[12px] border-2 border-[#e2e2e2] outline-0 inline-block"
+                            placeholder="توضیحاتی برای این تسک بنویسید"
+                            value={taskDescription}
+                            onChange={handleDescriptionChange}
+                        />
                 </div>
                 {/*-----------------------افزودن پیوست---------------------*/}
                 <div className="w-[1089px] h-[32px] gap-[16px] flex mt-8">
