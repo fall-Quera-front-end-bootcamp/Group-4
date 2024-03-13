@@ -1,13 +1,10 @@
 import React from "react";
-// import "./style.css";
+import ReactLoading from 'react-loading';
 
 const Loading = () => {
   return (
-    <div className="container show">
-      <div className="flex">
-        <div className="loader"></div>
-      </div>
-      <div className="load-text">در حال بارگذاری... لطفا صبور باشید.</div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <ReactLoading type="bars" color="#4AB7D8" height={400} width={400} />
     </div>
   );
 };
