@@ -170,7 +170,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                             <div className='relative workspaces'  >
                                 {workspaces.map(workspace => (
                                     <div key={workspace.id}>
-                                        <div className="flex justify-between items-center cursor-pointer pt-4 mr-[15px]" >
+                                        <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px]" >
                                             <button onClick={() => setIsMoreModalOpen(true)}> 
                                                 <img src={MoreIcon} alt="MoreIcon" />
                                             </button>
@@ -180,12 +180,13 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                             </div>
                                         </div>
                                         {selectedWorkspaces.includes(workspace.id) && openProjects[workspace.id] && (
-                                            <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
+                                            <div className='flex flex-col cursor-pointer items-end pt-4 pr-8 pb-4'>
                                                 {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={parseInt(workspace.id)} />}
                                                 {openProjects[workspace.id].length > 0 ? (
                                                     openProjects[workspace.id].map(project => (
-                                                        <div onClick={(event) => handleProjectClick(workspace.id, project.id)}>
-                                                            <h1 key={project.id} className='mb-[10px]'>{project.name}</h1>
+                                                        <div className='hover:bg-blue-50 hover:rounded-[5px] w-[264px] h-[31px] flex justify-end items-center flex justify-between items-center p-[5px]' onClick={(event) => handleProjectClick(workspace.id, project.id)}>
+                                                            <img src={MoreIcon} alt="MoreIcon"/>
+                                                            <h1 key={project.id}>{project.name}</h1>
                                                         </div>
                                                     ))
                                                 ) : (
