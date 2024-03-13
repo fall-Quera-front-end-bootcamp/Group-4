@@ -12,6 +12,7 @@ import { selectWorkspaceId } from '../../../../../../Features/workspaceSlice';
 import { selectProjectId } from '../../../../../../Features/projectSlice';
 import { RootState } from "../../../../../../utils/store";
 import { useSelector } from "react-redux";
+import Modal from 'react-modal';
 
 
 
@@ -88,7 +89,11 @@ const BoardView: React.FC = () => {
                         padding: '0px',
                     }}
                 />
-                {showModal && <NewTask onClose={toggleModal} />}
+                      {showModal && (
+
+          <NewTask onClose={toggleModal} />
+       
+      )}
             </div>
         </div>
     );

@@ -129,11 +129,9 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
 
     return (
         <div className="sidebar">
-            <Link to="/workspace">
             <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
                 کوئرا تسک منیجر
             </div>
-            </Link>
             <div className="relative" style={{ width: "304px" }}>
                 <div className="flex items-center cursor-pointer flex justify-between" onClick={toggleMenu}>
                     {isOpen ? (
@@ -165,13 +163,13 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                 bgColor="#007bff"
                                 fontSize="12px"
                                 fontWeight={400}
-                                borderRadius={6}
                             />
                             <div className='relative workspaces'  >
                                 {workspaces.map(workspace => (
                                     <div key={workspace.id}>
                                         <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px]" >
                                             <button onClick={() => setIsMoreModalOpen(true)}> 
+                                            {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />}
                                                 <img src={MoreIcon} alt="MoreIcon" />
                                             </button>
                                             <div className='flex w-[160px] h-[23px] justify-end items-center' onClick={() => toggleWorkspace(workspace.id)}>
@@ -228,7 +226,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
             </div>
             {isWorkspaceModalOpen && <CreateWorkspace onCloseModal={() => setIsWorkspaceModalOpen(false)} />}
             
-            {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />}
+            {/* {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />} */}
         </div>
 
     );
