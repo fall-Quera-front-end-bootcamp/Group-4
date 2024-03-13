@@ -70,6 +70,7 @@ function ResetPassword() {
                 textColor="white"
                 fontWeight={800}
                 fontSize="14px"
+                borderRadius={6}
               />
             </Link>
           </div>

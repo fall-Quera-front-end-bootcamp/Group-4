@@ -7,7 +7,7 @@ import { login } from "../../../services/account";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../utils/store";
 import { setMode } from "../slice";
-import { FORGET_PASSWORD } from "../constant";
+import { FORGET_PASSWORD, REGISTER } from "../constant";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -69,6 +69,10 @@ function Login() {
     dispatch(setMode(FORGET_PASSWORD));
   };
 
+  const handleRegisterClick = () =>{
+    dispatch(setMode(REGISTER));
+  }
+
   return (
     <div>
       <Form style={customStyle} onSubmit={handleLogin}>
@@ -103,9 +107,8 @@ function Login() {
             type={"password"}
           />
           <p
-            // to="/forgetpassword"
             style={link}
-            className="w-full flex flex-col justify-center items-end pt-6"
+            className="w-full flex flex-col justify-center items-end pt-6 cursor-pointer"
             onClick={handleForgotPasswordClick}
           >
             رمز عبور خود را فراموش کرده‌اید؟
@@ -120,15 +123,16 @@ function Login() {
               fontWeight={800}
               fontSize="14px"
               type="submit"
+              borderRadius={6}
             />
             <div className="w-full flex justify-center items-center py-4">
-              <Link
-                to="/register"
-                className="text-customBlue hover:text-customBlueLight pr-1"
+              <p
+                onClick={handleRegisterClick}
+                className="text-customBlue hover:text-customBlueLight pr-1 cursor-pointer"
                 style={register}
               >
                 ثبت‌نام
-              </Link>
+              </p>
               <h1 style={notRegister}>ثبت‌نام نکرده‌ای؟</h1>
             </div>
           </div>

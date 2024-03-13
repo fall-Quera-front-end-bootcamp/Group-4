@@ -15,12 +15,9 @@ function Register() {
 
   const handleRegister = async () => {
     try {
-      // Call the register function with username, email, and password
       const userData = await registerr(username, email, password);
       console.log("Registration successful:", userData);
-      // Handle successful registration
     } catch (error) {
-      // Handle registration error
       console.error("Registration failed:", error);
     }
   };
@@ -84,7 +81,7 @@ function Register() {
     <div>
       <Form style={customStyle}>
         <h1 style={header}>ثبت‌نام در کوئرا تسک منیجر</h1>
-        <div className="w-[592px] h-[355px] flex flex-col justify-center items-center pt-8">
+        <div className="w-[592px] h-[355px] flex flex-col justify-center items-center">
           <label
             style={labels}
             className="w-full flex flex-col
@@ -161,6 +158,7 @@ function Register() {
               textColor="white"
               fontWeight={800}
               fontSize="14px"
+              borderRadius={6}
             />
           </div>
         </div>

@@ -3,10 +3,14 @@ import DynamicInput from "../../Components/common/input";
 import { Link } from "react-router-dom";
 import DynamicButton from "../../Components/common/button";
 import { useState } from "react";
+import { setMode } from "../slice";
+import { LOGIN } from "../constant";
+import { useAppDispatch } from "../../../utils/store";
+
 function ForgetPassword() {
   const [email, setEmail] = useState("");
   const [showOtherForm, setShowOtherForm] = useState(false);
-
+  const dispatch = useAppDispatch();
   const customStyle = {
     width: "640px",
     height: "304px",
@@ -40,6 +44,10 @@ function ForgetPassword() {
     setShowOtherForm(true);
   };
 
+  const handleBackClick = () =>{
+    dispatch(setMode(LOGIN));
+  }
+
   return (
     <div>
       {!showOtherForm ? (
@@ -70,15 +78,16 @@ function ForgetPassword() {
                 textColor="white"
                 fontWeight={800}
                 fontSize="14px"
+                borderRadius={6}
               />
             </div>
-            <Link
-              to="/login"
-              className="text-customBlue hover:text-customBlueLight pr-1"
+            <p
+            onClick={handleBackClick}
+              className="text-customBlue hover:text-customBlueLight pr-1 cursor-pointer"
               style={register}
             >
               بازگشت
-            </Link>
+            </p>
           </div>
         </Form>
       ) : (
