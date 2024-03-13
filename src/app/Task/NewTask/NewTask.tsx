@@ -1,8 +1,15 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React, { useState } from 'react';
+import React, { useState , useEffect , useRef} from 'react';
 import { faTimes , faUserPlus ,faChain, faTags} from '@fortawesome/free-solid-svg-icons'
 import { faFlag, faCalendar} from '@fortawesome/free-regular-svg-icons'
 import DynamicButton from "../../Components/common/button";
+import CustomFileInput from "../../Components/common/customInput/CustomInput";
+import { selectWorkspaceId } from '../../../Features/workspaceSlice';
+import { selectProjectId } from '../../../Features/projectSlice';
+import { RootState } from "../../../utils/store";
+import { useSelector } from "react-redux";
+import { getProject } from '../../../services/project';
+import CalendarModal from "../../Components/calendar/calendarmodal";
 
 interface NewTaskProps {
     onClose: () => void; 
@@ -18,18 +25,70 @@ const containerStyle = {
 
 function NewTask ({ onClose }: NewTaskProps) {
     const [taskDescription, setTaskDescription] = useState<string>('');
+    const [projectName, setProjectName] = useState<string>('');
+    const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
+    const projectId = useSelector((state: RootState) => selectProjectId(state));
+    const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
+    const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
+    const attachmentInputRef = useRef<HTMLInputElement>(null);
+    const thumbnailInputRef = useRef<HTMLInputElement>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+
+
+    useEffect(() => {
+        const fetchBoardAndTasks = async () => {
+            try {
+
+                const project = await getProject(workspaceId,projectId);
+                setProjectName(project.name);
+
+            } catch (error) {
+                console.error('Error fetching project:', error);
+            }
+        };
+        fetchBoardAndTasks();
+    }, []);
 
     const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTaskDescription(event.target.value);
         console.log(taskDescription);
     };
 
+    const handleAttachmentInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const files = event.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+            setAttachmentFile(file);
+        }
+    };
+
+    const handleThumbnailInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const files = event.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+            setThumbnailFile(file);
+        }
+    };
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+      };
+
+
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 ">
-              <form>
+              
             {/*--------------عنوان تسک----------*/}
             <div dir="rtl" style={containerStyle}
-                 className="w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md bg-white z-100">
+                 className="w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md bg-white z-10">
                 <div className="w-[1089px] h-[34px] flex justify-between ">
                     <div className="w-[148px] h-[34px] gap-[13px] flex items-center">
 
@@ -48,7 +107,7 @@ function NewTask ({ onClose }: NewTaskProps) {
                     </div>
                     <div
                         className=" w-[158px] h-[32px] rounded-[6px] border-2 pt-[5px] pr-[8px] pb-[4px] pl-[8px] gap-[10px] border-[#e9ebfo] bg-white">
-                        <span className="w-[62px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">پروژه اول</span>
+                        <span className="w-[62px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">{projectName}</span>
                     </div>
                     <div className="w-[26px] h-[23px]">
                         <span
@@ -64,7 +123,7 @@ function NewTask ({ onClose }: NewTaskProps) {
                 <div className="mt-4">
                         <textarea
                             className="w-[1089px] h-[191px] rounded-[12px] border-2 border-[#e2e2e2] outline-0 inline-block"
-                            placeholder="توضیحاتی برای این تسک بنویسید"
+                            placeholder="توضیحاتی برای این تسک بنویسید   " 
                             value={taskDescription}
                             onChange={handleDescriptionChange}
                         />
@@ -72,16 +131,29 @@ function NewTask ({ onClose }: NewTaskProps) {
                 {/*-----------------------افزودن پیوست---------------------*/}
                 <div className="w-[1089px] h-[32px] gap-[16px] flex mt-8">
                     <span className="w-[102px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">افزودن پیوست</span>
-                    <button className="w-[112px] h-[32px] rounded-[4px] border-2 pt-[4px] pr-[8px] pb-[4px] pl-[8px] gap-[4px]
-     border-[#208d8e]"><span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain}/></span>آپلود فایل
+                    <button onClick={() => attachmentInputRef.current?.click()} className="w-[112px] h-[32px] rounded-[4px] border-2 pt-[4px] pr-[8px] pb-[4px] pl-[8px] gap-[4px] border-[#208d8e]">
+                    <input
+                        ref={attachmentInputRef}
+                        type="file"
+                        style={{ display: 'none' }}
+                        onChange={handleAttachmentInputChange}
+                    />
+                        <span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain} /></span>آپلود فایل
                     </button>
                 </div>
                 {/*----------------------افزودن کاور-----------------------------*/}
                 <div className="w-[1089px] h-[32px] gap-[16px] flex mt-8">
                     <span className="w-[102px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">افزودن کاور</span>
-                    <button className="w-[112px] h-[32px] rounded-[4px] border-2 pt-[4px] pr-[8px] pb-[4px] pl-[8px] gap-[4px]
-     border-[#208d8e]"><span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain}/></span>آپلود فایل
+                    <button onClick={() => thumbnailInputRef.current?.click()} className="w-[112px] h-[32px] rounded-[4px] border-2 pt-[4px] pr-[8px] pb-[4px] pl-[8px] gap-[4px] border-[#208d8e]">
+                    <span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain} /></span>آپلود فایل
+
                     </button>
+                <input
+                        ref={thumbnailInputRef}
+                        type="file"
+                        style={{ display: 'none' }}
+                        onChange={handleThumbnailInputChange}
+                    />
                 </div>
 
             {/*----------------ساختن تسک------------*/}
@@ -89,9 +161,12 @@ function NewTask ({ onClose }: NewTaskProps) {
                     <div className="w-[198px] h-[50px] gap-[24px] flex">
                         <div className="cursor-pointer w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon
                             icon={faFlag}/></span></div>
-                        <div
-                            className="cursor-pointer w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon
-                            icon={faCalendar}/></span></div>
+                        <button onClick={toggleModal}  className="cursor-pointer w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]">
+                            <span className="w-[29.41px]  h-[29.41px] items-center flex justify-center">
+                            <FontAwesomeIcon icon={faCalendar} />
+                            </span>
+                        </button>
+                        <CalendarModal isOpen={isModalOpen} closeModal={toggleModal} />
                         <div
                             className="cursor-pointer w-[50px] h-[50px] border-dashed border-[#c1c1c1] p-[6.67px] border-[1.39px] rounded-[138.89px] text-[#c1c1c1]"><span className="w-[29.41px]  h-[29.41px] items-center flex justify-center"><FontAwesomeIcon icon={faTags}/></span></div>
 
@@ -103,7 +178,7 @@ function NewTask ({ onClose }: NewTaskProps) {
 
 
             </div>
-        </form>
+        
         </div>
     )
 
