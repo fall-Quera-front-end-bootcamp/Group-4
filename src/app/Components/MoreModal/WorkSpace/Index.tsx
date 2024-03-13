@@ -48,7 +48,7 @@ const MoreWorkSpaceModal: React.FC<{ closeModal: () => void }> = ({ closeModal }
             onRequestClose={closeModal}
             style={customStyles}
         >
-            <div className='w-[169px] h-[164px] flex flex-col justify-between items-end mb-[20px]'>
+            <div className='w-[169px] h-[140px] flex flex-col justify-between items-end mb-[20px]'>
                 <button className='h-[20px] flex'>
                     <h1 style={ItemsStyle}>ساختن پروژه جدید</h1>
                     <img src={AddIcon} alt="AddIcon" />
