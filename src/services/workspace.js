@@ -27,3 +27,13 @@ export const createWorkspace = async (workspaceName , workspaceColor) => {
     throw error;
   }
 }
+
+export const deleteWorkspace = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/workspaces/${id}/`);
+    return response.data; 
+  } catch (error) {
+    console.error(`Error deliting workspace:${id}`, error);
+    throw error;
+  }
+};
