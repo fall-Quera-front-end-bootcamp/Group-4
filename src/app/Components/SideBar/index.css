@@ -10,7 +10,7 @@
     justify-content: start;
     align-items: center;
     border-left: 2px solid #eaeaea;
-    z-index: 10;
+    z-index: 999;
   }
   .workspaces{
     max-height: 400px;
