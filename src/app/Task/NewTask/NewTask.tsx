@@ -10,15 +10,18 @@ import { RootState } from "../../../utils/store";
 import { useSelector } from "react-redux";
 import { getProject } from '../../../services/project';
 import CalendarModal from "../../Components/calendar/calendarmodal";
-
+import Modal from 'react-modal';
+import './newTask.css';
 interface NewTaskProps {
     onClose: () => void; 
 }
 
 const containerStyle = {
     position: "absolute" as "absolute",
-    left: "135px",
-    top: "100px"
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 9999,
 };
 
 
@@ -84,7 +87,7 @@ function NewTask ({ onClose }: NewTaskProps) {
 
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 ">
+        <Modal isOpen={true} onRequestClose={onClose} overlayClassName="custom-overlay" className="custom-modal">
               
             {/*--------------عنوان تسک----------*/}
             <div dir="rtl" style={containerStyle}
@@ -179,7 +182,7 @@ function NewTask ({ onClose }: NewTaskProps) {
 
             </div>
         
-        </div>
+        </Modal>
     )
 
 
