@@ -12,7 +12,9 @@ export const login = async (username, password) => {
     // Store the token in local storage
     localStorage.setItem('accessToken', response.data.access);
     localStorage.setItem('refreshToken', response.data.refresh);
-    localStorage.setItem('userId' , response.data.id);
+    localStorage.setItem('userId',response.data.user_id);
+    console.log(localStorage.getItem('userId'));
+
     
     return response.data;
   } catch (error) {
@@ -72,7 +74,20 @@ export const registerr = async (username, email, password) => {
     }
   };
 
-
+export const fetchAccountByUsername = async (username) => {
+  try {
+    // Fetch all accounts
+    const response = await axiosInstance.get('/accounts/');
+    const accounts = response.data;
+    
+    const account = accounts.find(account => account.username === username);
+    
+    return account || null;
+  } catch (error) {
+    console.error('Error fetching account by username:', error);
+    throw error;
+  }
+};
   
 // export const fetchAccounts = async () => {
 //     try {

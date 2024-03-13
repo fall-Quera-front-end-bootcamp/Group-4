@@ -20,6 +20,7 @@ import { setWorkspaceId } from "../../../Features/workspaceSlice"
 import { setProjectId } from "../../../Features/projectSlice";
 import MoreIcon from '../assets/icons/MoreIcon.png';
 import MoreWorkSpaceModal from '../MoreModal/WorkSpace/Index';
+import { fetchAccount } from '../../../services/account';
 
 interface SidebarProps {
     openModal: () => void;
@@ -37,6 +38,16 @@ interface Workspace {
     color: string;
 };
 
+interface Profile {
+    id: number;
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string | null;
+    thumbnail: string;
+}
+
 function SideBar({ openModal, onLogout }: SidebarProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState("");
@@ -46,14 +57,22 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
     const [selectedWorkspaces, setSelectedWorkspaces] = useState<string[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
+    const [profile, setProfile] = useState<Profile|null>(null);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const user = localStorage.getItem('userId');
+    console.log('userrrr',user)
+
 
     useEffect(() => {
         const fetchWorkspaces = async () => {
             try {
                 const workspacesData = await getWorkspaces();
                 setWorkspaces(workspacesData);
+                const profileData=await fetchAccount(user);
+                setProfile(profileData);
+                console.log(profileData);
             } catch (error) {
                 console.error('Error fetching workspaces:', error);
             }
@@ -101,6 +120,11 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
             onLogout();
         }
         navigate('/authentication');
+    };
+    const avatarData = {
+        name: profile && (profile.first_name && profile.last_name) ? `${profile.first_name} ${profile.last_name}` : profile && profile.username || '',
+        imageSrc: profile && profile.thumbnail ? `${profile.thumbnail}` : '',
+        color: 'blue'
     };
 
     return (
@@ -154,6 +178,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                         </div>
                                         {selectedWorkspaces.includes(workspace.id) && openProjects[workspace.id] && (
                                             <div className='flex flex-col cursor-pointer items-end pt-4 pr-8'>
+                                                {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={parseInt(workspace.id)} />}
                                                 {openProjects[workspace.id].length > 0 ? (
                                                     openProjects[workspace.id].map(project => (
                                                         <div onClick={(event) => handleProjectClick(workspace.id, project.id)}>
@@ -175,14 +200,16 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
             <div className='w-[276px] h-[85px] mt-[570px]'>
                 <Link to="/profile/profile1">
                     <div className=' h-[33px] flex justify-end items-center cursor-pointer'>
-                        <h1 className='mr-[10px]' style={{ fontWeight: 500, fontSize: "16px" }}>حجت</h1>
-                        <Avatar
-                            size={30}
-                            borderRadius="50%"
-                            profile={{ name: 'حجت', imageSrc: '', color: '#007bff' }}
-                            index={0}
-                            overlap={0}
-                        />
+                        <h1 className='mr-[10px]' style={{ fontWeight: 500, fontSize: "16px" }}>{avatarData.name}</h1>
+                        {profile && (
+                            <Avatar
+                                size={30}
+                                borderRadius="50%"
+                                profile={avatarData}
+                                index={0}
+                                overlap={0}
+                            />
+                        )}
                     </div>
                 </Link>
                 <div className='flex justify-between items-center h-[36px] mt-[10px]'>
@@ -196,7 +223,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                 </div>
             </div>
             {isWorkspaceModalOpen && <CreateWorkspace onCloseModal={() => setIsWorkspaceModalOpen(false)} />}
-            {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={1} />}
+            
             {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />}
         </div>
 
