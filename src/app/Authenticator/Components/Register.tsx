@@ -81,7 +81,7 @@ function Register() {
     <div>
       <Form style={customStyle}>
         <h1 style={header}>ثبت‌نام در کوئرا تسک منیجر</h1>
-        <div className="w-[592px] h-[355px] flex flex-col justify-center items-center pt-8">
+        <div className="w-[592px] h-[355px] flex flex-col justify-center items-center">
           <label
             style={labels}
             className="w-full flex flex-col
