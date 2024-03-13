@@ -15,12 +15,9 @@ function Register() {
 
   const handleRegister = async () => {
     try {
-      // Call the register function with username, email, and password
       const userData = await registerr(username, email, password);
       console.log("Registration successful:", userData);
-      // Handle successful registration
     } catch (error) {
-      // Handle registration error
       console.error("Registration failed:", error);
     }
   };
@@ -161,6 +158,7 @@ function Register() {
               textColor="white"
               fontWeight={800}
               fontSize="14px"
+              borderRadius={6}
             />
           </div>
         </div>
