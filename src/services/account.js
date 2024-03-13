@@ -1,5 +1,5 @@
 import axiosInstance from "../config/axios";
-import axios from "axios";
+
 
 export const login = async (username, password) => {
   try {
@@ -74,20 +74,20 @@ export const registerr = async (username, email, password) => {
     }
   };
 
-export const fetchAccountByUsername = async (username) => {
-  try {
-    // Fetch all accounts
-    const response = await axiosInstance.get('/accounts/');
-    const accounts = response.data;
+// export const fetchAccountByUsername = async (username) => {
+//   try {
+//     // Fetch all accounts
+//     const response = await axiosInstance.get('/accounts/');
+//     const accounts = response.data;
     
-    const account = accounts.find(account => account.username === username);
+//     const account = accounts.find(account => account.username === username);
     
-    return account || null;
-  } catch (error) {
-    console.error('Error fetching account by username:', error);
-    throw error;
-  }
-};
+//     return account || null;
+//   } catch (error) {
+//     console.error('Error fetching account by username:', error);
+//     throw error;
+//   }
+// };
   
 // export const fetchAccounts = async () => {
 //     try {
