@@ -182,8 +182,8 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                                 {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={parseInt(workspace.id)} />}
                                                 {openProjects[workspace.id].length > 0 ? (
                                                     openProjects[workspace.id].map(project => (
-                                                        <div className='hover:bg-blue-50 hover:rounded-[5px] w-[264px] h-[31px] flex justify-end items-center flex justify-between items-center p-[5px]' onClick={(event) => handleProjectClick(workspace.id, project.id)}>
-                                                            <img src={MoreIcon} alt="MoreIcon"/>
+                                                        <div className='hover:bg-blue-50 hover:rounded-[5px] w-[264px] h-[31px] flex  justify-between items-center p-[5px]' onClick={(event) => handleProjectClick(workspace.id, project.id)}>
+                                                            <img className='ml-[15px]' src={MoreIcon} alt="MoreIcon"/>
                                                             <h1 key={project.id}>{project.name}</h1>
                                                         </div>
                                                     ))
