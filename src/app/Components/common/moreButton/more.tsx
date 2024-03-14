@@ -20,9 +20,13 @@ const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children }) => {
     setAnchorEl(null);
   };
 
+  const MoreButtonStyle = {
+    borderRadius: "10px"
+  };
+
   return (
     <div className="more-icon-dropdown">
-      <Button onClick={handleClick}>
+      <Button onClick={handleClick} style={MoreButtonStyle}>
 
         <img src={MoreIcon} alt="MoreIcon" />
       </Button>
@@ -34,6 +38,7 @@ const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children }) => {
         MenuListProps={{
           'aria-labelledby': 'basic-button', 
         }}
+        style={{height:"570px", borderRadius:"20px"}}
       >
         {children}
       </Menu>
