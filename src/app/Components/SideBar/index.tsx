@@ -22,6 +22,8 @@ import MoreIcon from '../assets/icons/MoreIcon.png';
 import MoreWorkSpaceModal from '../MoreModal/WorkSpace/Index';
 import { fetchAccount } from '../../../services/account';
 import { logout } from "../../Authenticator/authSlice";
+import MoreIconDropdown from '../common/moreButton/more';
+import MenuItem from '@mui/material/MenuItem';
 
 interface SidebarProps {
     openModal: () => void;
@@ -170,10 +172,14 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                 {workspaces.map(workspace => (
                                     <div key={workspace.id}>
                                         <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px]" >
-                                            <button onClick={() => setIsMoreModalOpen(true)}> 
+                                            <MoreIconDropdown>
+                                                <MenuItem onClick={()=>{}}>Option 1</MenuItem>
+                                                <MenuItem onClick={()=>{}}>Option 2</MenuItem>
+                                            </MoreIconDropdown>
+                                            {/* <button onClick={() => setIsMoreModalOpen(true)}> 
                                             {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />}
                                                 <img src={MoreIcon} alt="MoreIcon" />
-                                            </button>
+                                            </button> */}
                                             <div className='flex w-[160px] h-[23px] justify-end items-center' onClick={() => toggleWorkspace(workspace.id)}>
                                                 <div className='mt-1'>{workspace.name}</div>
                                                 <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
