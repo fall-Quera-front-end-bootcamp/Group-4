@@ -11,3 +11,16 @@ export const getTasks = async (workspaceId , projectId , boardId) => {
           throw error;
         }
   }
+
+export const createTask = async (workspaceId, projectId, boardId, task) => {
+  try {
+    const response = await axiosInstance.post(
+      `/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/tasks/`,
+      task
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error creating task:', error);
+    throw error;
+  }
+};

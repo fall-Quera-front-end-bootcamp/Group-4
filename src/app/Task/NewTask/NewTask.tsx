@@ -3,6 +3,7 @@ import React, { useState , useEffect , useRef} from 'react';
 import { faTimes , faUserPlus ,faChain, faTags} from '@fortawesome/free-solid-svg-icons'
 import { faFlag, faCalendar} from '@fortawesome/free-regular-svg-icons'
 import DynamicButton from "../../Components/common/button";
+import moment, { Moment } from 'jalali-moment';
 import CustomFileInput from "../../Components/common/customInput/CustomInput";
 import { selectWorkspaceId } from '../../../Features/workspaceSlice';
 import { selectProjectId } from '../../../Features/projectSlice';
@@ -11,6 +12,11 @@ import { useSelector } from "react-redux";
 import { getProject } from '../../../services/project';
 import CalendarModal from "../../Components/calendar/calendarmodal";
 import Modal from 'react-modal';
+import { getBoards } from "../../../services/board";
+import { createTask } from "../../../services/task";
+
+
+
 import './newTask.css';
 interface NewTaskProps {
     onClose: () => void; 
@@ -36,6 +42,12 @@ function NewTask ({ onClose }: NewTaskProps) {
     const attachmentInputRef = useRef<HTMLInputElement>(null);
     const thumbnailInputRef = useRef<HTMLInputElement>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
+    const [boards, setBoards] = useState<any[]>([]); 
+    const [selectedBoard, setSelectedBoard] = useState<string>(''); 
+    const [taskName, setTaskName] = useState('');
+    const [deadline, setDeadline] = useState<string | null>(null);
+
 
 
 
@@ -45,6 +57,17 @@ function NewTask ({ onClose }: NewTaskProps) {
 
                 const project = await getProject(workspaceId,projectId);
                 setProjectName(project.name);
+                if (workspaceId && projectId) { 
+                    getBoards(workspaceId, projectId)
+                        .then((data) => {
+                            setBoards(data); 
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching boards:', error);
+                            console.log('errrrr',workspaceId,projectId);
+                        });
+                }
+                
 
             } catch (error) {
                 console.error('Error fetching project:', error);
@@ -72,19 +95,73 @@ function NewTask ({ onClose }: NewTaskProps) {
     const handleThumbnailInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        
+        console.log(deadline);
         const files = event.target.files;
         if (files && files.length > 0) {
             const file = files[0];
-            setThumbnailFile(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setThumbnailPreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
         }
     };
-
+    
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
       };
 
+      const handleEndDateChange = () => {
+        const storedEndDate = localStorage.getItem('deadline');
+        console.log('Stored endDate from new task:', storedEndDate);
+        setDeadline(storedEndDate);
+        return storedEndDate ?? null;
+    };
+    
 
+    // useEffect(() => {
+    //     const storedEndDate = localStorage.getItem('deadline');
+    //     if (storedEndDate && storedEndDate !== deadline) {
+    //         console.log('Stored endDate from new task:', storedEndDate);
+    //         setDeadline(storedEndDate); 
+    //     }
+    // }, [deadline]);
+
+    // useEffect(() => {
+    //     const storedEndDate = localStorage.getItem('deadline');
+    //     if (storedEndDate) {
+    //         console.log('Stored endDate from new task:', storedEndDate);
+    //         setDeadline(storedEndDate); 
+    //     }
+    // }, [deadline]);
+
+    const handleBoardChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedBoardId = event.target.value;
+        setSelectedBoard(selectedBoardId);
+        console.log(selectedBoardId);
+    };
+
+    // const handleCreateTask = async () => {
+    //     try {
+    //         const currentDate = new Date().toISOString();
+    //         const taskData = {
+    //             name: taskName, 
+    //             description: taskDescription,
+    //             deadline: deadline,
+    //             priority: 1, 
+    //             attachment: attachmentFile ? attachmentFile.name : '', 
+    //             thumbnail: thumbnailFile ? thumbnailFile.name : '',
+    //             order: 1, 
+    //             members:"",
+    //             created_at: currentDate
+    //         };
+    
+    //         await createTask(workspaceId, projectId, selectedBoard, taskData);
+            
+    //     } catch (error) {
+    //         console.error('Error creating task:', error);
+    //     }
+    // };
 
     return (
         <Modal isOpen={true} onRequestClose={onClose} overlayClassName="custom-overlay" className="custom-modal">
@@ -93,12 +170,16 @@ function NewTask ({ onClose }: NewTaskProps) {
             <div dir="rtl" style={containerStyle}
                  className="w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md bg-white z-10">
                 <div className="w-[1089px] h-[34px] flex justify-between ">
-                    <div className="w-[148px] h-[34px] gap-[13px] flex items-center">
-
-                        <div className="w-[16px] h-[16px] rounded-[2px] bg-[#d9d9d9]"></div>
-                        <span
-                            className="w-[119px] h-[34px] font-medium text-[24px] leading-[33.82px] text-right text-[#1e1e1e] ">عنوان تسک</span>
-                    </div >
+                <div className="w-[148px] h-[34px] gap-[13px] flex items-center">
+                    <div className="w-[16px] h-[16px] rounded-[2px] bg-[#d9d9d9]"></div>
+                    <input
+                        type="text"
+                        className="w-[119px] h-[34px] font-medium text-[24px] leading-[33.82px] text-right text-[#1e1e1e] outline-none border-none bg-transparent"
+                        placeholder="عنوان تسک"
+                        value={taskName}
+                        onChange={(e) => setTaskName(e.target.value)}
+                    />
+                </div>
                     <span className="w-[32px] h-[32px] text-[#bdbdbd] cursor-pointer" onClick={onClose}><FontAwesomeIcon icon={faTimes}/></span>
                 </div>
 
@@ -114,13 +195,28 @@ function NewTask ({ onClose }: NewTaskProps) {
                     </div>
                     <div className="w-[26px] h-[23px]">
                         <span
-                            className=" font-medium text-[16px] leading-[22.55px] text-right text-[#1e1e1e]">برای</span>
+                            className=" font-medium text-[16px] leading-[22.55px] text-right text-[#1e1e1e]">تا  </span>
                     </div>
-                    <div
-                        className="w-[34px] h-[34px] rounded-[106.25px] border-[1.06px] border-dashed p-[4.25px] gap-[10.63px]">
-                        <span className="text-[#c1c1c1] w-[20px] h-[20px] text-center cursor-pointer "><FontAwesomeIcon
-                            icon={faUserPlus}/></span>
-                    </div>
+                    
+                    
+                        
+                    {/* {deadline && handleEndDateChange()} */}
+                    {/* {deadline && <span>{handleEndDateChange()}</span>} */}
+                    {deadline && handleEndDateChange()}
+
+
+
+                        
+                    
+                </div>
+                
+                <div className="w-[1089px] h-[32px] gap-[16px] flex mt-8">
+                    <span className="w-[102px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">انتخاب برد</span>
+                    <select onChange={handleBoardChange}>
+                        {boards.map(board => (
+                            <option key={board.id} value={board.id}>{board.name}</option>
+                         ))}
+                    </select>
                 </div>
                 {/*    ----------------توضیحات برای تسک--------------*/}
                 <div className="mt-4">
@@ -134,29 +230,45 @@ function NewTask ({ onClose }: NewTaskProps) {
                 {/*-----------------------افزودن پیوست---------------------*/}
                 <div className="w-[1089px] h-[32px] gap-[16px] flex mt-8">
                     <span className="w-[102px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">افزودن پیوست</span>
-                    <button onClick={() => attachmentInputRef.current?.click()} className="w-[112px] h-[32px] rounded-[4px] border-2 pt-[4px] pr-[8px] pb-[4px] pl-[8px] gap-[4px] border-[#208d8e]">
-                    <input
-                        ref={attachmentInputRef}
-                        type="file"
-                        style={{ display: 'none' }}
-                        onChange={handleAttachmentInputChange}
-                    />
-                        <span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain} /></span>آپلود فایل
-                    </button>
+                    <div className="relative w-[112px] h-[32px] rounded-[4px] border-2 border-[#208d8e] overflow-hidden">
+                    {/* Displaying the preview if there's any */}
+                    {attachmentFile ? (
+                        <img src={URL.createObjectURL(attachmentFile)} alt="Attachment Preview" className="w-full h-full object-cover" />
+                        ) : (
+                        <React.Fragment>
+                            <input
+                                ref={attachmentInputRef}
+                                type="file"
+                                style={{ position: 'absolute', zIndex: 9999, opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }}
+                                onChange={handleAttachmentInputChange}
+                            />
+                            <button onClick={() => attachmentInputRef.current?.click()} className="w-full h-full flex items-center justify-center">
+                                <span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain} /></span>آپلود فایل
+                            </button>
+                        </React.Fragment>
+                    )}
+                    </div>
                 </div>
                 {/*----------------------افزودن کاور-----------------------------*/}
                 <div className="w-[1089px] h-[32px] gap-[16px] flex mt-8">
-                    <span className="w-[102px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">افزودن کاور</span>
-                    <button onClick={() => thumbnailInputRef.current?.click()} className="w-[112px] h-[32px] rounded-[4px] border-2 pt-[4px] pr-[8px] pb-[4px] pl-[8px] gap-[4px] border-[#208d8e]">
-                    <span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain} /></span>آپلود فایل
-
-                    </button>
-                <input
-                        ref={thumbnailInputRef}
-                        type="file"
-                        style={{ display: 'none' }}
-                        onChange={handleThumbnailInputChange}
-                    />
+                    <span className="w-[102px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">آپلود کاور</span>
+                    <div className="relative w-[112px] h-[32px] rounded-[4px] border-2 border-[#208d8e] overflow-hidden">
+                        {thumbnailPreview ? (
+                            <img src={thumbnailPreview} alt="Thumbnail Preview" className="w-full h-full object-cover" />
+                        ) : (
+                            <React.Fragment>
+                                <input
+                                    ref={thumbnailInputRef}
+                                    type="file"
+                                    style={{ position: 'absolute', zIndex: 9999, opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }}
+                                    onChange={handleThumbnailInputChange}
+                                />
+                                <button onClick={() => thumbnailInputRef.current?.click()} className="w-full h-full flex items-center justify-center">
+                                    <span className="text-[#208D8E] ml-2"><FontAwesomeIcon icon={faChain} /></span>آپلود فایل
+                                </button>
+                            </React.Fragment>
+                        )}
+                    </div>
                 </div>
 
             {/*----------------ساختن تسک------------*/}
@@ -175,7 +287,7 @@ function NewTask ({ onClose }: NewTaskProps) {
 
                     </div>
                     <div className="w-[125px] h-[32px] ">
-                        <DynamicButton text="ساختن تسک" width={125} height={32} padding={4}/>
+                        <DynamicButton text="ساختن تسک" width={125} height={32} padding={4} borderRadius={5}/>
                     </div>
                 </div>
 

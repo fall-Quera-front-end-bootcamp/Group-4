@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import moment, { Moment } from 'jalali-moment';
 import Modal from 'react-modal';
 import right from'../../assets/icons/arrowUp.png';
 import left from'../../assets/icons/arrowDown.png';
 import './index.css'
+import DynamicButton from '../../common/button';
 // Sidebar component
 const Sidebar: React.FC = () => {
     const [currentDate] = useState<Moment>(moment());
@@ -17,7 +18,7 @@ const Sidebar: React.FC = () => {
     const twoHoursFromNow = moment().add(2, 'hours');
   
     return (
-      <div  style={{ backgroundColor:'#F7F8F9',padding:'20px',height:"400px"}}>
+      <div  style={{ backgroundColor:'#F7F8F9',padding:'20px',height:"450px"}}>
         
         <ul className="flex flex-col space-y-4" style={{ listStyleType: 'none', padding: 0,width:'250px' }}>
           <li className="flex justify-between" style={{ marginBottom: '10px' }}><strong>امروز</strong> <span style={{color:'#868E96'}}>{currentDate.format('dddd')}</span></li>
@@ -95,6 +96,18 @@ const Sidebar: React.FC = () => {
     const isEndDate = (day: Moment) => {
       return endDate && day.isSame(endDate, 'day');
     };
+
+    useEffect(() => {
+      if (endDate !== null) {
+        localStorage.setItem('deadline', endDate ? endDate.format('jD jMMMM ') : '');
+        console.log('Storeddd endDate:', endDate);
+      }
+    }, [endDate]);
+
+
+    const handleCloseModal = () => {
+      closeModal(); 
+  };
   
     return (
       <Modal
@@ -118,7 +131,7 @@ const Sidebar: React.FC = () => {
       // }}
       overlayClassName="custom-overlay" className="custom-modal"
       >
-          <div style={{ width:'936px',height:'632px',background:"white", borderRadius:"15px"}} >
+          <div style={{ width:'936px',height:'550px',background:"white", borderRadius:"15px"}} >
               <header style={{direction:'rtl', display:'flex', justifyContent:"flex-start",alignItems:'center', height:'100px'}} className='border-b border-solid border-gray'>
                   <p style={{width:'430px', margin:'20px',fontSize:'24px'}}>زمان شروع <span style={{marginRight:'10px' ,color:'#208D8E'}}>{startDate? startDate.format('jD jMMMM '):''}</span></p>
                   <p style={{width:'430px', margin:'20px',fontSize:'24px'}}>زمان پایان<span style={{marginRight:'10px', color:'#208D8E'}}>{endDate?endDate.format('jD jMMMM '):''}</span></p>
@@ -189,6 +202,7 @@ const Sidebar: React.FC = () => {
                       </div>
                     ))}
                   </div>
+                  <div className='mr-[450px]'><DynamicButton text="بستن" width={125} height={32} padding={4} onClick={handleCloseModal} borderRadius={5}/></div>
                 </div>
               </div>
               </div>

@@ -16,3 +16,22 @@
     z-index: 10000; /* Set a higher z-index value */
     /* Add other custom styles for the modal content */
 }
+.dropdownButton {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+   
+  }
+  
+  .dropdownItem {
+    color: #333;
+    padding: 8px 16px;
+    cursor: pointer;
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
