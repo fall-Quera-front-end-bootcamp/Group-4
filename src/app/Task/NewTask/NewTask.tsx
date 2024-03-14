@@ -136,7 +136,7 @@ function NewTask ({ onClose }: NewTaskProps) {
             const formData = new FormData();
             formData.append('name', taskName);
             formData.append('description', taskDescription);
-            formData.append('deadline', deadline || ''); // Handle null case
+            formData.append('deadline', deadline || ''); 
             formData.append('priority', '1');
             if (attachmentFile) {
                 formData.append('attachment', attachmentFile);
@@ -204,9 +204,10 @@ function NewTask ({ onClose }: NewTaskProps) {
                 <div className="w-[1089px] h-[32px] gap-[16px] flex mt-8">
                     <span className="w-[102px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right">انتخاب برد</span>
                     <select onChange={handleBoardChange}>
-                        {boards.map(board => (
-                            <option key={board.id} value={board.id}>{board.name}</option>
-                         ))}
+                    <option value="" disabled hidden>انتخاب برد</option>
+        {boards.map(board => (
+            <option key={board.id} value={board.id}>{board.name}</option>
+        ))}
                     </select>
                 </div>
                 {/*    ----------------توضیحات برای تسک--------------*/}
