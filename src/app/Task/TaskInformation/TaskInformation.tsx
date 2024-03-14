@@ -1,12 +1,19 @@
 import Comment from "../../Components/Comment";
-import React, {JSX} from "react";
+import React, {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTags, faTimes, faUser, faShareNodes} from '@fortawesome/free-solid-svg-icons';
 import {faFlag, faPlusSquare,faComment} from '@fortawesome/free-regular-svg-icons';
 import {Link} from "react-router-dom";
 import Avatar from "../../Components/common/avatar/avatar";
 import profile from "../../Profile";
+import './TaskInformation.css';
+import Modal from "react-modal";
+
+
+
 const TaskInformation =()=>{
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const FormStyle = {
         width: "470px",
         height: "332px",
@@ -29,8 +36,21 @@ const TaskInformation =()=>{
 
 
         <>
-            <form className="w-[1352px] m-20  h-[596px] top-[1952px] left-[118px] rounded-[20px]">
-                <div className="cursor-pointer w-[24px] h-[24px] top-[33px] left-[36px]">
+        <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        style={{
+            content: {
+                width: "1350px",
+                height: "596px",
+                background:"white",
+                borderRadius:"15px"
+            }
+            
+        }}
+        overlayClassName="custom-overlay" className="custom-modal"
+    >
+                <div className="cursor-pointer w-[24px] h-[24px] top-[33px] left-[36px] mt-[20px] ml-[20px]">
                     <Link to="/board">
                         <FontAwesomeIcon icon={faTimes}/>
                     </Link>
@@ -59,8 +79,8 @@ const TaskInformation =()=>{
                                         <span className=" w-[56px] h-[23px] font-medium text-[16px] leading-[22.55px] text-right text-[#1e1e1e]">پس فردا</span>
                                     </div>
                                 </div>
-                                <div className=" bottom-0  absolute">
-                                    <Comment/>
+                                <div className=" bottom-0  absolute mr-[-22px]">
+                                    <Comment />
                                 </div>
 
                             </div>
@@ -78,7 +98,7 @@ const TaskInformation =()=>{
                                     className="w-[111px] h-[30px] gap-[2px] bg-[#F84747] rounded-[4px] text-white">Open
                                 </button>
                                 {/*----------------عکس پروفایل---------------*/}
-                                <div className="w-[68px] h-[34px] flex">
+                                <div className="w-[100px] h-[34px] flex ml-[25px]">
                                     {profile.map((profileData, index) => (
                                         <div className='flex justify-end items-center' key={index}>
                                             <h1 className='mr-[5px] ml-[10px]' style={PersonLinkStyle}>{profileData.name}</h1>
@@ -158,7 +178,8 @@ const TaskInformation =()=>{
                 </div>
 
 
-            </form>
+                </Modal>
+                <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
 
 
         </>
