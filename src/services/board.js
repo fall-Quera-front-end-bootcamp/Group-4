@@ -27,3 +27,19 @@ export const getBoard = async (workspaceId , projectId , boardId) => {
         throw error;
       }
 }
+
+
+export const createBoard = async (workspaceId , projectId , name , color) => {
+  try {
+    const response = await axiosInstance.post(`/workspaces/${workspaceId}/projects/${projectId}/boards/`, {
+      name:name,
+      order:1,
+      is_archive:"true",
+      color:color
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating board:', error);
+    throw error;
+  }
+}
