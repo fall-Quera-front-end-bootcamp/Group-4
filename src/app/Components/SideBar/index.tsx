@@ -24,6 +24,12 @@ import { fetchAccount } from '../../../services/account';
 import { logout } from "../../Authenticator/authSlice";
 import MoreIconDropdown from '../common/moreButton/more';
 import MenuItem from '@mui/material/MenuItem';
+import AddIcon from '../assets/icons/MoreColumn/add.png';
+import EditIcon from '../assets/icons/MoreColumn/editColumn.png';
+import EditColor from '../assets/icons/MoreColumn/editColor.png';
+import CopyLink from '../assets/icons/MoreColumn/CopyLink.png';
+import DeleteIcon from '../assets/icons/MoreColumn/deleteRedIcon.png';
+import ShareIcon from '../assets/icons/MoreColumn/ShareIcon.png'
 
 interface SidebarProps {
     openModal: () => void;
@@ -173,13 +179,50 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                     <div key={workspace.id}>
                                         <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px]" >
                                             <MoreIconDropdown>
-                                                <MenuItem onClick={()=>{}}>Option 1</MenuItem>
-                                                <MenuItem onClick={()=>{}}>Option 2</MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                        <h1 className='mr-[5px]'>ساختن پروژه جدید</h1>
+                                                        <img src={AddIcon} alt="AddIcon" />
+                                                    </div>
+                                                </MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                        <h1 className='mr-[5px]'>ویرایش نام ورک‌اسپیس</h1>
+                                                        <img src={EditIcon} alt="EditIcon" />
+                                                    </div>
+                                                </MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                        <h1 className='mr-[5px]'>ویرایش رنگ</h1>
+                                                        <img src={EditColor} alt="EditColor" />
+                                                    </div>
+                                                </MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                        <h1 className='mr-[5px]'>کپی لینک</h1>
+                                                        <img src={CopyLink} alt="CopyLink" />
+                                                    </div>
+                                                </MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center mb-[10px]'>
+                                                        <h1 className='mr-[5px]'>حذف</h1>
+                                                        <img src={DeleteIcon} alt="DeleteIcon" />
+                                                    </div>
+                                                </MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                <DynamicButton
+                                                    text="اشتراک گذاری"
+                                                    width={169}
+                                                    height={36}
+                                                    onClick={() => setIsWorkspaceModalOpen(true)}
+                                                    bgColor="#007bff"
+                                                    fontSize="12px"
+                                                    fontWeight={400}
+                                                    borderRadius={6}
+                                                    icon={ShareIcon}
+                                                />
+                                                </MenuItem>
                                             </MoreIconDropdown>
-                                            {/* <button onClick={() => setIsMoreModalOpen(true)}> 
-                                            {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />}
-                                                <img src={MoreIcon} alt="MoreIcon" />
-                                            </button> */}
                                             <div className='flex w-[160px] h-[23px] justify-end items-center' onClick={() => toggleWorkspace(workspace.id)}>
                                                 <div className='mt-1'>{workspace.name}</div>
                                                 <div className={`w-[20px] h-[20px] rounded-md ml-2 bg-${workspace.color}`} style={{ backgroundColor: workspace.color }}></div>
