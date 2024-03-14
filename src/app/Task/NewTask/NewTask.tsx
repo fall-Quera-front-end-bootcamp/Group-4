@@ -95,13 +95,14 @@ function NewTask ({ onClose }: NewTaskProps) {
     const handleThumbnailInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        console.log(deadline);
+    
         const files = event.target.files;
         if (files && files.length > 0) {
             const file = files[0];
             const reader = new FileReader();
             reader.onloadend = () => {
-                setThumbnailPreview(reader.result as string);
+                setThumbnailFile(file); 
+                setThumbnailPreview(reader.result as string); 
             };
             reader.readAsDataURL(file);
         }
@@ -113,27 +114,15 @@ function NewTask ({ onClose }: NewTaskProps) {
 
       const handleEndDateChange = () => {
         const storedEndDate = localStorage.getItem('deadline');
-        console.log('Stored endDate from new task:', storedEndDate);
-        setDeadline(storedEndDate);
-        return storedEndDate ?? null;
+        if (storedEndDate) {
+            
+            console.log('Stored endDate from new task:', storedEndDate);
+            return storedEndDate; 
+        }
+        return null; 
     };
     
 
-    // useEffect(() => {
-    //     const storedEndDate = localStorage.getItem('deadline');
-    //     if (storedEndDate && storedEndDate !== deadline) {
-    //         console.log('Stored endDate from new task:', storedEndDate);
-    //         setDeadline(storedEndDate); 
-    //     }
-    // }, [deadline]);
-
-    // useEffect(() => {
-    //     const storedEndDate = localStorage.getItem('deadline');
-    //     if (storedEndDate) {
-    //         console.log('Stored endDate from new task:', storedEndDate);
-    //         setDeadline(storedEndDate); 
-    //     }
-    // }, [deadline]);
 
     const handleBoardChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedBoardId = event.target.value;
@@ -141,27 +130,29 @@ function NewTask ({ onClose }: NewTaskProps) {
         console.log(selectedBoardId);
     };
 
-    // const handleCreateTask = async () => {
-    //     try {
-    //         const currentDate = new Date().toISOString();
-    //         const taskData = {
-    //             name: taskName, 
-    //             description: taskDescription,
-    //             deadline: deadline,
-    //             priority: 1, 
-    //             attachment: attachmentFile ? attachmentFile.name : '', 
-    //             thumbnail: thumbnailFile ? thumbnailFile.name : '',
-    //             order: 1, 
-    //             members:"",
-    //             created_at: currentDate
-    //         };
+    const handleCreateTask = async () => {
+        try {
+            const currentDate = new Date().toISOString();
+            const formData = new FormData();
+            formData.append('name', taskName);
+            formData.append('description', taskDescription);
+            formData.append('deadline', deadline || ''); // Handle null case
+            formData.append('priority', '1');
+            if (attachmentFile) {
+                formData.append('attachment', attachmentFile);
+            }
+            if (thumbnailFile) {
+                formData.append('thumbnail', thumbnailFile);
+            }
+            formData.append('order', '1');
+            formData.append('members', '');
+            formData.append('created_at', currentDate);
     
-    //         await createTask(workspaceId, projectId, selectedBoard, taskData);
-            
-    //     } catch (error) {
-    //         console.error('Error creating task:', error);
-    //     }
-    // };
+            await createTask(workspaceId, projectId, selectedBoard, formData);
+        } catch (error) {
+            console.error('Error creating task:', error);
+        }
+    };
 
     return (
         <Modal isOpen={true} onRequestClose={onClose} overlayClassName="custom-overlay" className="custom-modal">
@@ -202,7 +193,7 @@ function NewTask ({ onClose }: NewTaskProps) {
                         
                     {/* {deadline && handleEndDateChange()} */}
                     {/* {deadline && <span>{handleEndDateChange()}</span>} */}
-                    {deadline && handleEndDateChange()}
+                    {handleEndDateChange()}
 
 
 
@@ -287,7 +278,7 @@ function NewTask ({ onClose }: NewTaskProps) {
 
                     </div>
                     <div className="w-[125px] h-[32px] ">
-                        <DynamicButton text="ساختن تسک" width={125} height={32} padding={4} borderRadius={5}/>
+                        <DynamicButton text="ساختن تسک" width={125} height={32} padding={4} borderRadius={5} onClick={handleCreateTask} />
                     </div>
                 </div>
 
@@ -302,4 +293,31 @@ function NewTask ({ onClose }: NewTaskProps) {
 
 export default NewTask;
 
+
+
+
+
+
+
+    // useEffect(() => {
+    //     const storedEndDate = localStorage.getItem('deadline');
+    //     if (storedEndDate && storedEndDate !== deadline) {
+    //         console.log('Stored endDate from new task:', storedEndDate);
+    //         setDeadline(storedEndDate); 
+    //     }
+    // }, [deadline]);
+
+    // useEffect(() => {
+    //     const storedEndDate = localStorage.getItem('deadline');
+    //     if (storedEndDate) {
+    //         console.log('Stored endDate from new task:', storedEndDate);
+    //         setDeadline(storedEndDate); 
+    //     }
+    // }, [deadline]);
+
+
+
+                    //     {/* {deadline && handleEndDateChange()} */}
+                    // {/* {deadline && <span>{handleEndDateChange()}</span>} */}
+                    // {deadline && handleEndDateChange()}
 
