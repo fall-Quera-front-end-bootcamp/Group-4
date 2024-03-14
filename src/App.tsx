@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoute from "./utils/PrivateRoute";
 import "./index.css";
 import WorkspaceModal from "./app/Dashboard/HomePage/Board/Board-Component/WorkspaceModal";
 import TaskInformation from "./app/Task/TaskInformation/TaskInformation";
@@ -48,29 +49,28 @@ const Profile3 = React.lazy(() => import("./app/Profile/ProfilePages/Profile3"))
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LayoutAuth />}>
-            <Route path="authentication" element={<AuthPage />} />
-            {/* <Route path="auth" element={<AuthenticationPage />} /> */}
-          </Route>
-          <Route path="board" element={<Board />}>
-            <Route path="listview" element={<ListView />} />
-            <Route path="calendarview" element={<CalendarView />} />
-            <Route path="boardview" element={<BView />} />
-
-          </Route>
-
-          <Route path="workspace" element={<WorkSpacePage />} />
-
-          <Route path="profile" element={<ProfilePages />}>
-            <Route path="profile1" element={<Profile1 />} />
-            <Route path="profile2" element={<Profile2 />} />
-            <Route path="profile3" element={<Profile3 />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LayoutAuth />}>
+          <Route path="authentication" element={<AuthPage />} />
+        </Route>
+        <Route
+          path="board"
+          element={<PrivateRoute component={Board} />}
+        >
+          <Route path="listview" element={<ListView />} />
+          <Route path="calendarview" element={<CalendarView />} />
+          <Route path="boardview" element={<BView />} />
+        </Route>
+        <Route path="workspace" element={<PrivateRoute component={WorkSpacePage} />} /> 
+        <Route path="profile" element={<PrivateRoute component={ProfilePages} />}> 
+          <Route path="profile1" element={<Profile1 />} />
+          <Route path="profile2" element={<Profile2 />} />
+          <Route path="profile3" element={<Profile3 />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }

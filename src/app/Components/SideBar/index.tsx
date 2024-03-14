@@ -21,6 +21,7 @@ import { setProjectId } from "../../../Features/projectSlice";
 import MoreIcon from '../assets/icons/MoreIcon.png';
 import MoreWorkSpaceModal from '../MoreModal/WorkSpace/Index';
 import { fetchAccount } from '../../../services/account';
+import { logout } from "../../Authenticator/authSlice";
 
 interface SidebarProps {
     openModal: () => void;
@@ -116,6 +117,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
 
     const handleLogout = () => {
         localStorage.clear();
+        dispatch(logout());
         if (onLogout) {
             onLogout();
         }
