@@ -13,6 +13,7 @@ import { selectProjectId } from '../../../../../../Features/projectSlice';
 import { RootState } from "../../../../../../utils/store";
 import { useSelector } from "react-redux";
 import Modal from 'react-modal';
+import CreateNewBoard from './createNewBoard';
 
 
 
@@ -33,6 +34,16 @@ const BoardView: React.FC = () => {
     // console.log(workspaceId,projectId);
     const [boards, setBoards] = useState<any[]>([]); 
     // console.log(workspaceId,projectId);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isNewBoardModalOpen, setIsNewBoardModalOpen] = useState(false);
+
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+  
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
 
     useEffect(() => {
         if (workspaceId && projectId) { 
@@ -68,9 +79,16 @@ const BoardView: React.FC = () => {
     return (
         <div>
             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'flex-start', marginRight: '290px', position: 'absolute', right: '65px', top: '150px' }}>
+            <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center" 
+                      onClick={() => setIsNewBoardModalOpen(true)}>
+                <h1 >ساختن پروژه جدید</h1>
+              </button> 
                 {boards.map((board) => (
                     <BoardCol key={board.id} board={board} />
                 ))}
+
+
+
                 <DynamicButton
                     text="تسک جدید"
                     width={118}
@@ -89,11 +107,8 @@ const BoardView: React.FC = () => {
                         padding: '0px',
                     }}
                 />
-                      {showModal && (
-
-          <NewTask onClose={toggleModal} />
-       
-      )}
+                      {showModal && (<NewTask onClose={toggleModal} />)}
+                      {isNewBoardModalOpen && <CreateNewBoard onCloseModal={() => setIsNewBoardModalOpen(false)} />}
             </div>
         </div>
     );
