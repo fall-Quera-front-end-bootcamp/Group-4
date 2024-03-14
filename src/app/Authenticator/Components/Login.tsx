@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import DynamicButton from "../../Components/common/button";
 import { login } from "../../../services/account";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../utils/store";
+import { useAppDispatch , useAppSelector} from "../../../utils/store";
 import { setMode } from "../slice";
 import { FORGET_PASSWORD, REGISTER } from "../constant";
+import authSlice from "../authSlice";
+import {setAuthenticated , setError} from "../authSlice"
+
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -16,16 +19,24 @@ function Login() {
 
   const dispatch = useAppDispatch();
 
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+      
+
       const response = await login(username, password);
+      
       console.log("Login response:", response);
       console.log("Login successful:", response);
+      dispatch(setAuthenticated(true));
       navigate("/workspace");
     } catch (error) {
       console.error("Login failed:", error);
+      dispatch(setError("Login failed: " + error));
     }
   };
 

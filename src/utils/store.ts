@@ -3,6 +3,7 @@ import taskManagerReducer from "../Features/taskManagerSlice";
 import authenticatorReducer from "../app/Authenticator/slice";
 import workspaceReducer from "../Features/workspaceSlice";
 import projectReducer from "../Features/projectSlice"
+import authReducer from "../app/Authenticator/authSlice"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 // export const rootReducer = combineReducers({})
@@ -18,6 +19,7 @@ export const store = configureStore({
   reducer: {
     taskManager: taskManagerReducer,
     authenticator: authenticatorReducer,
+    auth: authReducer,
     workspace: workspaceReducer,
     project: projectReducer,
   },
