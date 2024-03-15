@@ -10,6 +10,7 @@ import EditColor from '../../../../../../Components/assets/icons/MoreColumn/edit
 import DeleteIcon from '../../../../../../Components/assets/icons/MoreColumn/deleteRedIcon.png';
 import EditBoardName from '../../../../../../Components/editModals/board/EditBoardName';
 import EditBoardColor from '../../../../../../Components/editModals/board/EditBoardColor';
+import DeleteBoard from '../../../../../../Components/editModals/board/DeleteBoard';
 
 
 interface ColumnOpenProps {
@@ -22,6 +23,7 @@ interface ColumnOpenProps {
 const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boardId}) => {
     const [isEditBoardeNameModalOpen, setIsEditBoardNameModalOpen] = useState(false);
     const [isEditBoardeColorModalOpen, setIsEditBoardColorModalOpen] = useState(false);
+    const [isDeleteBoardModalOpen, setIsDeleteBoardModalOpen] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const toggleModal = () => {
@@ -78,7 +80,7 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
                                                         <img src={EditColor} alt="EditColor" />
                                                     </div>
                                                 </MenuItem>
-                                                <MenuItem onClick={()=>{}}>
+                                                <MenuItem onClick={()=>{setIsDeleteBoardModalOpen(true)}}>
                                                     <div className='flex w-[169px] justify-end items-center mb-[10px]'>
                                                         <h1 className='mr-[5px]'>حذف</h1>
                                                         <img src={DeleteIcon} alt="DeleteIcon" />
@@ -92,6 +94,7 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
             </div>
             {isEditBoardeNameModalOpen &&<EditBoardName onCloseModal={() => setIsEditBoardNameModalOpen(false)} ></EditBoardName>}
             {isEditBoardeColorModalOpen &&<EditBoardColor onCloseModal={() => setIsEditBoardColorModalOpen(false)} ></EditBoardColor>}
+            {isDeleteBoardModalOpen &&<DeleteBoard onCloseModal={() => setIsDeleteBoardModalOpen(false)} ></DeleteBoard>}
             {/* {isModalOpen && <MoreColumn />} */}
         </div>
     );

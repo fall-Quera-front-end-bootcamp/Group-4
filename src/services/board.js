@@ -69,9 +69,11 @@ export const editNameBoard = async (workspaceId,projectId,boardId,newName) => {
   }
 }
 
-export const deleteBoard = async (workspaceId,projectId,boardId) => {
+export const deleteBoard = async (workspaceId,projectId,boardId,boardName) => {
   try {
-    const response = await axiosInstance.patch(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/`);
+    const response = await axiosInstance.patch(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/`,{
+      name: boardName
+    });
     return response.data;
   } catch (error) {
     console.error('Error editing workspaceName:', error);
