@@ -61,7 +61,8 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
                 <button className='w-[24px] h-[24px] cursor-pointer'>+</button>
                 <div className='w-[26px] h-[26px] mb-[7px]'>
                 <MoreIconDropdown boardId={boardId}> 
-                                                <MenuItem onClick={()=>{}}>
+                                               <div className='flex flex-col justify-between items-center'>
+                                               <MenuItem onClick={()=>{}}>
                                                     <div className='flex w-[169px] justify-end items-center'>
                                                         <h1 className='mr-[5px]'>افزودن تسک</h1>
                                                         <img src={AddIcon} alt="AddIcon" />
@@ -86,8 +87,7 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
                                                         <img src={DeleteIcon} alt="DeleteIcon" />
                                                     </div>
                                                 </MenuItem>
-                                                <MenuItem onClick={()=>{}}>
-                                                </MenuItem>
+                                               </div>
                                             </MoreIconDropdown>
                 </div>
 

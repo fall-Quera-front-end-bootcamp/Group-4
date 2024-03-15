@@ -66,7 +66,7 @@ interface Profile {
 }
 
 function SideBar({ openModal, onLogout }: SidebarProps) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [search, setSearch] = useState("");
     const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
     const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -156,9 +156,11 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
 
     return (
         <div className="sidebar">
-            <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
-                کوئرا تسک منیجر
-            </div>
+            <Link to="/workspace">
+                <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
+                    کوئرا تسک منیجر
+                </div>
+            </Link>
             <div className="relative" style={{ width: "304px" }}>
                 <div className="flex items-center cursor-pointer flex justify-between" onClick={toggleMenu}>
                     {isOpen ? (
@@ -190,11 +192,12 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                 bgColor="#007bff"
                                 fontSize="12px"
                                 fontWeight={400}
+                                borderRadius={6}
                             />
                             <div className='relative workspaces'  >
                                 {workspaces.map(workspace => (
                                     <div key={workspace.id}>
-                                        <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px]" >
+                                        <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px] mr-[10px]" >
                                             <MoreIconDropdown workspaceId={workspace.id}>
                                                 <MenuItem onClick={()=>{}}>
                                                     <div className='flex w-[169px] justify-end items-center'>

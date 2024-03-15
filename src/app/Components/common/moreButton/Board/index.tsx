@@ -44,7 +44,7 @@ const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children, boardId }
         MenuListProps={{
           'aria-labelledby': `basic-button-${boardId}`, 
         }}
-        style={{height:"260px", borderRadius:"20px"}}
+        style={{height:"400px", borderRadius:"20px"}}
       >
         {children}
       </Menu>
