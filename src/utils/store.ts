@@ -7,6 +7,7 @@ import authenticatorReducer from "../app/Authenticator/slice";
 import workspaceReducer from "../Features/workspaceSlice";
 import projectReducer from "../Features/projectSlice"
 import authReducer from "../app/Authenticator/authSlice"
+import boardReducer from "../Features/boardSlice"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 // export const rootReducer = combineReducers({})
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   workspace: workspaceReducer,
   project: projectReducer,
+  board: boardReducer,
 });
 
 const persistConfig = {
