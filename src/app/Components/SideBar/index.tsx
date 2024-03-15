@@ -66,7 +66,7 @@ interface Profile {
 }
 
 function SideBar({ openModal, onLogout }: SidebarProps) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [search, setSearch] = useState("");
     const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
     const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
