@@ -33,6 +33,11 @@ import ShareIcon from '../assets/icons/MoreColumn/ShareIcon.png'
 import EditWorkspaceColor from '../editModals/workspace/EditWorkspaceColor';
 import EditWorkspaceName from '../editModals/workspace/EditWorkspaceName';
 import DeleteWorkspace from '../editModals/workspace/DeleteWorkspace';
+import MoreProjectIconDropdown from '../common/moreButton/project';
+import EditProjectName from '../editModals/project/EditProjectName';
+import DeleteProject from '../editModals/project/DeleteProject';
+
+
 
 interface SidebarProps {
     openModal: () => void;
@@ -73,6 +78,8 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
     const [isEditWorkspaceColorModalOpen, setIsEditWorkspaceColorModalOpen] = useState(false);
     const [isEditWorkspaceNameModalOpen, setIsEditWorkspaceNameModalOpen] = useState(false);
     const [isDeleteWorkspaceModalOpen, setIsDeleteWorkspaceModalOpen] = useState(false);
+    const [isEditProjectNameModalOpen, setIsEditProjectNameModalOpen] = useState(false);
+    const [isDeleteProjectModalOpen, setIsDeleteProjectModalOpen] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -244,7 +251,45 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                                 {openProjects[workspace.id].length > 0 ? (
                                                     openProjects[workspace.id].map(project => (
                                                         <div className='hover:bg-blue-50 hover:rounded-[5px] w-[264px] h-[31px] flex  justify-between items-center p-[5px]' onClick={(event) => handleProjectClick(workspace.id, project.id)}>
-                                                            <img className='ml-[15px]' src={MoreIcon} alt="MoreIcon"/>
+                                                            <MoreProjectIconDropdown projectId={project.id}>
+                                                                <MenuItem onClick={()=>{}}>
+                                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                                        <h1 className='mr-[5px]'>ساختن تسک جدید</h1>
+                                                                        <img src={AddIcon} alt="AddIcon" />
+                                                                    </div>
+                                                                </MenuItem>
+                                                                <MenuItem onClick={()=>setIsEditProjectNameModalOpen(true)}>
+                                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                                        <h1 className='mr-[5px]'>ویرایش نام پروژه</h1>
+                                                                        <img src={EditIcon} alt="EditIcon" />
+                                                                    </div>
+                                                                </MenuItem>
+                                                                <MenuItem onClick={()=>{}}>
+                                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                                        <h1 className='mr-[5px]'>کپی لینک</h1>
+                                                                        <img src={CopyLink} alt="CopyLink" />
+                                                                    </div>
+                                                                </MenuItem>
+                                                                <MenuItem onClick={()=>{setIsDeleteProjectModalOpen(true)}}>
+                                                                    <div className='flex w-[169px] justify-end items-center mb-[10px]'>
+                                                                        <h1 className='mr-[5px]'>حذف</h1>
+                                                                        <img src={DeleteIcon} alt="DeleteIcon" />
+                                                                    </div>
+                                                                </MenuItem>
+                                                                <MenuItem onClick={()=>{}}>
+                                                                <DynamicButton
+                                                                    text="اشتراک گذاری"
+                                                                    width={169}
+                                                                    height={36}
+                                                                    onClick={() => setIsWorkspaceModalOpen(true)}
+                                                                    bgColor="#007bff"
+                                                                    fontSize="12px"
+                                                                    fontWeight={400}
+                                                                    borderRadius={6}
+                                                                    icon={ShareIcon}
+                                                                />
+                                                                </MenuItem>
+                                                            </MoreProjectIconDropdown>
                                                             <h1 key={project.id}>{project.name}</h1>
                                                         </div>
                                                     ))
@@ -289,6 +334,8 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
             {isEditWorkspaceColorModalOpen &&<EditWorkspaceColor onCloseModal={() => setIsEditWorkspaceColorModalOpen(false)} ></EditWorkspaceColor>}
             {isEditWorkspaceNameModalOpen &&<EditWorkspaceName onCloseModal={() => setIsEditWorkspaceNameModalOpen(false)} ></EditWorkspaceName>}
             {isDeleteWorkspaceModalOpen &&<DeleteWorkspace onCloseModal={() => setIsDeleteWorkspaceModalOpen(false)} ></DeleteWorkspace>}
+            {isEditProjectNameModalOpen &&<EditProjectName onCloseModal={() => setIsEditProjectNameModalOpen(false)} ></EditProjectName>}
+            {isDeleteProjectModalOpen &&<DeleteProject onCloseModal={() => setIsDeleteProjectModalOpen(false)} ></DeleteProject>}
             {/* {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />} */}
         </div>
 

@@ -21,6 +21,6 @@ const boardSlice = createSlice({
 
 export const { setBoardId } = boardSlice.actions;
 
-export const selectProjectId = (state: RootState) => state.board.boardId;
+export const selectBoardId = (state: RootState) => state.board.boardId;
 
 export default boardSlice.reducer;
