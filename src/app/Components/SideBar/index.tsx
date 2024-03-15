@@ -190,6 +190,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                 bgColor="#007bff"
                                 fontSize="12px"
                                 fontWeight={400}
+                                borderRadius={6}
                             />
                             <div className='relative workspaces'  >
                                 {workspaces.map(workspace => (
