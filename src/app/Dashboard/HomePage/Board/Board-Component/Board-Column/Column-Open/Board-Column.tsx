@@ -29,6 +29,22 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
 
     return (
         <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-${borderColor} bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}>
+            {/* <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-limeGreen bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-blueViolet bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-purple bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-hotPink bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-redOrange bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-orange bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-goldenYellow bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-electricLime bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-darkCyan bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-teal bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-skyBlue bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-ceruleanBlue bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> 
+            <div className={`flex-row-reverse flex justify-between h-[40px] gap-[80px] rounded-[16px] border-t-[2px] shadow border-cornflowerBlue bg-white pt-[8px] pr-[12px] pb-[6px] pl-[12px] overflow-x-auto w-[249px] mb-[10px] ml-[10px]`}></div> */}
+            
+
+            
             <div className="h-[24px] gap-[4px] items-center justify-center flex flex-row">
                 <div className="bg-[#F4F4F4] rounded-[50px] w-[14px] h-[19px] flex justify-center items-center gap-[10px] pt-[2px] pr-[4px] pl-[4px]">
                     <span className="text-[#1E1E1E] w-[6px] h-[17px] font-medium text-[12px] leading-[16.91px] text-right">{number}</span>
