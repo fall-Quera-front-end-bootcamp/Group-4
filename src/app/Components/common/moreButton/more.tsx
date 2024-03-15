@@ -5,15 +5,17 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreIcon from '../../assets/icons/MoreIcon.png'
 
 interface MoreIconDropdownProps {
-  children: React.ReactNode; // Content to be displayed in the dropdown
+  children: React.ReactNode; 
+  workspaceId: string; 
 }
 
-const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children }) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // Anchor element for the menu
-  const open = Boolean(anchorEl); // Track open state based on anchorEl
+const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children, workspaceId }) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); 
+  const open = Boolean(anchorEl); 
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    console.log(workspaceId);
   };
 
   const handleClose = () => {
@@ -27,16 +29,15 @@ const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children }) => {
   return (
     <div className="more-icon-dropdown">
       <Button onClick={handleClick} style={MoreButtonStyle}>
-
         <img src={MoreIcon} alt="MoreIcon" />
       </Button>
       <Menu
-        id="basic-menu"
+        id={`basic-menu-${workspaceId}`} 
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button', 
+          'aria-labelledby': `basic-button-${workspaceId}`, 
         }}
         style={{height:"570px", borderRadius:"20px"}}
       >
