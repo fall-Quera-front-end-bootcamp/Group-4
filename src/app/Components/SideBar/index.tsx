@@ -156,9 +156,11 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
 
     return (
         <div className="sidebar">
-            <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
-                کوئرا تسک منیجر
-            </div>
+            <Link to="/workspace">
+                <div className=" font-extrabold   text-[32px] bg-gradient-to-r from-[#118C80] to-[#4AB7D8] inline-block text-transparent bg-clip-text  pt-10 pb-10">
+                    کوئرا تسک منیجر
+                </div>
+            </Link>
             <div className="relative" style={{ width: "304px" }}>
                 <div className="flex items-center cursor-pointer flex justify-between" onClick={toggleMenu}>
                     {isOpen ? (
