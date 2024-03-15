@@ -8,6 +8,8 @@ import AddIcon from '../../../../../../Components/assets/icons/MoreColumn/add.pn
 import EditIcon from '../../../../../../Components/assets/icons/MoreColumn/editColumn.png';
 import EditColor from '../../../../../../Components/assets/icons/MoreColumn/editColor.png';
 import DeleteIcon from '../../../../../../Components/assets/icons/MoreColumn/deleteRedIcon.png';
+import EditBoardName from '../../../../../../Components/editModals/board/EditBoardName';
+import EditBoardColor from '../../../../../../Components/editModals/board/EditBoardColor';
 
 
 interface ColumnOpenProps {
@@ -18,6 +20,8 @@ interface ColumnOpenProps {
 }
 
 const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boardId}) => {
+    const [isEditBoardeNameModalOpen, setIsEditBoardNameModalOpen] = useState(false);
+    const [isEditBoardeColorModalOpen, setIsEditBoardColorModalOpen] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const toggleModal = () => {
@@ -61,14 +65,14 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
                                                         <img src={AddIcon} alt="AddIcon" />
                                                     </div>
                                                 </MenuItem>                                        
-                                                <MenuItem onClick={()=>{}}>
+                                                <MenuItem onClick={()=>{setIsEditBoardNameModalOpen(true)}}>
                                                     <div className='flex w-[169px] justify-end items-center'>
                                                         <h1 className='mr-[5px]'>ویرایش نام ستون</h1>
                                                         <img src={EditIcon} alt="EditIcon" />
                                                     </div>
                                                 </MenuItem>
                                                 
-                                                <MenuItem onClick={()=>{}}>
+                                                <MenuItem onClick={()=>{setIsEditBoardColorModalOpen(true)}}>
                                                     <div className='flex w-[169px] justify-end items-center'>
                                                         <h1 className='mr-[5px]'>ویرایش رنگ</h1>
                                                         <img src={EditColor} alt="EditColor" />
@@ -86,6 +90,8 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
                 </div>
 
             </div>
+            {isEditBoardeNameModalOpen &&<EditBoardName onCloseModal={() => setIsEditBoardNameModalOpen(false)} ></EditBoardName>}
+            {isEditBoardeColorModalOpen &&<EditBoardColor onCloseModal={() => setIsEditBoardColorModalOpen(false)} ></EditBoardColor>}
             {/* {isModalOpen && <MoreColumn />} */}
         </div>
     );
