@@ -14,6 +14,7 @@ import { RootState } from "../../../../../../utils/store";
 import { useSelector } from "react-redux";
 import Modal from 'react-modal';
 import CreateNewBoard from './createNewBoard';
+import AddIcon from '../../../../../Components/assets/icons/MoreColumn/add.png'
 
 
 
@@ -75,13 +76,20 @@ const BoardView: React.FC = () => {
         setShowModal(!showModal);
     };
     console.log(workspaceId,projectId);
+
+    const newBoradStyle = {
+        fontWeight:600,
+        fontSize:"14px"
+    }
     
     return (
         <div>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'flex-start', marginRight: '290px', position: 'absolute', right: '65px', top: '150px' }}>
-            <button className="w-[200px] h-[80px] border-2 border-red-500 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-red-500 hover:text-white flex justify-center items-center" 
+            <div style={{ display: 'flex', flexDirection: 'row', gap: "30px" , justifyContent: 'flex-start', marginRight: '290px', position: 'absolute', right: '65px', top: '150px' }}>
+            <button className={`flex-row-reverse flex  h-[40px]  rounded-[16px] border-t-[2px] shadow border-gray-200 bg-white pt-[8px] pr-[12px] pb-[6px]  overflow-x-auto w-[249px] mb-[10px] ml-[10px] hover:bg-gray-100`}
                       onClick={() => setIsNewBoardModalOpen(true)}>
-                <h1 >ساختن پروژه جدید</h1>
+                <img src={AddIcon}  alt="AddIcon" />
+                <h1 style={newBoradStyle}>ساختن برد جدید</h1>
+                
               </button> 
                 {boards.map((board) => (
                     <BoardCol key={board.id} board={board} />
