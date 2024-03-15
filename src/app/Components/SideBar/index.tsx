@@ -32,6 +32,7 @@ import DeleteIcon from '../assets/icons/MoreColumn/deleteRedIcon.png';
 import ShareIcon from '../assets/icons/MoreColumn/ShareIcon.png'
 import EditWorkspaceColor from '../editModals/workspace/EditWorkspaceColor';
 import EditWorkspaceName from '../editModals/workspace/EditWorkspaceName';
+import DeleteWorkspace from '../editModals/workspace/DeleteWorkspace';
 
 interface SidebarProps {
     openModal: () => void;
@@ -71,6 +72,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
     const [profile, setProfile] = useState<Profile|null>(null);
     const [isEditWorkspaceColorModalOpen, setIsEditWorkspaceColorModalOpen] = useState(false);
     const [isEditWorkspaceNameModalOpen, setIsEditWorkspaceNameModalOpen] = useState(false);
+    const [isDeleteWorkspaceModalOpen, setIsDeleteWorkspaceModalOpen] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -211,7 +213,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                                         <img src={CopyLink} alt="CopyLink" />
                                                     </div>
                                                 </MenuItem>
-                                                <MenuItem onClick={()=>{}}>
+                                                <MenuItem onClick={()=>{setIsDeleteWorkspaceModalOpen(true)}}>
                                                     <div className='flex w-[169px] justify-end items-center mb-[10px]'>
                                                         <h1 className='mr-[5px]'>حذف</h1>
                                                         <img src={DeleteIcon} alt="DeleteIcon" />
@@ -286,6 +288,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
             {isWorkspaceModalOpen && <CreateWorkspace onCloseModal={() => setIsWorkspaceModalOpen(false)} />}
             {isEditWorkspaceColorModalOpen &&<EditWorkspaceColor onCloseModal={() => setIsEditWorkspaceColorModalOpen(false)} ></EditWorkspaceColor>}
             {isEditWorkspaceNameModalOpen &&<EditWorkspaceName onCloseModal={() => setIsEditWorkspaceNameModalOpen(false)} ></EditWorkspaceName>}
+            {isDeleteWorkspaceModalOpen &&<DeleteWorkspace onCloseModal={() => setIsDeleteWorkspaceModalOpen(false)} ></DeleteWorkspace>}
             {/* {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />} */}
         </div>
 
