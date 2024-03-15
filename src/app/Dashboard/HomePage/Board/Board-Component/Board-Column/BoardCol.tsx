@@ -73,7 +73,7 @@ const BoardCol: React.FC<{ board: Board }> = ({ board }) => {
 
     return (
         <div>
-            <ColumnOpen state={board.name} number={tasks.length} borderColor={board.color} />
+            <ColumnOpen state={board.name} number={tasks.length} borderColor={board.color} boardId={board.id} />
     
             {tasks.map((task: Task) => (
                 <ColumnCardImage
