@@ -19,8 +19,8 @@ export const getBoards = async (workspaceId , projectId) => {
 export const getBoard = async (workspaceId , projectId , boardId) => {
 
   try {
-      const response = await axiosInstance.get(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}`);
-      console.log('from ax',workspaceId,projectId);
+      const response = await axiosInstance.get(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/`);
+      //console.log('from ax',workspaceId,projectId);
       return response.data
       } catch (error) {
         console.error('Error fetching board :', error);
@@ -40,6 +40,43 @@ export const createBoard = async (workspaceId , projectId , name , color) => {
     return response.data;
   } catch (error) {
     console.error('Error creating board:', error);
+    throw error;
+  }
+}
+
+export const editColorBoard = async (workspaceId,projectId,boardId,newColor,boardName) => {
+  try {
+    const response = await axiosInstance.patch(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/`, {
+      name:boardName,
+      color: newColor
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error editing BoardColor:', error);
+    throw error;
+  }
+}
+
+export const editNameBoard = async (workspaceId,projectId,boardId,newName) => {
+  try {
+    const response = await axiosInstance.patch(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/`, {
+      name: newName
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error editing workspaceName:', error);
+    throw error;
+  }
+}
+
+export const deleteBoard = async (workspaceId,projectId,boardId,boardName) => {
+  try {
+    const response = await axiosInstance.patch(`/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/`,{
+      name: boardName
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error editing workspaceName:', error);
     throw error;
   }
 }
