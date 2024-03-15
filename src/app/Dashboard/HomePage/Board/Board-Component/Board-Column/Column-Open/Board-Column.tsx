@@ -1,20 +1,30 @@
 import React from 'react';
 // import MoreColumn from '../../../../../../Components/MoreModal';
 import { useState } from 'react';
+import MoreIconDropdown from '../../../../../../Components/common/moreButton/Board/index';
+import MenuItem from '@mui/material/MenuItem';
+import { useDispatch } from "react-redux";
+import AddIcon from '../../../../../../Components/assets/icons/MoreColumn/add.png';
+import EditIcon from '../../../../../../Components/assets/icons/MoreColumn/editColumn.png';
+import EditColor from '../../../../../../Components/assets/icons/MoreColumn/editColor.png';
+import DeleteIcon from '../../../../../../Components/assets/icons/MoreColumn/deleteRedIcon.png';
+
 
 interface ColumnOpenProps {
     state: string;
     number: number;
-    borderColor: string; 
+    borderColor: string;
+    boardId: number; 
 }
 
-const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor }) => {
+const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boardId}) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
+
+    
 
 
     return (
@@ -27,7 +37,37 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor }) =
             </div>
             <div className='w-[48px] h-[24px] flex justify-between items-center'>
                 <button className='w-[24px] h-[24px] cursor-pointer'>+</button>
-                <button className='w-[26px] h-[26px] mb-[7px] cursor-pointer' onClick={toggleModal}>...</button>
+                <div className='w-[26px] h-[26px] mb-[7px]'>
+                <MoreIconDropdown boardId={boardId}> 
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                        <h1 className='mr-[5px]'>افزودن تسک</h1>
+                                                        <img src={AddIcon} alt="AddIcon" />
+                                                    </div>
+                                                </MenuItem>                                        
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                        <h1 className='mr-[5px]'>ویرایش نام ستون</h1>
+                                                        <img src={EditIcon} alt="EditIcon" />
+                                                    </div>
+                                                </MenuItem>
+                                                
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center'>
+                                                        <h1 className='mr-[5px]'>ویرایش رنگ</h1>
+                                                        <img src={EditColor} alt="EditColor" />
+                                                    </div>
+                                                </MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                    <div className='flex w-[169px] justify-end items-center mb-[10px]'>
+                                                        <h1 className='mr-[5px]'>حذف</h1>
+                                                        <img src={DeleteIcon} alt="DeleteIcon" />
+                                                    </div>
+                                                </MenuItem>
+                                                <MenuItem onClick={()=>{}}>
+                                                </MenuItem>
+                                            </MoreIconDropdown>
+                </div>
 
             </div>
             {/* {isModalOpen && <MoreColumn />} */}
