@@ -30,6 +30,8 @@ import EditColor from '../assets/icons/MoreColumn/editColor.png';
 import CopyLink from '../assets/icons/MoreColumn/CopyLink.png';
 import DeleteIcon from '../assets/icons/MoreColumn/deleteRedIcon.png';
 import ShareIcon from '../assets/icons/MoreColumn/ShareIcon.png'
+import EditWorkspaceColor from '../editModals/workspace/EditWorkspaceColor';
+import EditWorkspaceName from '../editModals/workspace/EditWorkspaceName';
 
 interface SidebarProps {
     openModal: () => void;
@@ -67,6 +69,8 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
     const [profile, setProfile] = useState<Profile|null>(null);
+    const [isEditWorkspaceColorModalOpen, setIsEditWorkspaceColorModalOpen] = useState(false);
+    const [isEditWorkspaceNameModalOpen, setIsEditWorkspaceNameModalOpen] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -131,6 +135,10 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
         }
         navigate('/authentication');
     };
+
+        
+
+
     const avatarData = {
         name: profile && (profile.first_name && profile.last_name) ? `${profile.first_name} ${profile.last_name}` : profile && profile.username || '',
         imageSrc: profile && profile.thumbnail ? `${profile.thumbnail}` : '',
@@ -185,13 +193,13 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                                         <img src={AddIcon} alt="AddIcon" />
                                                     </div>
                                                 </MenuItem>
-                                                <MenuItem onClick={()=>{}}>
+                                                <MenuItem onClick={()=>setIsEditWorkspaceNameModalOpen(true)}>
                                                     <div className='flex w-[169px] justify-end items-center'>
                                                         <h1 className='mr-[5px]'>ویرایش نام ورک‌اسپیس</h1>
                                                         <img src={EditIcon} alt="EditIcon" />
                                                     </div>
                                                 </MenuItem>
-                                                <MenuItem onClick={()=>{}}>
+                                                <MenuItem onClick={()=>setIsEditWorkspaceColorModalOpen(true)}>
                                                     <div className='flex w-[169px] justify-end items-center'>
                                                         <h1 className='mr-[5px]'>ویرایش رنگ</h1>
                                                         <img src={EditColor} alt="EditColor" />
@@ -276,7 +284,8 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                 </div>
             </div>
             {isWorkspaceModalOpen && <CreateWorkspace onCloseModal={() => setIsWorkspaceModalOpen(false)} />}
-            
+            {isEditWorkspaceColorModalOpen &&<EditWorkspaceColor onCloseModal={() => setIsEditWorkspaceColorModalOpen(false)} ></EditWorkspaceColor>}
+            {isEditWorkspaceNameModalOpen &&<EditWorkspaceName onCloseModal={() => setIsEditWorkspaceNameModalOpen(false)} ></EditWorkspaceName>}
             {/* {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />} */}
         </div>
 
