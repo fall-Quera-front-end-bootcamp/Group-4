@@ -197,7 +197,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                             <div className='relative workspaces'  >
                                 {workspaces.map(workspace => (
                                     <div key={workspace.id}>
-                                        <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px]" >
+                                        <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px] mr-[10px]" >
                                             <MoreIconDropdown workspaceId={workspace.id}>
                                                 <MenuItem onClick={()=>{}}>
                                                     <div className='flex w-[169px] justify-end items-center'>
