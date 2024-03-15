@@ -6,18 +6,21 @@ import DynamicInput from '../../../Components/common/input';
 import DynamicButton from '../../../Components/common/button';
 import BackIcon from '../../../../../Components/assets/icons/BackIcon.png'
 import { selectWorkspaceId } from '../../../../Features/workspaceSlice';
+import { selectProjectId } from '../../../../Features/projectSlice';
 import { RootState } from "../../../../utils/store";
 import { useSelector } from "react-redux";
-import { editNameWorkspace } from '../../../../services/workspace';
+import { deleteWorkspace} from '../../../../services/workspace';
+import { deleteProject } from '../../../../services/project';
 
 
-interface EditWorkspaceNameProps {
+interface DeleteProjectProps {
     onCloseModal: () => void;
   }
-function EditWorkspaceName({ onCloseModal }: EditWorkspaceNameProps) {
+function DeleteProject({ onCloseModal }: DeleteProjectProps) {
     const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
+    const projectId = useSelector((state: RootState) => selectProjectId(state));
     const [isOpen, setIsOpen] = useState(true);
-    const [workspaceName, setWorkspaceName] = useState<string>('');
+    
     
       const closeModal = () => {
         setIsOpen(false);
@@ -29,23 +32,15 @@ function EditWorkspaceName({ onCloseModal }: EditWorkspaceNameProps) {
         fontSize:"24px"
       };
     
-      const NameOfWorkSpaceStyle = {
-        fontWeight:400,
-        fontSize:"14px"
-      };
 
-      const handleEditWorkspaceName = async () => {
+      const handleDeleteProject = async () => {
         try {
-          await editNameWorkspace(workspaceId , workspaceName);
+          await deleteProject(workspaceId ,projectId );
           closeModal();
           window.location.reload();
         } catch (error) {
           console.error('Error creating board:', error);
         }
-      };
-      const handleWorkspaceNameChange = (newValue: string) => {
-        setWorkspaceName(newValue);
-        console.log(newValue);
       };
 
 
@@ -67,28 +62,21 @@ function EditWorkspaceName({ onCloseModal }: EditWorkspaceNameProps) {
       >
       <div className='w-[452px] h-[140px]'>
       <div className='flex w-[452px] h-[32px] justify-end items-center'>
-              <h3 className='pr-[85px]' style={HeaderStyles}>ویرایش نام ورکسپیس</h3>
+              <h3 className='pr-[85px]' style={HeaderStyles}>آیا مایل به حذف پروژه هستید ؟</h3>
               <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
             </div>
            <div className='flex flex-col h-[190px] justify-between'>
                   <div className='w-[415px] h-[68px] flex flex-col justify-center items-end pt-[70px] ml-[20px]'>
-                      <label htmlFor="workspaceName" className='pb-[10px]' style={NameOfWorkSpaceStyle}>نام ورکسپیس</label>
-                      <DynamicInput
-                      type='text'
-                      width={415}
-                      height={40}
-                      value={workspaceName}
-                      onChange={(newValue) => handleWorkspaceNameChange(newValue)}
-                      />
+
                   </div>
                   <DynamicButton
-                      text='تغییر'
+                      text='بله'
                       width={415}
                       height={40}
                       borderRadius={6}
                       fontWeight={800}
                       fontSize='14px'
-                      onClick={handleEditWorkspaceName}
+                      onClick={handleDeleteProject}
                       style={{marginLeft:"20px"}}
                    />
            </div>
@@ -100,4 +88,4 @@ function EditWorkspaceName({ onCloseModal }: EditWorkspaceNameProps) {
 
 
 
-export default EditWorkspaceName;
+export default DeleteProject;
