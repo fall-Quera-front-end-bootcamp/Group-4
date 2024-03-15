@@ -3,6 +3,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem'; 
 import MoreIcon from '../../assets/icons/MoreIcon.png'
+import { useDispatch } from "react-redux";
+import { setWorkspaceId } from "../../../../Features/workspaceSlice";
 
 interface MoreIconDropdownProps {
   children: React.ReactNode; 
@@ -10,12 +12,14 @@ interface MoreIconDropdownProps {
 }
 
 const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children, workspaceId }) => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); 
   const open = Boolean(anchorEl); 
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    console.log(workspaceId);
+    dispatch(setWorkspaceId(parseInt(workspaceId)));
+    
   };
 
   const handleClose = () => {
