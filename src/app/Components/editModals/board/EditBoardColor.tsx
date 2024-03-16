@@ -104,7 +104,6 @@ function EditBoardColor({ onCloseModal }: EditBoardColorProps) {
       >
       <div className='w-[452px] h-[140px]'>
       <div className='flex w-[452px] h-[32px] justify-end items-center'>
-      <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
                 <h3 className='pr-[85px] pl-[85px]' style={HeaderStyles}>ویرایش رنگ ستون</h3>
                 <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
             </div>
