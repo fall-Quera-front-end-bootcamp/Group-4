@@ -197,7 +197,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                             <div className='relative workspaces'  >
                                 {workspaces.map(workspace => (
                                     <div key={workspace.id}>
-                                        <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px] p-[5px] mr-[10px]" >
+                                        <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px]" >
                                             <MoreIconDropdown workspaceId={workspace.id}>
                                                 <MenuItem onClick={()=>{}}>
                                                     <div className='flex w-[169px] justify-end items-center'>
@@ -249,11 +249,11 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                             </div>
                                         </div>
                                         {selectedWorkspaces.includes(workspace.id) && openProjects[workspace.id] && (
-                                            <div className='flex flex-col cursor-pointer items-end pt-4 pr-8 pb-4'>
+                                            <div className='flex flex-col cursor-pointer items-end pt-4  pb-4 '>
                                                 {isModalOpen && <NewProjectModal onCloseModal={closeModalFunction} workspaceId={parseInt(workspace.id)} />}
                                                 {openProjects[workspace.id].length > 0 ? (
                                                     openProjects[workspace.id].map(project => (
-                                                        <div className='hover:bg-blue-50 hover:rounded-[5px] w-[264px] h-[31px] flex  justify-between items-center p-[5px]' onClick={(event) => handleProjectClick(workspace.id, project.id)}>
+                                                        <div className='hover:bg-blue-50 hover:rounded-[5px] w-[274px] h-[31px] flex  justify-between items-center p-[5px] ' onClick={(event) => handleProjectClick(workspace.id, project.id)}>
                                                             <MoreProjectIconDropdown projectId={project.id}>
                                                                 <MenuItem onClick={()=>{}}>
                                                                     <div className='flex w-[169px] justify-end items-center'>

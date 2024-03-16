@@ -27,11 +27,12 @@ const MoreIconDropdown: React.FC<MoreIconDropdownProps> = ({ children, workspace
   };
 
   const MoreButtonStyle = {
-    borderRadius: "10px"
+    borderRadius: "10px",
+    marginLeft:"5px",
   };
 
   return (
-    <div className="more-icon-dropdown">
+    <div className="more-icon-dropdown" >
       <Button onClick={handleClick} style={MoreButtonStyle}>
         <img src={MoreIcon} alt="MoreIcon" />
       </Button>
