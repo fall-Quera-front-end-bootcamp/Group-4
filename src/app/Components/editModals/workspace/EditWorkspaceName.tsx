@@ -67,7 +67,7 @@ function EditWorkspaceName({ onCloseModal }: EditWorkspaceNameProps) {
       >
       <div className='w-[452px] h-[140px]'>
       <div className='flex w-[452px] h-[32px] justify-end items-center'>
-              <h3 className='pr-[85px]' style={HeaderStyles}>ویرایش نام ورکسپیس</h3>
+              <h3 className='pr-[90px]' style={HeaderStyles}>ویرایش نام ورکسپیس</h3>
               <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
             </div>
            <div className='flex flex-col h-[190px] justify-between'>
