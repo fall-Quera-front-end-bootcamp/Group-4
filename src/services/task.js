@@ -24,3 +24,14 @@ export const createTask = async (workspaceId, projectId, boardId, task) => {
     throw error;
   }
 };
+
+export const deleteTask = async (workspaceId, projectId, boardId, taskId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `/workspaces/${workspaceId}/projects/${projectId}/boards/${boardId}/tasks/${taskId}/`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    throw error;
+  }
+};

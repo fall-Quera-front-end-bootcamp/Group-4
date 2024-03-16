@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faListAlt } from "@fortawesome/free-regular-svg-icons";
 import jalaliMoment from 'jalali-moment';
+import { useNavigate } from 'react-router-dom';
 import { selectWorkspaceId } from '../../../../../../../Features/workspaceSlice';
 import { selectProjectId } from '../../../../../../../Features/projectSlice';
 import { RootState } from "../../../../../../../utils/store";
 import { useSelector } from "react-redux";
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { getBoards } from '../../../../../../../services/board';
+import { createTask } from '../../../../../../../services/task';
+import { deleteTask } from '../../../../../../../services/task';
+import { useDispatch } from "react-redux";
+import { setWorkspaceId } from "../../../../../../../Features/workspaceSlice"
+import { setProjectId } from "../../../../../../../Features/projectSlice";
+import { setBoardId } from '../../../../../../../Features/boardSlice';
+
+
 
 interface Task {
     id: number;
@@ -19,18 +31,90 @@ interface Task {
     members: string;
     created_at: string;
 }
+interface Board {
+    id: number;
+    name: string;
+    order: number;
+    tasks: string;
+    tasks_count: string;
+    is_archive: boolean;
+    color: string;
+}
 
 interface ColumnCardImageProps {
     task: Task;
     projectName: string;
+    boardId:number;
 }
 
-const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName}) => {
-
+const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName , boardId}) => {
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
+    const taskIid=task.id;
     const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
     const projectId = useSelector((state: RootState) => selectProjectId(state));
+    const Boardss=[];
+    const [boards, setBoards] = useState<Board[]>([]);
+
+
 
     const pDeadline = jalaliMoment(task.deadline, 'YYYY-MM-DD').locale('fa').format('D MMMM');
+
+    useEffect(() => {
+        const fetchBoards = async () => {
+            try {
+                const fetchedBoards: Board[] = await getBoards(workspaceId, projectId);
+                setBoards(fetchedBoards);
+                console.log('Fetched boards:', fetchedBoards);
+            } catch (error) {
+                console.error('Error fetching boards:', error);
+            }
+        };
+        fetchBoards();
+    }, [workspaceId, projectId]);
+
+    function getPreviousBoardId() {
+        const index = boards.findIndex(board => board.id === boardId);
+        console.log(index,"-------");
+        if (index === -1 || index === 0) {
+            return null;
+        }
+        return boards[index - 1].id;
+    }
+
+    function getNextBoardId() {
+        const index = boards.findIndex(board => board.id === boardId);
+        if (index === -1 || index === boards.length - 1) {
+            return null;
+        }
+        return boards[index + 1].id;
+    }
+
+    const navigateLeft = async () => {
+        try {
+            const newTask = { ...task }; 
+            const nextBoardId = getNextBoardId();
+            await createTask(workspaceId, projectId, nextBoardId, newTask);
+            await deleteTask(workspaceId, projectId, boardId , task.id);
+            window.location.reload();
+        } catch (error) {
+            console.error('Error navigating right:', error);
+        }
+    };
+
+    const navigateRight = async () => {
+
+        try {
+            const newTask = { ...task }; 
+            const previousBoardId = getPreviousBoardId(); 
+            console.log(previousBoardId,"-------------");
+            await createTask(workspaceId, projectId, previousBoardId, newTask);
+            await deleteTask(workspaceId, projectId,boardId, task.id);
+            window.location.reload();
+        } catch (error) {
+            console.error('Error navigating left:', error);
+        }
+    };
 
     return (
         <div>
@@ -55,8 +139,10 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName}) 
                         <span className="mr-1 font-medium text-[12px] leading-[16.91px] text-right">{pDeadline}</span>
                     </div>
                 </div>
-                <div dir="rtl">
+                <div dir="ltr">
                 <div className="w-[240px] h-[24px] gap-[8px] flex-row flex mt-6">
+                    <FontAwesomeIcon icon={faArrowLeft} onClick={navigateLeft} />
+                    <FontAwesomeIcon icon={faArrowRight} onClick={navigateRight} />
                     {/* {tags.map((tag, index) => (
                         <div key={index} className={`text-[#228BE6] bg-[#D0EBFF] inline-block rounded-[14px] pr-[8px] pl-[8px]`}>
                             <span className="w-[25px] h-[17px] font-extrabold text-[12px] leading-[16.91px] text-right">{tag}</span>

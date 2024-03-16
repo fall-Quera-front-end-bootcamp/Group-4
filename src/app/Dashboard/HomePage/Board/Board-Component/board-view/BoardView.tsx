@@ -32,6 +32,7 @@ const BoardView: React.FC = () => {
 
     const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
     const projectId = useSelector((state: RootState) => selectProjectId(state));
+    const boardId = useSelector((state: RootState) => selectProjectId(state));
     // console.log(workspaceId,projectId);
     const [boards, setBoards] = useState<any[]>([]); 
     // console.log(workspaceId,projectId);
@@ -91,7 +92,7 @@ const BoardView: React.FC = () => {
                 <h1 style={newBoradStyle}>ساختن برد جدید</h1>
                 
               </button> 
-                {boards.map((board) => (
+                {boards.slice().reverse().map((board) => (
                     <BoardCol key={board.id} board={board} />
                 ))}
 

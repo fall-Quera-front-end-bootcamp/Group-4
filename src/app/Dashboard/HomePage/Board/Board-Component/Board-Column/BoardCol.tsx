@@ -80,6 +80,7 @@ const BoardCol: React.FC<{ board: Board }> = ({ board }) => {
                     key={task.id}
                     task={task}
                     projectName={projectName}
+                    boardId={board.id}
                 />
             ))}
         </div>
