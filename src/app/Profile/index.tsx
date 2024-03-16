@@ -7,12 +7,13 @@ import BackIcon from '../../app/Components/assets/icons/backRight.png'
 import PersonalityInfoIcon from '../Components/assets/icons/Profile/personalityInformation.png'
 import AccountInfo from '../Components/assets/icons/Profile/accountInformation.png'
 import settingIcon from '../Components/assets/icons/Profile/setting.png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 function ProfilePage() {
 
+  const navigate = useNavigate();
   
 
   const SidBarItemsStyle = {
@@ -21,7 +22,7 @@ function ProfilePage() {
   }
 
   const handleClick = () => {
-    console.log("back button")
+    navigate(-1);
   };
 
   return (
