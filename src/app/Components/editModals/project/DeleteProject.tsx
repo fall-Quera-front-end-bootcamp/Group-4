@@ -39,7 +39,7 @@ function DeleteProject({ onCloseModal }: DeleteProjectProps) {
           closeModal();
           window.location.reload();
         } catch (error) {
-          console.error('Error creating board:', error);
+          console.error('Error deleting project:', error);
         }
       };
 

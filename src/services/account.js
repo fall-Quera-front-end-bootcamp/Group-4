@@ -74,6 +74,50 @@ export const registerr = async (username, email, password) => {
     }
   };
 
+  export const changePersonalInformation = async (userId, firstName, lastName, phoneNumber, thumbnail, email, username) => {
+    try {
+      const formData = new FormData();
+  
+      formData.append('username', username);
+      formData.append('email', email);
+      formData.append('first_name', firstName);
+      formData.append('last_name', lastName);
+      formData.append('phone_number', phoneNumber);
+  
+      if (thumbnail instanceof File) {
+        formData.append('thumbnail', thumbnail);
+      }
+  
+      const response = await axiosInstance.patch(`/accounts/${userId}/`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+  
+      return response.data;
+    } catch (error) {
+      console.error('Error editing user personal information:', error);
+      throw error;
+    }
+  };
+  
+
+  export const changeAccountInformation = async( oldPass , newPass, newPass1) => {
+
+    try {
+      const response = await axiosInstance.patch(`/accounts/change-password`, {
+        oldPass:oldPass ,
+        newPass:newPass,
+        newPass1:newPass1
+      });
+  
+      return response.data;
+    } catch (error) {
+      console.error('Error changing user password:', error);
+      throw error;
+    }
+
+  }
 // export const fetchAccountByUsername = async (username) => {
 //   try {
 //     // Fetch all accounts

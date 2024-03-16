@@ -76,7 +76,7 @@ export const deleteBoard = async (workspaceId,projectId,boardId,boardName) => {
     });
     return response.data;
   } catch (error) {
-    console.error('Error editing workspaceName:', error);
+    console.error('Error deleting board:', error);
     throw error;
   }
 }
