@@ -149,6 +149,8 @@ function NewTask ({ onClose }: NewTaskProps) {
             formData.append('created_at', currentDate);
     
             await createTask(workspaceId, projectId, selectedBoard, formData);
+            onClose();
+            window.location.reload();
         } catch (error) {
             console.error('Error creating task:', error);
         }
@@ -161,11 +163,11 @@ function NewTask ({ onClose }: NewTaskProps) {
             <div dir="rtl" style={containerStyle}
                  className="w-[1153px] h-[637px] items-center fixed top-[251px] left-[91px] rounded-[20px] p-[32px] gap-[40px]  shadow-md bg-white z-10">
                 <div className="w-[1089px] h-[34px] flex justify-between ">
-                <div className="w-[148px] h-[34px] gap-[13px] flex items-center">
+                <div className="w-[500px] h-[34px] gap-[13px] flex items-center">
                     <div className="w-[16px] h-[16px] rounded-[2px] bg-[#d9d9d9]"></div>
                     <input
                         type="text"
-                        className="w-[119px] h-[34px] font-medium text-[24px] leading-[33.82px] text-right text-[#1e1e1e] outline-none border-none bg-transparent"
+                        className="w-[500px] h-[34px] font-medium text-[24px] leading-[33.82px] text-right text-[#1e1e1e] outline-none border-none bg-transparent"
                         placeholder="عنوان تسک"
                         value={taskName}
                         onChange={(e) => setTaskName(e.target.value)}
