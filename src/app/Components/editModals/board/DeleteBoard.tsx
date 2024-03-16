@@ -77,11 +77,11 @@ function DeleteBoard({ onCloseModal }: DeleteBoardProps) {
       >
       <div className='w-[452px] h-[140px]'>
       <div className='flex w-[452px] h-[32px] justify-end items-center'>
-              <h3 className='pr-[85px]' style={HeaderStyles}>آیا مایل به حذف ستون هستید ؟</h3>
               <img src={DeleteIcon} alt="DeleteIcon" className='w-[24px] h-[24px] cursor-pointer' onClick={onCloseModal}/>
             </div>
            <div className='flex flex-col h-[190px] justify-between'>
-                  <div className='w-[415px] h-[68px] flex flex-col justify-center items-end pt-[70px] ml-[20px]'>
+                  <div className='w-[415px] h-[68px] flex flex-col justify-center items-center pt-[70px] ml-[20px]'>
+                  <h3 className='pb-[10px]' style={HeaderStyles}>آیا مایل به حذف ستون هستید ؟</h3>
 
                   </div>
                   <DynamicButton
