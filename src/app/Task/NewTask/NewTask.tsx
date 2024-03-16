@@ -149,6 +149,8 @@ function NewTask ({ onClose }: NewTaskProps) {
             formData.append('created_at', currentDate);
     
             await createTask(workspaceId, projectId, selectedBoard, formData);
+            onClose();
+            window.location.reload();
         } catch (error) {
             console.error('Error creating task:', error);
         }
