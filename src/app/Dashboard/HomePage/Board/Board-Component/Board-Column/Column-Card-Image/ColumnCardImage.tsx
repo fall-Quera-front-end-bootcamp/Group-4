@@ -99,7 +99,7 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName , 
             await deleteTask(workspaceId, projectId, boardId , task.id);
             window.location.reload();
         } catch (error) {
-            console.error('Error navigating right:', error);
+            console.error('Error navigating left:', error);
         }
     };
 
@@ -108,12 +108,20 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName , 
         try {
             const newTask = { ...task }; 
             const previousBoardId = getPreviousBoardId(); 
-            console.log(previousBoardId,"-------------");
             await createTask(workspaceId, projectId, previousBoardId, newTask);
             await deleteTask(workspaceId, projectId,boardId, task.id);
             window.location.reload();
         } catch (error) {
-            console.error('Error navigating left:', error);
+            console.error('Error navigating right:', error);
+        }
+    };
+
+    const handleDeleteClick = async () => {
+        try {
+            await deleteTask(workspaceId, projectId,boardId, task.id);
+            window.location.reload();
+        } catch (error) {
+            console.error('Error deleting task:', error);
         }
     };
 
@@ -143,7 +151,7 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName , 
                 <div dir="ltr">
                 <div className="w-[240px] h-[24px] gap-[8px] flex-row flex mt-6 justify-between items-center">
                     <FontAwesomeIcon icon={faArrowLeft} onClick={navigateLeft} className='pl-[8px] pr-[8px] hover:bg-gray-200 rounded-full hover:p-2'/>
-                    <img src={DeleteIcon} alt="DeleteIcon" className='hover:bg-red-200 rounded-full  hover:p-2 pr-2 pl-2'/>
+                    <img src={DeleteIcon} onClick={handleDeleteClick} alt="DeleteIcon" className='hover:bg-red-200 rounded-full  hover:p-2 pr-2 pl-2'/>
                     <FontAwesomeIcon icon={faArrowRight} onClick={navigateRight} className=' pr-[8px] pl-[8px] hover:bg-gray-200 rounded-full hover:p-2'/>
                     {/* {tags.map((tag, index) => (
                         <div key={index} className={`text-[#228BE6] bg-[#D0EBFF] inline-block rounded-[14px] pr-[8px] pl-[8px]`}>
