@@ -11,6 +11,7 @@ import DeleteIcon from '../../../../../../Components/assets/icons/MoreColumn/del
 import EditBoardName from '../../../../../../Components/editModals/board/EditBoardName';
 import EditBoardColor from '../../../../../../Components/editModals/board/EditBoardColor';
 import DeleteBoard from '../../../../../../Components/editModals/board/DeleteBoard';
+import NewTask from '../../../../../../Task/NewTask/NewTask';
 
 
 interface ColumnOpenProps {
@@ -24,10 +25,18 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
     const [isEditBoardeNameModalOpen, setIsEditBoardNameModalOpen] = useState(false);
     const [isEditBoardeColorModalOpen, setIsEditBoardColorModalOpen] = useState(false);
     const [isDeleteBoardModalOpen, setIsDeleteBoardModalOpen] = useState(false);
+    const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
+    };
+    const openCreateTaskModal = () => {
+        setIsCreateTaskModalOpen(true);
+    };
+    
+    const closeCreateTaskModal = () => {
+        setIsCreateTaskModalOpen(false);
     };
 
     
@@ -62,7 +71,7 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
                 <div className='w-[26px] h-[26px] mb-[7px]'>
                 <MoreIconDropdown boardId={boardId}> 
                                                <div className='flex flex-col justify-between items-center'>
-                                               <MenuItem onClick={()=>{}}>
+                                               <MenuItem onClick={openCreateTaskModal}>
                                                     <div className='flex w-[169px] justify-end items-center'>
                                                         <h1 className='mr-[5px]'>افزودن تسک</h1>
                                                         <img src={AddIcon} alt="AddIcon" />
@@ -95,6 +104,7 @@ const ColumnOpen: React.FC<ColumnOpenProps> = ({ state, number, borderColor, boa
             {isEditBoardeNameModalOpen &&<EditBoardName onCloseModal={() => setIsEditBoardNameModalOpen(false)} ></EditBoardName>}
             {isEditBoardeColorModalOpen &&<EditBoardColor onCloseModal={() => setIsEditBoardColorModalOpen(false)} ></EditBoardColor>}
             {isDeleteBoardModalOpen &&<DeleteBoard onCloseModal={() => setIsDeleteBoardModalOpen(false)} ></DeleteBoard>}
+            {isCreateTaskModalOpen && <NewTask onClose={closeCreateTaskModal} />}
             {/* {isModalOpen && <MoreColumn />} */}
         </div>
     );
