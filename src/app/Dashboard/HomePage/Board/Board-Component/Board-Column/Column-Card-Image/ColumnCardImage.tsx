@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { setWorkspaceId } from "../../../../../../../Features/workspaceSlice"
 import { setProjectId } from "../../../../../../../Features/projectSlice";
 import { setBoardId } from '../../../../../../../Features/boardSlice';
+import DeleteIcon from '../../../../../../Components/assets/icons/MoreColumn/deleteRedIcon.png'
 
 
 
@@ -140,9 +141,10 @@ const ColumnCardImage: React.FC<ColumnCardImageProps> = ({ task , projectName , 
                     </div>
                 </div>
                 <div dir="ltr">
-                <div className="w-[240px] h-[24px] gap-[8px] flex-row flex mt-6">
-                    <FontAwesomeIcon icon={faArrowLeft} onClick={navigateLeft} />
-                    <FontAwesomeIcon icon={faArrowRight} onClick={navigateRight} />
+                <div className="w-[240px] h-[24px] gap-[8px] flex-row flex mt-6 justify-between items-center">
+                    <FontAwesomeIcon icon={faArrowLeft} onClick={navigateLeft} className='pl-[8px] pr-[8px] hover:bg-gray-200 rounded-full hover:p-2'/>
+                    <img src={DeleteIcon} alt="DeleteIcon" className='hover:bg-red-200 rounded-full  hover:p-2 pr-2 pl-2'/>
+                    <FontAwesomeIcon icon={faArrowRight} onClick={navigateRight} className=' pr-[8px] pl-[8px] hover:bg-gray-200 rounded-full hover:p-2'/>
                     {/* {tags.map((tag, index) => (
                         <div key={index} className={`text-[#228BE6] bg-[#D0EBFF] inline-block rounded-[14px] pr-[8px] pl-[8px]`}>
                             <span className="w-[25px] h-[17px] font-extrabold text-[12px] leading-[16.91px] text-right">{tag}</span>
