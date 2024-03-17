@@ -16,7 +16,7 @@ import DarkModeSwitch from '../../Components/assets/icons/Dark Mode switch.png';
 import { Link } from "react-router-dom";
 import NewProjectModal from '../NewProjectModal/index';
 import { useDispatch } from "react-redux";
-import { setWorkspaceId } from "../../../Features/workspaceSlice"
+import { selectWorkspaceId, setWorkspaceId } from "../../../Features/workspaceSlice"
 import { setProjectId } from "../../../Features/projectSlice";
 import MoreIcon from '../assets/icons/MoreIcon.png';
 import MoreWorkSpaceModal from '../MoreModal/WorkSpace/Index';
@@ -36,6 +36,8 @@ import DeleteWorkspace from '../editModals/workspace/DeleteWorkspace';
 import MoreProjectIconDropdown from '../common/moreButton/project';
 import EditProjectName from '../editModals/project/EditProjectName';
 import DeleteProject from '../editModals/project/DeleteProject';
+import NewProjModal from '../editModals/project/NewProj';
+
 
 
 
@@ -80,6 +82,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
     const [isDeleteWorkspaceModalOpen, setIsDeleteWorkspaceModalOpen] = useState(false);
     const [isEditProjectNameModalOpen, setIsEditProjectNameModalOpen] = useState(false);
     const [isDeleteProjectModalOpen, setIsDeleteProjectModalOpen] = useState(false);
+    const [isNewProjModalOpen, setIsNewProjModalOpen] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -199,7 +202,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
                                     <div key={workspace.id}>
                                         <div className="flex justify-between items-center cursor-pointer mb-2 hover:bg-blue-50 hover:rounded-[5px]" >
                                             <MoreIconDropdown workspaceId={workspace.id}>
-                                                <MenuItem onClick={()=>{}}>
+                                                <MenuItem onClick={()=>setIsNewProjModalOpen(true)}>
                                                     <div className='flex w-[169px] justify-end items-center'>
                                                         <h1 className='mr-[5px]'>ساختن پروژه جدید</h1>
                                                         <img src={AddIcon} alt="AddIcon" />
@@ -339,6 +342,7 @@ function SideBar({ openModal, onLogout }: SidebarProps) {
             {isDeleteWorkspaceModalOpen &&<DeleteWorkspace onCloseModal={() => setIsDeleteWorkspaceModalOpen(false)} ></DeleteWorkspace>}
             {isEditProjectNameModalOpen &&<EditProjectName onCloseModal={() => setIsEditProjectNameModalOpen(false)} ></EditProjectName>}
             {isDeleteProjectModalOpen &&<DeleteProject onCloseModal={() => setIsDeleteProjectModalOpen(false)} ></DeleteProject>}
+            {isNewProjModalOpen &&<NewProjModal onCloseModal={() => setIsDeleteProjectModalOpen(false)} ></NewProjModal>}
             {/* {isMoreModalOpen && <MoreWorkSpaceModal closeModal={() => setIsMoreModalOpen(false)} />} */}
         </div>
 
