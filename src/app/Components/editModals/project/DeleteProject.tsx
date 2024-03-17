@@ -11,6 +11,7 @@ import { RootState } from "../../../../utils/store";
 import { useSelector } from "react-redux";
 import { deleteWorkspace} from '../../../../services/workspace';
 import { deleteProject } from '../../../../services/project';
+import { useNavigate } from 'react-router-dom';
 
 
 interface DeleteProjectProps {
@@ -20,6 +21,7 @@ function DeleteProject({ onCloseModal }: DeleteProjectProps) {
     const workspaceId = useSelector((state: RootState) => selectWorkspaceId(state));
     const projectId = useSelector((state: RootState) => selectProjectId(state));
     const [isOpen, setIsOpen] = useState(true);
+    const navigate=useNavigate();
     
     
       const closeModal = () => {
@@ -37,7 +39,7 @@ function DeleteProject({ onCloseModal }: DeleteProjectProps) {
         try {
           await deleteProject(workspaceId ,projectId );
           closeModal();
-          window.location.reload();
+          navigate('/workspace');
         } catch (error) {
           console.error('Error deleting project:', error);
         }
